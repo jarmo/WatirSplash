@@ -1,12 +1,10 @@
-require "rubygems"
-require "spec"
-require "watir"
-
 module WatiRspec
   module SpecHelper
 
     def open_browser_at url
       @browser = Watir::Browser.new
+      @browser.speed = :fast
+      @browser.add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
       begin
         formatter.browser = @browser
       rescue

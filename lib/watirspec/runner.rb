@@ -1,4 +1,9 @@
+require "rubygems"
+require "spec"
+require "watir"
 require "watirspec/spec_helper"
+require "watirspec/rspec"
+require "watirspec/watir"
 
 module WatiRspec
   class Runner

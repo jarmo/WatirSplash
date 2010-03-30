@@ -12,6 +12,7 @@ module WatiRspec
     def initialize(options, output)
       raise "output has to be a file path!" unless output.is_a?(String)
       @output_dir = File.dirname(output)
+      puts "Results will be saved into the directory #{@output_dir}"
       @files_dir = File.join(@output_dir, "files")
       if File.exists?(@output_dir)
         FileUtils.mv @output_dir, "#{@output_dir}_#{File.mtime(@output_dir).strftime("%m%d%y_%H%M%S")}"
