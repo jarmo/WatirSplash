@@ -4,11 +4,10 @@ Spec::Runner.configure do |config|
   config.before(:all) do
     url = Config::Application::URL rescue "about:blank"
     open_browser_at url
-    @autoit = Watir.autoit
   end
 
   config.after(:all) do
-    @browser.close
+    close
   end
 end
 
