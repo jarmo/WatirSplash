@@ -3,8 +3,8 @@ watirspec_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(watirspec_dir) unless $LOAD_PATH.include?(watirspec_dir)
 require 'watirspec/runner'
 
-unless ARGV[0] == "generate"
-  exit ::WatiRspec::Runner.run
+if ARGV.size == 1 && ::WatiRspec::Runner.respond_to?(ARGV[0])
+  exit ::WatiRspec::Runner.send(ARGV[0])
 else
-  exit ::WatiRspec::Runner.generate
+  exit ::WatiRspec::Runner.run
 end
