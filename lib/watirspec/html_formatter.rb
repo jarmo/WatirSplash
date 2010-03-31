@@ -15,7 +15,9 @@ module WatiRspec
       puts "Results will be saved into the directory #{@output_dir}"
       @files_dir = File.join(@output_dir, "files")
       if File.exists?(@output_dir)
-        FileUtils.mv @output_dir, "#{@output_dir}_#{File.mtime(@output_dir).strftime("%m%d%y_%H%M%S")}"
+        archive_dir = File.join(@output_dir, "../archive")
+        FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
+        FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
       end
       FileUtils.mkdir_p(@files_dir)
       super
