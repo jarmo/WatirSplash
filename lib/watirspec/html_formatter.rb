@@ -60,10 +60,10 @@ module WatiRspec
       file_name
     end
 
-    def save_screenshot(description="Screenshot")
+    def save_screenshot(description="Screenshot", hwnd=@browser.hwnd)
       begin
         @browser.bring_to_front
-        width, height, blob = Win32::Screenshot.capture_hwnd(@browser.hwnd)
+        width, height, blob = Win32::Screenshot.capture_hwnd(hwnd)
         file_name = file_path("screenshot.png", description)
         img = Magick::ImageList.new
         img.from_blob(blob)
@@ -83,7 +83,7 @@ module WatiRspec
         autoit.ControlClick("[TITLE:#{@browser.title}]", "", "[CLASS:msctls_statusbar32]", "left", 2)
         popup_title = "[REGEXPTITLE:^(Windows )?Internet Explorer$]"
         autoit.WinWait(popup_title, "", 10)
-        file_name = save_screenshot("JS_Error")
+        file_name = save_screenshot("JS_Error", autoit.WinGetHandle(popup_title).hex)
         autoit.WinClose(popup_title)
       end
       file_name
