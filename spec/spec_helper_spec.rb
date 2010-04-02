@@ -39,9 +39,14 @@ describe "SpecHelper" do
 
     file_path(file_name).should =~ Regexp.new(expected_path)
     expected_path = expected_path.gsub("/", "\\")
-    native_file_path(file_name).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\\\d\\{6\\}", "\\d{6}"))
+    native_file_path(file_path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\\\d\\{6\\}", "\\d{6}"))
   end
 
-  it "has download_file method"
+  it "has download_file method" do
+    goto "http://dl.dropbox.com/u/2731643/testing_tool_benchmark/page5.html"
+    link(:text => "Download").click_no_wait
+    file = download_file("blah.pdf")
+    File.read(file).should == "this is a 'pdf' file"
+  end
 
 end

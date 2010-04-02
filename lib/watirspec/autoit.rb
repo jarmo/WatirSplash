@@ -1,6 +1,7 @@
 # Helper class for AutoIt
 class AutoItHelper
-
+  extend WatiRspec::Waiter
+  
   @@autoit = Watir.autoit
 
   class << self

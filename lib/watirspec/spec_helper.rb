@@ -3,6 +3,7 @@ module WatiRspec
   #
   # these methods can be used in specs directly
   module SpecHelper
+    include Waiter
 
     # opens the browser at specified url
     def open_browser_at url
@@ -27,7 +28,7 @@ module WatiRspec
     # * returns absolute file_path of the saved file
     def download_file file_name
       AutoItHelper.click_save
-      file_path = formatter.native_file_path(file_name)
+      file_path = native_file_path(file_path(file_name))
       AutoItHelper.set_edit(file_path)
       AutoItHelper.click_save("Save As")
       wait_until! {File.exists?(file_path)}
@@ -36,32 +37,6 @@ module WatiRspec
 
     def method_missing name, *arg #:nodoc:
       @browser.respond_to?(name) ? @browser.send(name, *arg) : super
-    end
-
-    # waits until some condition is true and
-    # throws Watir::Exception::TimeOutException upon timeout
-    #
-    # examples:
-    #   wait_until! {text_field(:name => 'x').exists?} # waits until text field exists
-    #   wait_until!(5) {...} # waits maximum of 5 seconds condition to be true
-    def wait_until! *arg
-      Watir::Waiter.wait_until(*arg) {yield}
-    end
-
-    # waits until some condition is true and
-    # returns false if timeout occurred, true otherwise
-    #
-    # examples:
-    #   wait_until {text_field(:name => 'x').exists?} # waits until text field exists
-    #   wait_until(5) {...} # waits maximum of 5 seconds condition to be true
-    def wait_until *arg
-      begin
-        wait_until!(*arg) {yield}
-      rescue Watir::Exception::TimeOutException
-        return false
-      end
-
-      return true
     end
 
     # returns WatiRspec::HtmlFormatter object, nil if not in use
