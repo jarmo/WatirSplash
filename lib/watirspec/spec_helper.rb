@@ -46,6 +46,17 @@ module WatiRspec
 
     def file_path(file_name, description=nil)
       formatter.file_path(file_name, description)
+    rescue
+      extension = File.extname(file_name)
+      basename = File.basename(file_name, extension)
+      file_path = File.join(Dir.pwd, "#{basename}_#{Time.now.strftime("%H%M%S")}#{extension}")
+      file_path
     end
+
+    def native_file_path(file_name, description=nil)
+      path = file_path(file_name, description)
+      File::ALT_SEPARATOR ? path.gsub(File::SEPARATOR, File::ALT_SEPARATOR) : path
+    end
+
   end
 end

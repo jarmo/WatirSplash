@@ -1,0 +1,10 @@
+require "rubygems"
+require "require_all"
+require "spec"
+require "watir"
+require "watirspec/util"
+require "watirspec/spec_helper"
+require "watirspec/rspec"
+require "watirspec/watir"
+require "watirspec/autoit"
+

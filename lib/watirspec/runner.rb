@@ -6,7 +6,7 @@ module WatiRspec
 
       def run
         unless ARGV.empty?
-          load_libs
+          require "watirspec"
           load_formatter
           load_options
           load_project_env
@@ -58,17 +58,6 @@ All other commands/options will be passed to RSpec directly.}
       end
 
       private
-
-      def load_libs
-        require "rubygems"
-        require "require_all"
-        require "spec"
-        require "watir"
-        require "watirspec/spec_helper"
-        require "watirspec/rspec"
-        require "watirspec/watir"
-        require "watirspec/autoit"
-      end
 
       def load_formatter
         ARGV << "--require" << "watirspec/html_formatter.rb"

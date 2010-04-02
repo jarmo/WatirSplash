@@ -35,8 +35,8 @@ describe "WatiRspec" do
   end
 
   it "has also access to global methods" do
-    pending "this fails as long as there's not executed generate_common command
-and it's not tied with this project" do
+    pending "it fails as long as there's not executed 'watirspec generate_common' command
+and ui-test-common is not loaded by this project" do
       new_global_method.should == "it just works"
     end
   end

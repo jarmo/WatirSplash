@@ -96,14 +96,6 @@ module WatiRspec
       @files_saved_during_example.unshift(:desc => description, :path => file_path)
       file_path
     end
-
-    def native_file_path(path)
-      File::ALT_SEPARATOR ? path.gsub(File::SEPARATOR, File::ALT_SEPARATOR) : path
-    end
-
-    def absolute_file_path(file_name, description=nil)
-      native_file_path(File.expand_path(file_path(file_name, description)))
-    end
-
+    
   end
 end
