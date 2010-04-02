@@ -1,9 +1,14 @@
 module WatiRspec
+  # class for common functionality
   class Util
     @@ui_test_common_dir ||= "ui-test-common"
 
     class << self
 
+      # loads ui-test-common/environment.rb
+      #
+      # ui-test-common has to be located at some higher level within directory
+      # structure compared to project/ui-test directory
       def load_common
         dir = common_dir
         puts "Loading ui-test-common from #{dir}..."

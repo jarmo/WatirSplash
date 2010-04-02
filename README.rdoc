@@ -1,0 +1,161 @@
+= WatiRspec
+
+* Web: http://github.com/jarmo/WatiRspec
+* Author: Jarmo Pertman (mailto:jarmo.p[at]gmail.com)
+
+== DESCRIPTION:
+
+WatiRspec is a small library for easier browser-based functional testing in Ruby.
+It combines Watir (http://www.watir.com) for controlling the browser (currently mainly IE) and
+RSpec (http://rspec.info) for testing framework. This powerful combination gives you
+the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
+you don't need to have any extra documentation for your applications.
+
+WatiRspec makes it easier to use best features of both of these tools together so
+you won't have to spend time on thinking how to do that yourself - you can start
+testing right away!
+
+== FEATURES:
+
+* generate command for generating default project structure
+* generate_common command for generating common ui-tests directory
+* Browser will be opened and closed for each example group automatically
+* You can use Watir method names directly without having to specify a browser object:
+    text_field(:name => "locator") # instead of @browser.text_field(:name => "locator")
+* All needed libraries will be loaded and helper modules will be included automatically
+* All JavaScript errors will be detected automatically
+* Some additional methods to help using Watir (download_file, wait_until, wait_until! etc.)
+
+* Custom html formatter for RSpec:
+* Saves screenshot of the browser window
+* Saves html of the page
+* Saves all the files created/downloaded during the example and shows them on the report
+* Automatically archives test results for later reviewing
+
+== SYNOPSIS:
+
+    describe "Google" do
+        before :all do
+            goto "http://google.com"
+            url.should =~ /google/
+        end
+        
+        it "has search field" do
+            text_field = text_field(:name => "q")
+            text_field.should exist
+            text_field.should be_visible
+        end
+        
+        it "performs search" do
+            text_field(:name => "q").set "Bing"
+            button(:name => "btnG").click
+            text.should include("Bing")
+        end
+    end
+    
+    C:\project\ui-test>watirspec spec\google_spec.rb
+    Results will be saved into the directory C:/project/ui-test/results
+    Google
+      has search field
+      performs search
+
+    Finished in 6.782388 seconds
+
+    2 examples, 0 failures
+
+== INSTALL:
+
+* install Ruby 1.8.6:
+    http://rubyinstaller.org/
+    
+* install ImageMagick with rmagick-win32 for making the screenshots:
+    http://rubyforge.org/frs/?group_id=12&release_id=42049
+    
+* update RubyGems:
+    gem update --system
+
+* install WatiRspec:
+    gem install watirspec
+    
+== USAGE:
+    
+If you have a web-application project (it may have been written in any programming language) without any browser-based tests,
+then it has probably a directory structure similar to this example:
+    C:\example_project
+    ├───doc
+    ├───lib
+    └───test
+    
+Now from the command line go to this directory and execute generate command:
+    C:\>cd example_project
+
+    C:\example_project>watirspec generate
+    Creating WatiRspec project directory structure to C:/example_project/ui-test...
+    Done
+    
+After that the directory structure will be something like this:
+    C:\example_project
+    ├───doc
+    ├───lib
+    ├───test
+    └───ui-test
+        └───spec
+    
+The contents of that ui-test directory will be:
+    ui-test\application_helper.rb
+    ui-test\config.rb
+    ui-test\environment.rb
+    ui-test\ide_runner.rb
+    
+    ui-test\spec
+    ui-test\spec\dummy_spec.rb
+    
+Just check out all the files to see some example code and comments in it and execute dummy_spec.rb
+to verify that everything works correctly:
+    watirspec spec\dummy_spec.rb
+    
+You can have whatever directory structure for your tests just make sure that all test files have _spec.rb in
+the end of their filename (if using default RSpec options).
+    
+== USAGE FOR MULTIPLE PROJECTS:
+
+Usually you're going to write tests for multiple different projects. It would be shame if you'd
+going to create all those common helper methods again for different projects or just copy-paste
+the code from previous project's helpers. This is the place where ui-test-common comes into play.
+    
+ui-test-common would be a place where you can hold all your common functionality in helper
+modules/methods/classes and then use those things in your tests so you won't have multiple
+copies of similar or even same code in different places. So it helps you
+to keep DRY (http://en.wikipedia.org/wiki/Don't_repeat_yourself).
+    
+After finding yourself in a situation where a new project comes into play, then execute
+generate_common command once somewhere in a higher level of a directory tree than your project's ui-test directory
+to generate ui-test-common directory:
+    C:\example_project>cd ..
+
+    C:\>watirspec generate_common
+    Creating WatiRspec common project directory structure to C:/ui-test-common...
+    Done
+
+It has a structure of:
+    C:\UI-TEST-COMMON
+    └───lib
+    
+    ui-test-common\config.rb
+    ui-test-common\environment.rb
+    ui-test-common\lib
+    ui-test-common\lib\common_application_helper.rb
+    
+In environment.rb under project/ui-test you shall add common functionality to your project.
+Add the following line before any other require statements to do that:
+    WatiRspec::Util.load_common
+    
+This gives you by default the access to every method in ui-test-common/lib/common_application_helper.rb
+    
+Now, in ui-test-common/config.rb change the URL to your hostname and in config.rb under project/ui-test:
+    URL = Config.full_url("/relative_path")
+    
+This gives you the ability to have host and port written only in one place.
+    
+Now move all the common functionality away from your project's files into ui-test-common files and start testing.
+From now on, add all common functionality into ui-test-common/lib

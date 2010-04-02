@@ -1,18 +1,18 @@
 module Watir
   module PageCheckers
+    # raises an error if javascript error was found
     JAVASCRIPT_ERRORS_CHECKER = lambda {|ie| raise "Got JavaScript error!" if ie.status =~ /Error on page/}
   end
 end
 
 # patches for Watir
-module Watir
+module Watir #:nodoc:all
   class IE
     # This is Watir's overriden wait method, which is used in many places for deciding
     # if browser is ready or not. We have to patch one line in it to work properly
     # when file save as dialog has been displayed. For some reason READYSTATE (4)
     # property value will be READYSTATE_INTERACTIVE (3) after file has been downloaded
     # and not 4, thus wait will stay blocking.
-
     # read more about IE READYSTATE property:
     # http://msdn.microsoft.com/en-us/library/aa768362(VS.85).aspx
     def wait(no_sleep=false)

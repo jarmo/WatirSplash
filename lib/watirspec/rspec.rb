@@ -1,4 +1,4 @@
-Spec::Runner.configure do |config|
+Spec::Runner.configure do |config| #:nodoc:
   config.include(WatiRspec::SpecHelper)
 
   config.before(:all) do
@@ -10,6 +10,8 @@ Spec::Runner.configure do |config|
   end
 end
 
-class Spec::ExampleGroup
-  subject {self}
+module Spec #:nodoc:all
+  class ExampleGroup
+    subject {self}
+  end
 end

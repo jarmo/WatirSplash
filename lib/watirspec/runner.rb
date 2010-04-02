@@ -1,9 +1,17 @@
 module WatiRspec
+
+  # WatiRspec runner class is responsible for:
+  # * generating directory structures for projects
+  # * starting RSpec with specified settings
   class Runner
     @@template_directory = File.join(File.dirname(__FILE__), "../../templates/")
 
     class << self
 
+      # Run RSpec with custom settings
+      # * loads spec.opts from project's directory if exists
+      # * loads environment.rb from project's directory if exists
+      # * loads custom Formatter
       def run
         unless ARGV.empty?
           require "watirspec"
@@ -17,6 +25,7 @@ module WatiRspec
         ::Spec::Runner::CommandLine.run
       end
 
+      # Generates ui-test project structure for project
       def generate
         ui_test_dir = File.join(Dir.pwd, "ui-test")
         puts "Creating WatiRspec project directory structure to #{ui_test_dir}..."
@@ -30,6 +39,7 @@ module WatiRspec
         return -1
       end
 
+      # Generates ui-test-common directory structure
       def generate_common
         common_dir = File.join(Dir.pwd, "ui-test-common")
         puts "Creating WatiRspec common project directory structure to #{common_dir}..."
@@ -43,6 +53,7 @@ module WatiRspec
         return -1
       end
 
+      # Shows help
       def help
         puts %Q{WatiRspec:
 Usage: watirspec (COMMAND|FILE(:LINE)?|DIRECTORY|GLOB)+ [options]
