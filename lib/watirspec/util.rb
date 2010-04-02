@@ -1,7 +1,7 @@
 module WatiRspec
   # class for common functionality
   class Util
-    @@ui_test_common_dir ||= "ui-test-common"
+    @@ui_test_common_dir = "ui-test-common"
 
     class << self
 

@@ -1,8 +1,7 @@
 require "watirspec"
 require "spec/autorun"
 
-describe "SpecHelper" do
-  include WatiRspec::SpecHelper
+describe WatiRspec::SpecHelper do
 
   it "opens browser automatically" do
     @browser.should exist
@@ -44,10 +43,14 @@ describe "SpecHelper" do
   end
 
   it "has download_file method" do
-    goto "http://dl.dropbox.com/u/2731643/misc/download.html"
-    link(:text => "Download").click_no_wait
-    file = download_file("download.zip")
-    File.read(file).should == "this is a 'zip' files"
+    begin
+      goto "http://dl.dropbox.com/u/2731643/misc/download.html"
+      link(:text => "Download").click_no_wait
+      file = download_file("download.zip")
+      File.read(file).should == "this is a 'zip' file!"
+    ensure
+      FileUtils.rm file
+    end
   end
 
 end
