@@ -1,4 +1,5 @@
 require "watirspec"
+require "spec/autorun"
 
 describe "SpecHelper" do
   include WatiRspec::SpecHelper
@@ -43,10 +44,10 @@ describe "SpecHelper" do
   end
 
   it "has download_file method" do
-    goto "http://dl.dropbox.com/u/2731643/testing_tool_benchmark/page5.html"
+    goto "http://dl.dropbox.com/u/2731643/misc/download.html"
     link(:text => "Download").click_no_wait
-    file = download_file("blah.pdf")
-    File.read(file).should == "this is a 'pdf' file"
+    file = download_file("download.zip")
+    File.read(file).should == "this is a 'zip' files"
   end
 
 end

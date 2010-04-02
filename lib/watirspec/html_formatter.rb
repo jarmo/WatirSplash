@@ -18,7 +18,7 @@ module WatiRspec
 
     def initialize(options, output) # :nodoc:
       raise "output has to be a file path!" unless output.is_a?(String)
-      @output_dir = File.dirname(output)
+      @output_dir = File.expand_path(File.dirname(output))
       puts "Results will be saved into the directory #{@output_dir}"
       @files_dir = File.join(@output_dir, "files")
       if File.exists?(@output_dir)

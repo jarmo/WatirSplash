@@ -35,10 +35,6 @@ module WatiRspec
       file_path
     end
 
-    def method_missing name, *arg #:nodoc:
-      @browser.respond_to?(name) ? @browser.send(name, *arg) : super
-    end
-
     # returns WatiRspec::HtmlFormatter object, nil if not in use
     def formatter
       @formatter ||= Spec::Runner.options.formatters.find {|f| f.kind_of?(WatiRspec::HtmlFormatter) rescue false}
@@ -62,6 +58,10 @@ module WatiRspec
     #   native_file_path("c:/blah/blah2/file.txt") => c:\\blah\\blah2\\file.txt 
     def native_file_path(file_path)
       File::ALT_SEPARATOR ? file_path.gsub(File::SEPARATOR, File::ALT_SEPARATOR) : file_path
+    end
+
+    def method_missing name, *arg #:nodoc:
+      @browser.respond_to?(name) ? @browser.send(name, *arg) : super
     end
 
   end
