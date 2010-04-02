@@ -34,9 +34,10 @@ describe "WatiRspec" do
     end
   end
 
-  it "is in fixed pending status" do
-    pending "this has been a known 'bug' for some time now" do
-      text.should include("Google")
+  it "has also access to global methods" do
+    pending "this fails as long as there's not executed generate_common command
+and it's not tied with this project" do
+      new_global_method.should == "it just works"
     end
   end
 

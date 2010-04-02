@@ -1,1 +1,0 @@
-require "watirspec/spec_helper"

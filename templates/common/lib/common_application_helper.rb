@@ -4,7 +4,7 @@
 module CommonApplicationHelper
 
   def new_global_method
-    puts "it just works"
+    "it just works"
   end
 
 end

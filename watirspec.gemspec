@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
-  s.description = %q{Integration of best features of Watir and RSpec for browser-based functional testing.}
+  s.description = %q{Integration of best features of Watir, RSpec and Ruby for browser-based functional testing.}
   s.email = ["jarmo.p@gmail.com"]
   s.executables = ["watirspec"]
   s.extra_rdoc_files = ["License.txt"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://www.itreallymatters.net}
   s.post_install_message = %q{********************************************************************************
 
-Thank you for installing watiRspec!
+Thank you for installing WatiRspec!
 
 Execute "watirspec generate" under your project's directory to generate default project structure.
 
