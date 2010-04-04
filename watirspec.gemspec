@@ -25,11 +25,11 @@ Execute "watirspec generate" under your project's directory to generate default 
   s.require_paths = ["lib"]
   s.summary = %Q{watirspec #{WatiRspec::VERSION}}
 
-  s.add_dependency("watir", "=1.6.5")
-  s.add_dependency("rspec", "=1.3.0")
+  s.add_dependency("watir", ">=1.6.5")
+  s.add_dependency("rspec", ">=1.3.0")
   s.add_dependency("diff-lcs")
   s.add_dependency("require_all")
-  s.add_dependency("rmagick", "=2.12.0")
+  s.add_dependency("rmagick")
   s.add_dependency("syntax")
   s.add_dependency("win32console")
 end
