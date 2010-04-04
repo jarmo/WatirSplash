@@ -28,4 +28,13 @@ describe Watir::TableRow do
     second_row.to_a.should == ["3"]
   end
 
+  it "#to_a works with rowspan" do
+    t = table(:id => "rowspan")
+    second_row = t[2]
+    second_row.to_a.should == ["3", "4"]
+
+    third_row = t[3]
+    third_row.to_a.should == ["5"]
+  end
+
 end

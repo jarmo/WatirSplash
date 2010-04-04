@@ -41,4 +41,13 @@ describe Watir::Table do
     ]
     table(:id => "colspan").to_a.should =~ expected_table
   end
+
+  it "#to_a works with rowspan" do
+    expected_table = [
+            %w[1 2],
+            %w[3 4],
+            %w[5]
+    ]
+    table(:id => "rowspan").to_a.should =~ expected_table
+  end
 end

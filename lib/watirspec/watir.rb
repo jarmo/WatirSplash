@@ -6,8 +6,8 @@ module Watir
 end
 
 # patches for Watir
-module Watir #:nodoc:all
-  class IE
+module Watir
+  class IE #:nodoc:all
     # This is Watir's overriden wait method, which is used in many places for deciding
     # if browser is ready or not. We have to patch one line in it to work properly
     # when file save as dialog has been displayed. For some reason READYSTATE (4)
@@ -65,7 +65,7 @@ module Watir #:nodoc:all
     end
   end
 
-  module PageContainer
+  module PageContainer #:nodoc:all
     # patch for .click_no_wait
     def eval_in_spawned_process(command)
       command.strip!
@@ -82,7 +82,7 @@ module Watir #:nodoc:all
 
     # This method returns multi-dimensional array of the text's in table.
     #
-    # It works with tr, th, td elements, colspan and nested tables.
+    # It works with tr, th, td elements, colspan, rowspan and nested tables.
     def to_a
       assert_exists
       y = []
@@ -101,7 +101,7 @@ module Watir #:nodoc:all
 
     # This method returns (multi)-dimensional array of the text's in table row.
     #
-    # It works with th, td elements, colspan and nested tables.
+    # It works with th, td elements, colspan, rowspan and nested tables.
     def to_a
       assert_exists
       y = []
