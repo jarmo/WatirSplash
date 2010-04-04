@@ -24,7 +24,6 @@ Execute "watirspec generate" under your project's directory to generate default 
 #{"*"*25}}
   s.require_paths = ["lib"]
   s.summary = %Q{watirspec #{WatiRspec::VERSION}}
-  s.history_file = "History.rdoc"
 
   s.add_dependency("watir", ">=1.6.5")
   s.add_dependency("rspec", ">=1.3.0")
