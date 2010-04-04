@@ -1,3 +1,13 @@
+=== Version 0.1.1 / 2010-04-04
+
+* Watir::Table#to_a and Watir::TableRow#to_a work now well with tr, th, td elements, colspan and nested tables.
+This means that you can test easily tables now:
+    expected_table = [["one", "two"], ["three", "four"]]
+    table(:id => "table_id").to_a.should =~ expected_table
+
+* removed strict version requirements for dependencies
+
+
 === Version 0.1.0 / 2010-04-03
 
 First release of WatiRspec, a small library for combining Watir and RSpec for browser-based functional testing in Ruby.
