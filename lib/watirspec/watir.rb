@@ -86,11 +86,7 @@ module Watir
     def to_a
       assert_exists
       y = []
-      @o.getElementsByTagName("TR").each do |row|
-        # make sure that this row is directly child element of the table
-        # and not from some inner table
-        next unless row.parentElement.parentElement.uniqueID == @o.uniqueID
-
+      @o.rows.each do |row|
         y << TableRow.new(@container, :ole_object, row).to_a
       end
       y
@@ -99,7 +95,7 @@ module Watir
 
   class TableRow < Element
 
-    # This method returns (multi)-dimensional array of the text's in table row.
+    # This method returns (multi-dimensional) array of the text's in table's row.
     #
     # It works with th, td elements, colspan, rowspan and nested tables.
     def to_a
@@ -108,7 +104,7 @@ module Watir
       @o.cells.each do |cell|
         inner_tables = cell.getElementsByTagName("TABLE")
         inner_tables.each do |inner_table|
-          y << Watir::Table.new(@container, :ole_object, inner_table).to_a
+          y << Table.new(@container, :ole_object, inner_table).to_a
         end
 
         if inner_tables.length == 0
