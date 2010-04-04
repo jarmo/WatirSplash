@@ -34,6 +34,14 @@ describe Watir::Table do
     table(:id => "nested").to_a.should =~ expected_table
   end
 
+  it "#to_a works with deep-nested tables" do
+    expected_table = [
+            %w[1 2],
+            [[%w[11 12], [[["404", "405"], ["406", "407"]], "14"]], "3"]
+    ]
+    table(:id => "deepnested").to_a.should =~ expected_table
+  end
+
   it "#to_a works with colspan" do
     expected_table = [
             %w[1 2],

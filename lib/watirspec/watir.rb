@@ -104,7 +104,10 @@ module Watir
       @o.cells.each do |cell|
         inner_tables = cell.getElementsByTagName("TABLE")
         inner_tables.each do |inner_table|
-          y << Table.new(@container, :ole_object, inner_table).to_a
+          # make sure that the inner table is directly child for this cell
+          if inner_table.parentElement.uniqueID == cell.uniqueID
+            y << Table.new(@container, :ole_object, inner_table).to_a
+          end
         end
 
         if inner_tables.length == 0

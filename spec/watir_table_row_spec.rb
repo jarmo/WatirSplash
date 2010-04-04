@@ -23,6 +23,12 @@ describe Watir::TableRow do
     second_row.to_a.should =~ [[%w[11 12], %w[13 14]], "3"]
   end
 
+  it "#to_a works with deep-nested tables" do
+    second_row = table(:id => "deepnested")[2]
+    second_row.to_a.should =~ [[%w[11 12],
+                                [[["404", "405"], ["406", "407"]], "14"]], "3"]
+  end
+
   it "#to_a works with colspan" do
     second_row = table(:id => "colspan")[2]
     second_row.to_a.should == ["3"]
