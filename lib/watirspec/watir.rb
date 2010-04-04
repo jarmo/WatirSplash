@@ -77,4 +77,59 @@ module Watir #:nodoc:all
       system(exec_string)
     end
   end
+
+  class Table < Element
+    def to_a
+      assert_exists
+
+      y = []
+      rows = @o.getElementsByTagName("TR")
+      rows.each do |row|
+        # make sure that this row is direct child element of the table
+        next unless row.parentElement.parentElement.uniqueID == @o.uniqueID
+        x = []
+
+        # find all headers within this row
+        headers = row.getElementsByTagName("TH")
+        headers.each do |header|
+          # make sure that this header is direct child element of the row
+          if header.parentElement.uniqueID == row.uniqueID
+            x << header.innerText.strip
+          end
+        end
+
+        # find all cells within this row
+        cells = row.getElementsbyTagName("TD")
+        cells.each do |cell|
+          # make sure that this cell is direct child element of the row
+          if cell.parentElement.uniqueID == row.uniqueID
+            # find all inner tables
+            inner_tables = cell.getElementsByTagName("TABLE")
+            inner_tables.each do |inner_table|
+              x << Watir::Table.new(@container, :ole_object, inner_table).to_a
+            end
+
+            if inner_tables.length == 0
+              x << cell.innerText.strip
+            end
+          end
+        end
+        y << x
+      end
+      y
+    end
+  end
+
+  class TableRow < Element
+    def to_a
+      assert_exists
+      
+      y = []
+      @o.cells.each do |cell|
+        y << cell.innerText.strip
+      end
+      
+      y
+    end
+  end
 end
