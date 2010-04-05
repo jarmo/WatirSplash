@@ -16,6 +16,11 @@ module Spec #:nodoc:all
   end
 end
 
+# match_array is useful for matching arrays where some elements are regular expressions.
+#    expected_array = ["1", "2", /\d+/, "3"]
+#
+#    ["1", "2", "66", "3"].should match_array(expected_array)
+#    table(:id => "table_id").to_a.should match_array(expected_array)
 Spec::Matchers.define :match_array do |array2|
   match do |array1|
     raise "match_array works only with Array objects!" unless array1.is_a?(Array) && array2.is_a?(Array)
