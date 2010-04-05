@@ -5,7 +5,7 @@ require "watir"
 require "watirspec/util"
 require "watirspec/waiter"
 require "watirspec/spec_helper"
-require "watirspec/rspec"
+require "watirspec/spec"
 require "watirspec/watir"
 require "watirspec/autoit"
 

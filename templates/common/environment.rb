@@ -1,7 +1,7 @@
 =begin
-  you have to require this file from your projects' environment.rb, which
+  you have to load this file from your projects' environment.rb, which
   will use common functionality:
-  require_rel "../../../ui-test-common/environment.rb
+  WatiRspec::Util.load_common
 
   add all your require statements into this file to avoid unnecessary
   code in your other projects' files

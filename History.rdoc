@@ -1,3 +1,11 @@
+=== Version 0.1.2 / 2010-04-05
+
+ * Added match_array matcher for RSpec for using with Array when regular expressions are needed. It is useful when verifying html tables with #to_a method.
+    expected_array = ["1", "2", /\d+/, "3"]
+    
+    ["1", "2", "66", "3"].should match_array(expected_array)
+    table(:id => "table_id").to_a.should match_array(expected_array)
+
 === Version 0.1.1 / 2010-04-04
 
 * Watir::Table#to_a and Watir::TableRow#to_a work now well with tr, th, td elements, colspan and nested tables.
