@@ -105,7 +105,7 @@ module Watir
         inner_tables = cell.getElementsByTagName("TABLE")
         inner_tables.each do |inner_table|
           # make sure that the inner table is directly child for this cell
-          if inner_table.parentElement.uniqueID == cell.uniqueID
+          if inner_table?(cell, inner_table)
             y << Table.new(@container, :ole_object, inner_table).to_a
           end
         end
@@ -115,6 +115,20 @@ module Watir
         end
       end
       y
+    end
+
+    private
+    # returns true if inner_table is direct child
+    # table for cell and there's not any table-s in between
+    def inner_table?(cell, inner_table)
+      parent_element = inner_table.parentElement
+      if parent_element.uniqueID == cell.uniqueID
+        return true
+      elsif parent_element.tagName == "TABLE"
+        return false
+      else
+        return inner_table?(cell, parent_element)
+      end
     end
   end
 end
