@@ -32,4 +32,5 @@ Execute "watirspec generate" under your project's directory to generate default 
   s.add_dependency("rmagick")
   s.add_dependency("syntax")
   s.add_dependency("win32console")
+  s.add_dependency("win32screenshot")
 end

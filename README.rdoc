@@ -159,3 +159,13 @@ This gives you the ability to have host and port written only in one place.
     
 Now move all the common functionality away from your project's files into ui-test-common files and start testing.
 From now on, add all common functionality into ui-test-common/lib
+
+== KNOWN PROBLEMS (& SOLUTIONS)
+
+= PROBLEM #1
+
+If you see the following error message when running watirspec:
+    R6034. An application has made an attempt to load the C runtime library incorrectly.
+ 
+Solution:
+    Install Microsoft Visual C++ 2008 SP1 Redistributable Package
