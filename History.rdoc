@@ -1,3 +1,7 @@
+=== Version 0.1.5 / 2010-04-08
+
+ * fixed a problem where HtmlFormatter threw an ugly exception due to the problem when browser was not opened
+
 === Version 0.1.4 / 2010-04-06
 
  * added dependency for win32screenshot

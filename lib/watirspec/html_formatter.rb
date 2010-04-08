@@ -27,11 +27,12 @@ module WatiRspec
         FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
       end
       FileUtils.mkdir_p(@files_dir)
+      @files_saved_during_example = []
       super
     end
 
     def example_started(example) # :nodoc:
-      @files_saved_during_example = []
+      @files_saved_during_example.clear
       super
     end
 
@@ -107,6 +108,6 @@ module WatiRspec
       @files_saved_during_example.unshift(:desc => description, :path => file_path)
       file_path
     end
-    
+
   end
 end
