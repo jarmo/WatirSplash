@@ -1,3 +1,7 @@
+=== Version 0.1.6 / 2010-04-08
+
+ * browser was not closed when Watir::IE#run_error_checks throwed an exception
+
 === Version 0.1.5 / 2010-04-08
 
  * fixed a problem where HtmlFormatter threw an ugly exception due to the problem when browser was not opened
