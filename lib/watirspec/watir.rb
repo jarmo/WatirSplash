@@ -63,6 +63,23 @@ module Watir
       sleep @pause_after_wait unless no_sleep
       @down_load_time
     end
+
+    # Closes the browser even if #wait throws an exception.
+    # It happens mostly when #run_error_checks throws some exception.
+    def close
+      return unless exists?
+      @closing = true
+      @ie.stop
+      begin
+        wait
+      rescue
+      end
+      chwnd = @ie.hwnd.to_i
+      @ie.quit
+      while Win32API.new("user32", "IsWindow", 'L', 'L').Call(chwnd) == 1
+        sleep 0.3
+      end
+    end
   end
 
   module PageContainer #:nodoc:all
