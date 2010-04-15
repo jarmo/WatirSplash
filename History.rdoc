@@ -1,3 +1,7 @@
+=== Version 0.1.7 / 2010-04-15
+
+ * minor fix
+
 === Version 0.1.6 / 2010-04-08
 
  * browser was not closed when Watir::IE#run_error_checks throwed an exception

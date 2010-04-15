@@ -85,14 +85,19 @@ module WatiRspec
 
     def save_javascript_error # :nodoc:
       file_name = nil
-      if @browser.is_a?(Watir::IE) && @browser.status =~ /Error on page/
-        autoit = Watir::autoit
-        autoit.AutoItSetOption("MouseCoordMode", 0)
-        autoit.ControlClick("[TITLE:#{@browser.title}]", "", "[CLASS:msctls_statusbar32]", "left", 2)
-        popup_title = "[REGEXPTITLE:^(Windows )?Internet Explorer$]"
-        autoit.WinWait(popup_title, "", 10)
-        file_name = save_screenshot("JS_Error", autoit.WinGetHandle(popup_title).hex)
-        autoit.WinClose(popup_title)
+      begin
+        if @browser.is_a?(Watir::IE) && @browser.status =~ /Error on page/
+          autoit = Watir::autoit
+          autoit.AutoItSetOption("MouseCoordMode", 0)
+          autoit.ControlClick("[TITLE:#{@browser.title}]", "", "[CLASS:msctls_statusbar32]", "left", 2)
+          popup_title = "[REGEXPTITLE:^(Windows )?Internet Explorer$]"
+          autoit.WinWait(popup_title, "", 10)
+          file_name = save_screenshot("JS_Error", autoit.WinGetHandle(popup_title).hex)
+          autoit.WinClose(popup_title)
+        end
+      rescue => e
+        $stderr.puts "saving of javascript error failed: #{e.message}"
+        $stderr.puts e.backtrace
       end
       file_name
     end
