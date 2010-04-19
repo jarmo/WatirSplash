@@ -1,3 +1,7 @@
+=== Version 0.1.8 / 2010-04-19
+
+ * tidied up some code, no changes in functionality
+
 === Version 0.1.7 / 2010-04-15
 
  * minor fix
