@@ -1,5 +1,5 @@
-# this is just a fully working dummy spec file which you can run to see if
-# your configuration is correct and everything is working
+# this is a fully working dummy spec file which you can run to see if
+# your configuration is correct and everything is working as expected
 
 describe "WatiRspec" do
 

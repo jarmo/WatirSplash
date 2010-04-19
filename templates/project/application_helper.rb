@@ -1,4 +1,4 @@
-# ApplicationHelper module has helper methods, for easy use in specs
+# ApplicationHelper module has helper methods for easy use in specs
 # see usages in spec/dummy_spec.rb
 
 module ApplicationHelper

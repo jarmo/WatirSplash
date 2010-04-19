@@ -13,11 +13,13 @@ Gem::Specification.new do |s|
   s.rdoc_options << "--main" << "README.rdoc" <<
           "--template" << "hanna" <<
           "--inline-source" << "--format=html"
-  s.files = Dir.glob("**/*").delete_if {|f| f =~ /watirspec\.gemspec|\.gitignore|\.idea/}
+  ignored_files = File.readlines(".gitignore").map {|l| l.strip.gsub("*", "")}
+  ignored_files << ".gitignore" << ".gemspec"
+  s.files = Dir.glob("**/*").delete_if {|f| f =~ Regexp.union(*ignored_files)}
   s.homepage = %q{http://github.com/jarmo/WatiRspec}
   s.post_install_message = %Q{#{"*"*25}
 
-Thank you for installing WatiRspec! Don't forget to take a look at README file!
+Thank you for installing WatiRspec #{WatiRspec::VERSION}! Don't forget to take a look at README file!
 
 Execute "watirspec generate" under your project's directory to generate default project structure.
 

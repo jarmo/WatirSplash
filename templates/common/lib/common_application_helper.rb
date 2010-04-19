@@ -3,6 +3,10 @@
 
 module CommonApplicationHelper
 
+  # you can use these methods automatically inside of your it-blocks
+  # it "does something" do
+  #   new_global_method.should == "it just works"
+  # end
   def new_global_method
     "it just works"
   end
