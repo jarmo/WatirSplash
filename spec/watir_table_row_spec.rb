@@ -10,22 +10,22 @@ describe Watir::TableRow do
 
   it "#to_a works with regular row" do
     first_row = table(:id => "normal")[1]
-    first_row.to_a.should =~ %w[1 2 3]
+    first_row.to_a.should == ["1", "2", "3"]
   end
 
   it "#to_a works with headers in row" do
     first_row = table(:id => "headers")[1]
-    first_row.to_a.should =~ %w[1 2 3 4]
+    first_row.to_a.should == ["1", "2", "3", "4"]
   end
 
   it "#to_a works with nested tables" do
     second_row = table(:id => "nested")[2]
-    second_row.to_a.should =~ [[%w[11 12], %w[13 14]], "3"]
+    second_row.to_a.should == [[["11", "12"], ["13","14"]], "3"]
   end
 
   it "#to_a works with deep-nested tables" do
     second_row = table(:id => "deepnested")[2]
-    second_row.to_a.should =~ [[%w[11 12],
+    second_row.to_a.should == [[["11", "12"],
                                 [[["404", "405"], ["406", "407"]], "14"]], "3"]
   end
 
