@@ -1,5 +1,4 @@
-require "watirsplash"
-require "spec/autorun"
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe Watir::TableRow do
   include WatirSplash::SpecHelper
@@ -20,12 +19,12 @@ describe Watir::TableRow do
 
   it "#to_a works with nested tables" do
     second_row = table(:id => "nested")[2]
-    second_row.to_a.should == [[["11", "12"], ["13","14"]], "3"]
+    second_row.to_a(2).should == [[["11", "12"], ["13","14"]], "3"]
   end
 
   it "#to_a works with deep-nested tables" do
     second_row = table(:id => "deepnested")[2]
-    second_row.to_a.should == [[["11", "12"],
+    second_row.to_a(3).should == [[["11", "12"],
                                 [[["404", "405"], ["406", "407"]], "14"]], "3"]
   end
 

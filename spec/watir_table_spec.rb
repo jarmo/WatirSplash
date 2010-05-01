@@ -1,5 +1,4 @@
-require "watirsplash"
-require "spec/autorun"
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe Watir::Table do
   include WatirSplash::SpecHelper
@@ -33,7 +32,7 @@ describe Watir::Table do
                     [[["11", "12"],
                       ["13", "14"]], "3"]
             ]
-    table(:id => "nested").to_a.should == expected_table
+    table(:id => "nested").to_a(2).should == expected_table
   end
 
   it "#to_a works with nested table with non-direct child" do
@@ -44,7 +43,7 @@ describe Watir::Table do
                       ["13", "14"]], "3"]
             ]
 
-    table(:id => "nestednondirectchild").to_a.should == expected_table
+    table(:id => "nestednondirectchild").to_a(2).should == expected_table
   end
 
   it "#to_a works with deep-nested tables" do
@@ -55,7 +54,7 @@ describe Watir::Table do
                       [[["404", "405"],
                         ["406", "407"]], "14"]], "3"]
             ]
-    table(:id => "deepnested").to_a.should == expected_table
+    table(:id => "deepnested").to_a(3).should == expected_table
   end
 
   it "#to_a works with colspan" do

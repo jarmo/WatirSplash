@@ -1,5 +1,4 @@
-require "spec/autorun"
-require "watirsplash"
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe "Array match_array matcher" do
 

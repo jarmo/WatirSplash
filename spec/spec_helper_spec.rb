@@ -1,5 +1,4 @@
-require "watirsplash"
-require "spec/autorun"
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe WatirSplash::SpecHelper do
 
@@ -31,15 +30,15 @@ describe WatirSplash::SpecHelper do
     lambda {wait_until!(0.5) {sleep 0.1; false}}.should raise_exception(Watir::Exception::TimeOutException)
   end
 
-  it "has file_path methods without using formatter" do
+  it "has file_path methods formatter" do
     file_name = "blah.temp"
     ext = File.extname(file_name)
     base = File.basename(file_name, ext)
-    expected_path = File.join(Dir.pwd, "#{base}_\\d{6}#{ext}")
+    expected_path = File.join(Dir.pwd, "results/files/#{base}_.*#{ext}")
 
     file_path(file_name).should =~ Regexp.new(expected_path)
     expected_path = expected_path.gsub("/", "\\")
-    native_file_path(file_path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\\\d\\{6\\}", "\\d{6}"))
+    native_file_path(file_path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\.\\*", ".*"))
   end
 
   it "has download_file method" do

@@ -97,14 +97,15 @@ module Watir
 
   class Table < Element
 
-    # This method returns multi-dimensional array of the text's in table.
+    # This method returns multi-dimensional array of the cell texts in table.
     #
-    # It works with tr, th, td elements, colspan, rowspan and nested tables.
-    def to_a
+    # Works with tr, th, td elements, colspan, rowspan and nested tables.
+    # Takes an optional parameter *max_depth*, which is by default 1
+    def to_a(max_depth=1)
       assert_exists
       y = []
       @o.rows.each do |row|
-        y << TableRow.new(@container, :ole_object, row).to_a
+        y << TableRow.new(@container, :ole_object, row).to_a(max_depth)
       end
       y
     end
@@ -112,10 +113,11 @@ module Watir
 
   class TableRow < Element
 
-    # This method returns (multi-dimensional) array of the text's in table's row.
+    # This method returns (multi-dimensional) array of the cell texts in table's row.
     #
-    # It works with th, td elements, colspan, rowspan and nested tables.
-    def to_a
+    # Works with th, td elements, colspan, rowspan and nested tables.
+    # Takes an optional parameter *max_depth*, which is by default 1
+    def to_a(max_depth=1)
       assert_exists
       y = []
       @o.cells.each do |cell|
@@ -123,7 +125,8 @@ module Watir
         inner_tables.each do |inner_table|
           # make sure that the inner table is directly child for this cell
           if inner_table?(cell, inner_table)
-            y << Table.new(@container, :ole_object, inner_table).to_a
+            max_depth -= 1
+            y << Table.new(@container, :ole_object, inner_table).to_a(max_depth) if max_depth >= 1
           end
         end
 

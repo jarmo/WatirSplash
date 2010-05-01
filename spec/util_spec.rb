@@ -1,5 +1,4 @@
-require "watirsplash"
-require "spec/autorun"
+require File.dirname(__FILE__) + '/spec_helper'
 
 describe WatirSplash::Util do
 
