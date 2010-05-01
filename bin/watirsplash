@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-watirsplash_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+watirsplash_dir = File.expand_path(File.join(File.dirname(__FILE__), '../lib'))
 $LOAD_PATH.unshift(watirsplash_dir) unless $LOAD_PATH.include?(watirsplash_dir)
-require 'watirsplash/runner'
+require 'watirsplash/generator'
 
-if ARGV.size == 1 && ::WatirSplash::Runner.respond_to?(ARGV[0])
-  exit ::WatirSplash::Runner.send(ARGV[0])
+if ARGV.size == 1 && ::WatirSplash::Generator.respond_to?(ARGV[0])
+  exit ::WatirSplash::Generator.send(ARGV[0])
 else
-  exit ::WatirSplash::Runner.run
+  exit ::WatirSplash::Generator.help
 end

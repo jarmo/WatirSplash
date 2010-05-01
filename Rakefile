@@ -10,7 +10,4 @@ end
 
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
-  t.spec_opts << "--options" << "lib/spec.opts" <<
-          "--require" << "lib/watirsplash/html_formatter" <<
-          "--format" << "WatirSplash::HtmlFormatter:results/index.html"
 end

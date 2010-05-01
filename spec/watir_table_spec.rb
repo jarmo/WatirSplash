@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + '/spec_helper'
-
 describe Watir::Table do
   include WatirSplash::SpecHelper
 

@@ -1,0 +1,11 @@
+--require
+lib\watirsplash
+--require
+lib\watirsplash\html_formatter
+--format
+WatirSplash::HtmlFormatter:results/index.html
+--color
+--format
+nested
+--diff
+u

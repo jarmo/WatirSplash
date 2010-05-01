@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + '/spec_helper'
-
 describe Watir::IE do
 
   it "closes the browser even when Watir::IE#run_error_checks throws an exception" do

@@ -46,11 +46,6 @@ module WatirSplash
     # be shown on the report upon test failure.
     def file_path(file_name, description=nil)
       formatter.file_path(file_name, description)
-    rescue
-      extension = File.extname(file_name)
-      basename = File.basename(file_name, extension)
-      file_path = File.join(Dir.pwd, "#{basename}_#{Time.now.strftime("%H%M%S")}#{extension}")
-      file_path
     end
 
     # returns native file path

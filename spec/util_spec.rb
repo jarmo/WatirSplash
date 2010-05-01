@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + '/spec_helper'
-
 describe WatirSplash::Util do
 
   it "loads ui-test-common" do
