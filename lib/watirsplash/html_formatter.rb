@@ -4,8 +4,8 @@ require 'rmagick'
 require 'pathname'
 require 'fileutils'
 
-module WatiRspec
-  # Custom RSpec formatter for WatiRspec
+module WatirSplash
+  # Custom RSpec formatter for WatirSplash
   # * saves screenshot of the browser upon test failure
   # * saves html of the browser upon test failure
   # * saves javascript error dialog upon test failure

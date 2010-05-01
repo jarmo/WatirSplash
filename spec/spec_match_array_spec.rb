@@ -1,5 +1,5 @@
 require "spec/autorun"
-require "watirspec"
+require "watirsplash"
 
 describe "Array match_array matcher" do
 

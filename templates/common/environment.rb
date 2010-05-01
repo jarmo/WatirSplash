@@ -1,7 +1,7 @@
 =begin
   you have to load this file from your projects' environment.rb, which
   will use common functionality:
-  WatiRspec::Util.load_common
+  WatirSplash::Util.load_common
 
   add all your require statements into this file to avoid unnecessary
   code in your other projects' files

@@ -1,0 +1,11 @@
+require "rubygems"
+require "require_all"
+require "spec"
+require "watir"
+require "watirsplash/util"
+require "watirsplash/waiter"
+require "watirsplash/spec_helper"
+require "watirsplash/spec"
+require "watirsplash/watir"
+require "watirsplash/autoit"
+

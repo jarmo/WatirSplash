@@ -1,3 +1,3 @@
 # this file is needed for launching specs from IDE
-require "watirspec/runner"
-exit ::WatiRspec::Runner.run
+require "watirsplash/runner"
+exit ::WatirSplash::Runner.run

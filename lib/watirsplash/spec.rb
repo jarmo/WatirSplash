@@ -1,5 +1,5 @@
 Spec::Runner.configure do |config| #:nodoc:
-  config.include(WatiRspec::SpecHelper)
+  config.include(WatirSplash::SpecHelper)
 
   config.before(:all) do
     open_browser_at "about:blank"

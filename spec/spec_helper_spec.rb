@@ -1,7 +1,7 @@
-require "watirspec"
+require "watirsplash"
 require "spec/autorun"
 
-describe WatiRspec::SpecHelper do
+describe WatirSplash::SpecHelper do
 
   it "opens browser automatically" do
     @browser.should exist

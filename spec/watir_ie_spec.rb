@@ -1,4 +1,4 @@
-require "watirspec"
+require "watirsplash"
 require "spec/autorun"
 
 describe Watir::IE do

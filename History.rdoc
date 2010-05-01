@@ -1,3 +1,9 @@
+=== Version 0.1.9 / 2010-05-01
+
+ * Changed name of the library to WatirSplash due to name conflict
+   - this means that all watirspec commands are now obsolete and you have to use watirsplash commands instead
+   - all WatiRspec constants (module names etc) are now named as WatirSplash
+
 === Version 0.1.8 / 2010-04-19
 
  * tidied up some code, no changes in functionality

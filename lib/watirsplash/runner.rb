@@ -1,6 +1,6 @@
-module WatiRspec
+module WatirSplash
 
-  # WatiRspec runner class is responsible for:
+  # WatirSplash runner class is responsible for:
   # * generating directory structures for projects
   # * starting RSpec with specified settings
   class Runner
@@ -14,7 +14,7 @@ module WatiRspec
       # * loads custom Formatter
       def run
         unless ARGV.empty?
-          require "watirspec"
+          require "watirsplash"
           load_formatter
           load_options
           load_project_env
@@ -28,7 +28,7 @@ module WatiRspec
       # Generates ui-test project structure for project
       def generate
         ui_test_dir = File.join(Dir.pwd, "ui-test")
-        puts "Creating WatiRspec project directory structure to #{ui_test_dir}..."
+        puts "Creating WatirSplash project directory structure to #{ui_test_dir}..."
         require "fileutils"
         FileUtils.cp_r File.join(@@template_directory, "project/."), ui_test_dir
         puts "Done"
@@ -42,7 +42,7 @@ module WatiRspec
       # Generates ui-test-common directory structure
       def generate_common
         common_dir = File.join(Dir.pwd, "ui-test-common")
-        puts "Creating WatiRspec common project directory structure to #{common_dir}..."
+        puts "Creating WatirSplash common project directory structure to #{common_dir}..."
         require "fileutils"
         FileUtils.cp_r File.join(@@template_directory, "common/."), common_dir
         puts "Done"
@@ -55,8 +55,8 @@ module WatiRspec
 
       # Shows help
       def help
-        puts %Q{WatiRspec:
-Usage: watirspec (COMMAND|FILE(:LINE)?|DIRECTORY|GLOB)+ [options]
+        puts %Q{WatirSplash:
+Usage: watirsplash (COMMAND|FILE(:LINE)?|DIRECTORY|GLOB)+ [options]
 Commands:
           * generate - generate default directory structure for new project
           * generate_common - generate common project directory structure
@@ -71,8 +71,8 @@ All other commands/options will be passed to RSpec directly.}
       private
 
       def load_formatter
-        ARGV << "--require" << "watirspec/html_formatter.rb"
-        ARGV << "--format" << "WatiRspec::HtmlFormatter:#{File.join(Dir.pwd, "results/index.html")}"
+        ARGV << "--require" << "watirsplash/html_formatter.rb"
+        ARGV << "--format" << "WatirSplash::HtmlFormatter:#{File.join(Dir.pwd, "results/index.html")}"
       end
 
       def load_options

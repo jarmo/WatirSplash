@@ -1,4 +1,4 @@
-module WatiRspec
+module WatirSplash
   module Waiter
     # waits until some condition is true and
     # throws Watir::Exception::TimeOutException upon timeout

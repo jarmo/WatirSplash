@@ -1,6 +1,6 @@
 # Helper class for AutoIt
 class AutoItHelper
-  extend WatiRspec::Waiter
+  extend WatirSplash::Waiter
   
   @@autoit = Watir.autoit
 

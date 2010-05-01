@@ -1,8 +1,8 @@
-require "watirspec"
+require "watirsplash"
 require "spec/autorun"
 
 describe Watir::TableRow do
-  include WatiRspec::SpecHelper
+  include WatirSplash::SpecHelper
 
   before :all do
     goto "http://dl.dropbox.com/u/2731643/misc/tables.html"

@@ -1,7 +1,7 @@
 # this is a fully working dummy spec file which you can run to see if
 # your configuration is correct and everything is working as expected
 
-describe "WatiRspec" do
+describe "WatirSplash" do
 
   it "has the browser window opened" do
     url.should == "about:blank"
@@ -35,7 +35,7 @@ describe "WatiRspec" do
   end
 
   it "has also access to global methods" do
-    pending "it fails as long as there's not executed 'watirspec generate_common' command
+    pending "it fails as long as there's not executed 'watirsplash generate_common' command
 and ui-test-common is not loaded by this project" do
       new_global_method.should == "it just works"
     end

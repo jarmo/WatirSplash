@@ -2,7 +2,7 @@
 # code in your spec files
 
 # uncomment following line to load functionality from ui-test-common
-# WatiRspec::Util.load_common
+# WatirSplash::Util.load_common
 
 # by default everything, which is not a spec file, will be loaded
 local_dir = File.join(File.dirname(__FILE__), "**/*.rb")

@@ -1,4 +1,4 @@
-module WatiRspec
+module WatirSplash
   # main helper module
   #
   # these methods can be used in specs directly
@@ -35,9 +35,9 @@ module WatiRspec
       file_path
     end
 
-    # returns WatiRspec::HtmlFormatter object, nil if not in use
+    # returns WatirSplash::HtmlFormatter object, nil if not in use
     def formatter
-      @formatter ||= Spec::Runner.options.formatters.find {|f| f.kind_of?(WatiRspec::HtmlFormatter) rescue false}
+      @formatter ||= Spec::Runner.options.formatters.find {|f| f.kind_of?(WatirSplash::HtmlFormatter) rescue false}
     end
 
     # returns unique file path for use in examples.
