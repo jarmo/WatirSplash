@@ -7,12 +7,12 @@ begin
     version = File.read("VERSION").strip
     gem.name = "watirsplash"
     gem.summary = %Q{watirsplash #{version}}
-    gem.description = %q{Combines best features of Watir, RSpec and Ruby for browser-based functional testing.}
+    gem.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
     gem.email = "jarmo.p@gmail.com"
-    gem.homepage = "http://github.com/jarmo/my-testing-library"
+    gem.homepage = "http://github.com/jarmo/WatirSplash"
     gem.authors = ["Jarmo Pertman"]
     gem.executables = ["watirsplash"]
-    #gem.extra_rdoc_files = ["README.rdoc", "History.rdoc", "License.txt"]
+    gem.extra_rdoc_files = ["README.rdoc", "History.rdoc", "License.txt"]
     gem.rdoc_options << "--main" << "README.rdoc" <<
             "--template" << "hanna" <<
             "--inline-source" << "--format=html"
@@ -21,7 +21,7 @@ begin
     gem.files = Dir.glob("**/*").delete_if {|f| f =~ Regexp.union(*ignored_files)}
     gem.post_install_message = %Q{#{"*"*25}
 
-Thank you for installing WatirSplash #{version}! Don't forget to take a look at README file!
+Thank you for installing WatirSplash #{version}! Don't forget to take a look at README and History files!
 
 Execute "watirsplash generate" under your project's directory to generate default project structure.
 
@@ -51,7 +51,6 @@ Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.pattern = 'spec/**/*_spec.rb'
   spec.rcov = true
-  spec.rcov_opts << '--sort coverage --text-summary --aggregate coverage.data'
 end
 
 task :default => :spec
