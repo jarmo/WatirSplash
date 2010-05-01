@@ -1,3 +1,5 @@
+require "spec"
+
 describe "Array match_array matcher" do
 
   it "matches other arrays with regexps" do

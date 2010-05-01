@@ -1,3 +1,5 @@
+require "spec"
+
 describe WatirSplash::Util do
 
   it "loads ui-test-common" do

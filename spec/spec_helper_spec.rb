@@ -1,3 +1,5 @@
+require "spec"
+
 describe WatirSplash::SpecHelper do
 
   it "opens browser automatically" do

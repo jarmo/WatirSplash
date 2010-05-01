@@ -82,6 +82,16 @@ module Watir
     end
   end
 
+  class Element #:nodoc:all
+    def_wrap_guard :currentstyle
+
+    # returns current style instead of inline style
+    # http://msdn.microsoft.com/en-us/library/ms535231(VS.85).aspx
+    def style
+      currentstyle
+    end
+  end
+
   module PageContainer #:nodoc:all
     # patch for .click_no_wait
     def eval_in_spawned_process(command)

@@ -1,3 +1,5 @@
+require "spec"
+
 describe Watir::Table do
   include WatirSplash::SpecHelper
 
