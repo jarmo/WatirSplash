@@ -1,17 +1,17 @@
-= WatiRspec
+= WatirSplash
 
-* Web: http://github.com/jarmo/WatiRspec
+* Web: http://github.com/jarmo/WatirSplash
 * Author: Jarmo Pertman (mailto:jarmo.p[at]gmail.com)
 
 == DESCRIPTION:
 
-WatiRspec is a small library for easier browser-based functional testing in Ruby.
+WatirSplash is a small library for easier browser-based functional testing in Ruby.
 It combines Watir (http://www.watir.com) for controlling the browser (currently mainly IE) and
 RSpec (http://rspec.info) for testing framework. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
 you don't need to have any extra documentation for your applications.
 
-WatiRspec makes it easier to use best features of both of these tools together so
+WatirSplash makes it easier to use best features of both of these tools together so
 you won't have to spend time on thinking how to do that yourself - you can start
 testing right away!
 
@@ -53,7 +53,7 @@ testing right away!
         end
     end
     
-    C:\project\ui-test>watirspec spec\google_spec.rb
+    C:\project\ui-test>watirsplash spec\google_spec.rb
     Results will be saved into the directory C:/project/ui-test/results
     Google
       has search field
@@ -74,8 +74,8 @@ testing right away!
 * update RubyGems:
     gem update --system
 
-* install WatiRspec:
-    gem install watirspec
+* install WatirSplash:
+    gem install watirsplash
     
 == USAGE:
     
@@ -89,8 +89,8 @@ then it has probably a directory structure similar to this example:
 Now from the command line go to this directory and execute generate command:
     C:\>cd example_project
 
-    C:\example_project>watirspec generate
-    Creating WatiRspec project directory structure to C:/example_project/ui-test...
+    C:\example_project>watirsplash generate
+    Creating WatirSplash project directory structure to C:/example_project/ui-test...
     Done
     
 After that the directory structure will be something like this:
@@ -112,7 +112,7 @@ The contents of that ui-test directory will be:
     
 Just check out all the files to see some example code and comments in it and execute dummy_spec.rb
 to verify that everything works correctly:
-    watirspec spec\dummy_spec.rb
+    watirsplash spec\dummy_spec.rb
     
 You can have whatever directory structure for your tests just make sure that all test files have _spec.rb in
 the end of their filename (if using default RSpec options).
@@ -133,8 +133,8 @@ generate_common command once somewhere in a higher level of a directory tree tha
 to generate ui-test-common directory:
     C:\example_project>cd ..
 
-    C:\>watirspec generate_common
-    Creating WatiRspec common project directory structure to C:/ui-test-common...
+    C:\>watirsplash generate_common
+    Creating WatirSplash common project directory structure to C:/ui-test-common...
     Done
 
 It has a structure of:
@@ -148,7 +148,7 @@ It has a structure of:
     
 In environment.rb under project/ui-test you shall add common functionality to your project.
 Add the following line before any other require statements to do that:
-    WatiRspec::Util.load_common
+    WatirSplash::Util.load_common
     
 This gives you by default the access to every method in ui-test-common/lib/common_application_helper.rb
     
@@ -164,7 +164,7 @@ From now on, add all common functionality into ui-test-common/lib
 
 === PROBLEM #1
 
-If you see the following error message when running watirspec:
+If you see the following error message when running watirsplash:
     R6034. An application has made an attempt to load the C runtime library incorrectly.
  
 Solution:
