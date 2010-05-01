@@ -1,6 +1,6 @@
-.idea
-*.gem
-archive*
 coverage*
-results*
+pkg
+archive
+results
+.idea
 todo.txt
