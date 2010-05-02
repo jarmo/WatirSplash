@@ -4,3 +4,4 @@ archive
 results
 .idea
 todo.txt
+*.gemspec
