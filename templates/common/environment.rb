@@ -1,17 +1,15 @@
 =begin
-  you have to load this file from your projects' environment.rb, which
-  will use common functionality:
+  You have to load this file from your projects' environment.rb, which
+  would like to use common functionality.
+
+  Use the following code to do it automatically:
   WatirSplash::Util.load_common
 
-  add all your require statements into this file to avoid unnecessary
+  Add all your require statements into this file to avoid unnecessary
   code in your other projects' files
 
-  by default everything, which is not a spec file, will be loaded
+  By default everything in lib directory will be loaded
 =end
 
-local_dir = File.join(File.dirname(__FILE__), "**/*.rb")
-filtered_ruby_files = Dir.glob(local_dir).delete_if do |file|
-  File.directory?(file) || File.basename(file) =~ /(config|_spec)\.rb$/
-end
-require_all filtered_ruby_files
+require_rel "lib/"
 require_rel "config.rb"

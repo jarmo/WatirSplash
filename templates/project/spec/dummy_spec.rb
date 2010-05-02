@@ -1,4 +1,4 @@
-# this is a fully working dummy spec file which you can run to see if
+# This is a fully working spec file which you can run to see if
 # your configuration is correct and everything is working as expected
 
 describe "WatirSplash" do
@@ -10,9 +10,9 @@ describe "WatirSplash" do
   it "has easy access to ApplicationHelper methods" do
     # ApplicationHelper#helper_method_one will be executed
     helper_method_one.should == "one"
-    # ApplicationHelper#has_second_method? will be execute
+    # ApplicationHelper#has_second_method? will be executed
     should have_second_method
-    # ApplicationHelper#correct? method will be execute
+    # ApplicationHelper#correct? method will be executed
     should_not be_correct
   end
 
@@ -34,7 +34,7 @@ describe "WatirSplash" do
     end
   end
 
-  it "has also access to global methods" do
+  it "has access to global methods after generate_common command has been used" do
     pending "it fails as long as there's not executed 'watirsplash generate_common' command
 and ui-test-common is not loaded by this project" do
       new_global_method.should == "it just works"

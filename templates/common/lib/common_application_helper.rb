@@ -1,9 +1,9 @@
-# you can create under this directory common libraries/helpers/methods which you could
-# use within your specs in different projects
+# You can create under this directory common libraries/helpers/methods which you would
+# like to use within your specs in different projects
 
 module CommonApplicationHelper
 
-  # you can use these methods automatically inside of your it-blocks
+  # You can use methods declared in this module inside of your it-blocks
   # it "does something" do
   #   new_global_method.should == "it just works"
   # end

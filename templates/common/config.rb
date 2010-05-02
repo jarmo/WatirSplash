@@ -1,8 +1,6 @@
 =begin
   Global configuration constants
-  For example, you can use the URL constant below from your projects like this:
-
-  In your projects' config.rb:
+  For example, you can use the URL constant below from your projects' config.rb like this:
 
   module Config
     module Application
