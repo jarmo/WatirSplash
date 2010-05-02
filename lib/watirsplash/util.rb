@@ -15,6 +15,17 @@ module WatirSplash
         require File.join(dir, "environment.rb")
       end
 
+      def load_environment
+        env_file = File.join(Dir.pwd, "environment.rb")
+        if File.exists?(env_file)
+          require env_file
+        else
+          Dir.chdir("..") do
+            load_environment if Dir.entries(Dir.pwd).include?("..")
+          end
+        end
+      end
+
       private
 
       def common_dir

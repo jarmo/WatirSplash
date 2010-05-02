@@ -4,8 +4,6 @@ watirsplash
 watirsplash/html_formatter
 --format
 WatirSplash::HtmlFormatter:results/index.html
---require
-../environment.rb
 --color
 --format
 nested
