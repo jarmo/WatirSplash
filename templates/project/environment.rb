@@ -4,10 +4,12 @@
 # uncomment following line to load functionality from ui-test-common
 # WatirSplash::Util.load_common
 
-# by default everything, which is not a spec file, will be loaded
-local_dir = File.join(File.dirname(__FILE__), "**/*.rb")
-filtered_ruby_files = Dir.glob(local_dir).delete_if do |file|
-  File.directory?(file) || File.basename(file) =~ /(ide_runner|config|_spec)\.rb$/
+# by default everything, which is not a spec file, will be loaded from spec directory
+# and it's subdirectories
+spec_dir = File.join(File.dirname(__FILE__), "spec/**/*.rb")
+filtered_spec_files = Dir.glob(spec_dir).delete_if do |file|
+  File.directory?(file) || File.basename(file) =~ /.*spec\.rb$/
 end
-require_all filtered_ruby_files
+require_all filtered_spec_files
 require_rel "config.rb"
+require_rel "application_helper.rb"
