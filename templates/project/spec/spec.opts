@@ -1,10 +1,10 @@
+--color
 --require
 watirsplash
 --require
 watirsplash/html_formatter
 --format
 WatirSplash::HtmlFormatter:results/index.html
---color
 --format
 nested
 --diff
