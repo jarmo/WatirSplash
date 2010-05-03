@@ -1,3 +1,14 @@
+=== Version 0.2.0 / 2010-05-03
+
+ PS! This version has some backwards incompatible changes!
+ 
+ * added max_depth parameter to Watir::Table#to_a and Watir::TableRow#to_a methods for avoiding too complex arrays if wanted
+ * watirsplash is not used to launch tests anymore - use regular RSpec's 'spec' command instead
+ * tests need to be inside of 'spec' directory, because spec.opts is responsible for loading every library
+ * you can launch tests with IDE by using -O spec.opts as a spec runner parameter
+ * Watir::Element#style returns current CSS style for element
+ * ui-test and ui-test-common project templates got changed
+
 === Version 0.1.9 / 2010-05-01
 
  * Changed name of the library to WatirSplash due to name conflict
