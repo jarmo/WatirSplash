@@ -5,8 +5,8 @@
 
 == DESCRIPTION:
 
-WatirSplash is a small library for easier browser-based functional testing in Ruby.
-It combines Watir (http://www.watir.com) for controlling the browser (currently mainly IE) and
+WatirSplash makes browser-based testing in Ruby splashin' easy.
+It combines Watir (http://www.watir.com) for controlling the browser and
 RSpec (http://rspec.info) for testing framework. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
 you don't need to have any extra documentation for your applications.
@@ -17,23 +17,56 @@ testing right away!
 
 == FEATURES:
 
-* generate command for generating default project structure
-* generate_common command for generating common ui-tests directory
+* generate command for generating default tests project structure
+* generate_common command for generating a project structure for common functionality in your tests
 * Browser will be opened and closed for each example group automatically
 * You can use Watir method names directly without having to specify a browser object:
     text_field(:name => "locator") # instead of @browser.text_field(:name => "locator")
 * All needed libraries will be loaded and helper modules will be included automatically
-* All JavaScript errors will be detected automatically
+* All JavaScript errors will be detected and saved automatically
 * Some additional methods to help using Watir (download_file, wait_until, wait_until! etc.)
+* Some patches for different libraries which haven't made yet to the libraries themselves
 
 * Custom html formatter for RSpec:
-* Saves screenshot of the browser window
-* Saves html of the page
-* Saves all the files created/downloaded during the example and shows them on the report
-* Automatically archives test results for later reviewing
+  - saves screenshot of the browser window
+  - saves html of the page
+  - saves all the files created/downloaded during the example and shows them on the report
+  - automatically archives test results for later reviewing
 
 == SYNOPSIS:
 
+  Without WatirSplash:
+    require 'watir'
+    require 'spec'
+
+    describe "Google" do
+        before :all do
+            @browser = Watir::Browser.new
+            @browser.maximize
+            @browser.goto "http://google.com"
+            @browser.url.should =~ /google/
+        end
+
+        it "has search field" do
+            @browser.text_field = text_field(:name => "q")
+            @browser.text_field.should exist
+            @browser.text_field.should be_visible
+        end
+
+        it "performs search" do
+            @browser.text_field(:name => "q").set "Bing"
+            @browser.button(:name => "btnG").click
+            @browser.text.should include("Bing")
+        end
+
+        after :all do
+            @browser.close
+        end
+    end
+
+
+
+  With WatirSplash:
     describe "Google" do
         before :all do
             goto "http://google.com"
@@ -53,7 +86,7 @@ testing right away!
         end
     end
     
-    C:\project\ui-test>watirsplash spec\google_spec.rb
+    C:\project\ui-test>spec spec\google_spec.rb
     Results will be saved into the directory C:/project/ui-test/results
     Google
       has search field
@@ -68,11 +101,8 @@ testing right away!
 * install Ruby 1.8.6:
     http://rubyinstaller.org/
     
-* install ImageMagick with rmagick-win32 for making the screenshots:
+* install ImageMagick with rmagick-win32 for saving the screenshots in PNG format:
     http://rubyforge.org/frs/?group_id=12&release_id=42049
-    
-* update RubyGems:
-    gem update --system
 
 * install WatirSplash:
     gem install watirsplash
@@ -105,17 +135,18 @@ The contents of that ui-test directory will be:
     ui-test\application_helper.rb
     ui-test\config.rb
     ui-test\environment.rb
-    ui-test\ide_runner.rb
     
     ui-test\spec
     ui-test\spec\dummy_spec.rb
+    ui-test\spec\spec.opts
     
 Just check out all the files to see some example code and comments in it and execute dummy_spec.rb
 to verify that everything works correctly:
-    watirsplash spec\dummy_spec.rb
-    
-You can have whatever directory structure for your tests just make sure that all test files have _spec.rb in
-the end of their filename (if using default RSpec options).
+    spec spec\dummy_spec.rb
+
+You have to create your tests under spec directory so RSpec would load spec.opts automatically.
+You can have whatever directory structure under this directory just make sure that
+all test files have _spec.rb in the end of their filename (if using default RSpec options).
     
 == USAGE FOR MULTIPLE PROJECTS:
 
@@ -138,7 +169,7 @@ to generate ui-test-common directory:
     Done
 
 It has a structure of:
-    C:\UI-TEST-COMMON
+    C:\ui-test-common
     └───lib
     
     ui-test-common\config.rb
@@ -147,12 +178,12 @@ It has a structure of:
     ui-test-common\lib\common_application_helper.rb
     
 In environment.rb under project/ui-test you shall add common functionality to your project.
-Add the following line before any other require statements to do that:
+Uncomment the following line:
     WatirSplash::Util.load_common
     
 This gives you by default the access to every method in ui-test-common/lib/common_application_helper.rb
     
-Now, in ui-test-common/config.rb change the URL to your hostname and in config.rb under project/ui-test:
+Now, in ui-test-common/config.rb change the URL to your hostname and in project's config.rb:
     URL = Config.full_url("/relative_path")
     
 This gives you the ability to have host and port written only in one place.
@@ -168,4 +199,5 @@ If you see the following error message when running watirsplash:
     R6034. An application has made an attempt to load the C runtime library incorrectly.
  
 Solution:
-    Install Microsoft Visual C++ 2008 SP1 Redistributable Package
+    This is caused by ImageMagick.
+    Install Microsoft Visual C++ 2008 SP1 Redistributable Package to solve the problem.
