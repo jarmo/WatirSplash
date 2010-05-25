@@ -18,16 +18,16 @@ describe WatirSplash::SpecHelper do
   end
 
   it "has wait_until" do
-    result = wait_until {sleep 0.1; true}
-    result.should be_true
-
-    result = wait_until(0.5) {sleep 0.1; false}
-    result.should be_false
+    lambda {wait_until(0.5) {sleep 0.1; true}}.should_not raise_exception
+    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::Exception::TimeOutException)
   end
 
-  it "has wait_until!" do
-    lambda {wait_until!(0.5) {sleep 0.1; true}}.should_not raise_exception
-    lambda {wait_until!(0.5) {sleep 0.1; false}}.should raise_exception(Watir::Exception::TimeOutException)
+  it "has wait_until?" do
+    result = wait_until? {sleep 0.1; true}
+    result.should be_true
+
+    result = wait_until?(0.5) {sleep 0.1; false}
+    result.should be_false
   end
 
   it "has file_path methods formatter" do

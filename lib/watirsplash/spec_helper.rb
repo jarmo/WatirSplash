@@ -31,7 +31,7 @@ module WatirSplash
       file_path = native_file_path(file_path(file_name))
       AutoItHelper.set_edit(file_path)
       AutoItHelper.click_save("Save As")
-      wait_until! {File.exists?(file_path)}
+      wait_until {File.exists?(file_path)}
       file_path
     end
 

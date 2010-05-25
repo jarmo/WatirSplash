@@ -23,7 +23,7 @@ class AutoItHelper
     # activates window automatically and makes sure that the field's
     # value got changed
     def set_field(window_title, field_name, field_value)
-      wait_until! do
+      wait_until do
         activate_window(window_title) &&
                 @@autoit.ControlFocus(window_title, "", field_name) == 1 &&
                 @@autoit.ControlSetText(window_title, "", field_name, field_value) == 1 &&
@@ -35,11 +35,11 @@ class AutoItHelper
     # activates window automatically and makes sure that the click
     # was successful
     def click_button(window_title, button_name)
-      wait_until! do
+      wait_until do
         activate_window(window_title) &&
                 @@autoit.ControlFocus(window_title, "", button_name) == 1 &&
                 @@autoit.ControlClick(window_title, "", button_name) == 1 &&
-                wait_until(3) {@@autoit.WinExists(window_title) == 0}
+                wait_until?(3) {@@autoit.WinExists(window_title) == 0}
       end
     end
 
