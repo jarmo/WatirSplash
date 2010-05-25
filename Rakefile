@@ -34,7 +34,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
     gem.add_dependency("rmagick")
     gem.add_dependency("syntax")
     gem.add_dependency("win32console")
-    gem.add_dependency("win32screenshot")
+    gem.add_dependency("win32screenshot", ">=0.0.4")
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

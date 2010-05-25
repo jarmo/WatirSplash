@@ -1,5 +1,5 @@
 require 'spec/runner/formatter/html_formatter'
-require 'win32screenshot'
+require 'win32/screenshot'
 require 'rmagick'
 require 'pathname'
 require 'fileutils'
@@ -71,11 +71,12 @@ module WatirSplash
     def save_screenshot(description="Screenshot", hwnd=@browser.hwnd) # :nodoc:
       begin
         @browser.bring_to_front
-        width, height, blob = Win32::Screenshot.capture_hwnd(hwnd)
-        file_name = file_path("screenshot.png", description)
-        img = Magick::ImageList.new
-        img.from_blob(blob)
-        img.write(file_name)
+        Win32::Screenshot.hwnd(hwnd) do |width, height, blob|
+          file_name = file_path("screenshot.png", description)
+          img = Magick::ImageList.new
+          img.from_blob(blob)
+          img.write(file_name)
+        end
       rescue => e
         $stderr.puts "saving of screenshot failed: #{e.message}"
         $stderr.puts e.backtrace
