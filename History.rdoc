@@ -1,4 +1,4 @@
-=== Version 0.2.1 / XXXX-XX-XX
+=== Version 0.2.1 / 2010-05-27
 
  * added compatibility with Win32::Screenshot 0.0.4
  * wait_until behaves exactly the same as with Watir - throws Exception upon timeout
