@@ -8,6 +8,8 @@ end
 # patches for Watir
 module Watir
   class IE #:nodoc:all
+    READYSTATE_INTERACTIVE = 3
+
     # This is Watir's overriden wait method, which is used in many places for deciding
     # if browser is ready or not. We have to patch one line in it to work properly
     # when file save as dialog has been displayed. For some reason READYSTATE (4)
@@ -26,7 +28,8 @@ module Watir
           sleep a_moment
         end
         # this is the line which has been changed to accept also state 3
-        until @ie.readyState <= READYSTATE_COMPLETE do
+        until @ie.readyState == READYSTATE_INTERACTIVE ||
+                @ie.readyState == READYSTATE_COMPLETE do
           sleep a_moment
         end
         sleep a_moment
