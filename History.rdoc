@@ -1,3 +1,7 @@
+=== Version 0.2.2 / 2010-06-13
+
+ * fixed minor bugs
+
 === Version 0.2.1 / 2010-05-27
 
  * added compatibility with Win32::Screenshot 0.0.4
