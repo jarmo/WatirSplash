@@ -201,3 +201,7 @@ If you see the following error message when running watirsplash:
 Solution:
     This is caused by ImageMagick.
     Install Microsoft Visual C++ 2008 SP1 Redistributable Package to solve the problem.
+
+== COPYRIGHT
+
+Copyright © 2010 Jarmo Pertman. See LICENSE for details.
