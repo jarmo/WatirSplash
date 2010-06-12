@@ -68,8 +68,9 @@ module WatirSplash
       file_name
     end
 
-    def save_screenshot(description="Screenshot", hwnd=@browser.hwnd) # :nodoc:
+    def save_screenshot(description="Screenshot", hwnd=nil) # :nodoc:
       begin
+        hwnd ||= @browser.hwnd
         @browser.bring_to_front
         Win32::Screenshot.hwnd(hwnd) do |width, height, blob|
           file_name = file_path("screenshot.png", description)
