@@ -35,7 +35,7 @@ testing right away!
 
 == SYNOPSIS:
 
-=== Without WatirSplash:
+=== With plain Watir and RSpec:
     require 'watir'
     require 'spec'
 
@@ -48,9 +48,9 @@ testing right away!
         end
 
         it "has search field" do
-            @browser.text_field = text_field(:name => "q")
-            @browser.text_field.should exist
-            @browser.text_field.should be_visible
+            text_field = @browser.text_field(:name => "q")
+            text_field.should exist
+            text_field.should be_visible
         end
 
         it "performs search" do
