@@ -3,7 +3,7 @@ require "spec"
 describe Watir::IE do
 
   it "uses currentStyle method to show computed style" do
-    goto "http://dl.dropbox.com/u/2731643/misc/tables.html"
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/tables.html"
     t = table(:id => "normal")
     normal_cell = t[1][1]
     normal_cell.text.should == "1"

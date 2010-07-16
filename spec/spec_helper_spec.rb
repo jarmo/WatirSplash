@@ -43,7 +43,7 @@ describe WatirSplash::SpecHelper do
 
   it "has download_file method" do
     begin
-      goto "http://dl.dropbox.com/u/2731643/misc/download.html"
+      goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
       link(:text => "Download").click_no_wait
       file = download_file("download.zip")
       File.read(file).should == "this is a 'zip' file!"
@@ -51,5 +51,7 @@ describe WatirSplash::SpecHelper do
       FileUtils.rm file
     end
   end
+
+  it "redirects usages of method 'p' to Watir instead of printing"
 
 end

@@ -4,7 +4,7 @@ describe Watir::TableRow do
   include WatirSplash::SpecHelper
 
   before :all do
-    goto "http://dl.dropbox.com/u/2731643/misc/tables.html"
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/tables.html"
   end
 
   it "#to_a works with regular row" do
