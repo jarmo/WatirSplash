@@ -1,3 +1,8 @@
+=== Version 0.3.0 / XXXX-XX-XX
+
+Bug fixes:
+ * it is now possible to use method 'p' to find <p> elements in specs without invoking Kernel.p
+
 === Version 0.2.2 / 2010-06-13
 
  * fixed minor bugs

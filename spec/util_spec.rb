@@ -3,12 +3,9 @@ require "spec"
 describe WatirSplash::Util do
 
   it "loads ui-test-common" do
-    class WatirSplash::Util
-      @@ui_test_common_dir = "ui-test-common-for-test"
-    end
-
+    ui_test_common_dir = "../ui-test-common"
+    raise "ui-test-common directory should not exist due to testing!" if File.exists?(ui_test_common_dir)
     begin
-      ui_test_common_dir = "../ui-test-common-for-test"
       FileUtils.mkdir(ui_test_common_dir)
       File.open(File.join(ui_test_common_dir, "environment.rb"), "w") do |f|
         f.puts "
@@ -17,6 +14,7 @@ module GlobalApplication
 end"
       end
 
+      lambda {GlobalApplication::LOADED}.should raise_exception
       lambda {WatirSplash::Util.load_common}.should_not raise_exception
       GlobalApplication::LOADED.should be_true
     ensure
@@ -25,13 +23,28 @@ end"
   end
 
   it "raises exception if ui-test-common is not found" do
-    class WatirSplash::Util
-      @@ui_test_common_dir = "nonexisting_ui_test_common_dir"
-    end
-
     lambda {WatirSplash::Util.load_common}.
             should raise_exception(RuntimeError,
-                                   "nonexisting_ui_test_common_dir directory was not found! It has to exist somewhere higher in directory tree than your project's directory and it has to have environment.rb file in it!")
+                                   "ui-test-common directory was not found! It has to exist somewhere higher in directory tree than your project's directory and it has to have environment.rb file in it!")
+  end
+
+  it "loads project's environment.rb automatically" do
+    env_file = "../environment.rb"
+    raise "environment.rb file should not exist due to testing!" if File.exists?(env_file)
+    begin
+      File.open(env_file, "w") do |file|
+        file.puts "
+module GlobalApplication
+  ENVIRONMENT_LOADED = true
+end"
+      end
+
+      lambda {GlobalApplication::ENVIRONMENT_LOADED}.should raise_exception
+      lambda {WatirSplash::Util.load_environment}.should_not raise_exception
+      GlobalApplication::ENVIRONMENT_LOADED.should be_true
+    ensure
+      FileUtils.rm_rf(env_file)
+    end
   end
 
 end
