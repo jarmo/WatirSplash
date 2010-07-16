@@ -55,8 +55,15 @@ module WatirSplash
       File::ALT_SEPARATOR ? file_path.gsub(File::SEPARATOR, File::ALT_SEPARATOR) : file_path
     end
 
-    def method_missing name, *arg #:nodoc:
-      @browser.respond_to?(name) ? @browser.send(name, *arg) : super
+    def method_missing name, *args #:nodoc:
+      @browser.respond_to?(name) ? @browser.send(name, *args) : super
+    end
+
+    # make sure that using method 'p' will be invoked on @browser
+    # and not Kernel
+    # use Kernel.p if you need to dump some variable 
+    def p *args #:nodoc:
+      @browser.p *args
     end
 
   end
