@@ -1,7 +1,8 @@
-=== Version 0.3.0 / XXXX-XX-XX
+=== Version 0.3.0 / 2010-07-23
 
 Bug fixes:
  * it is now possible to use method 'p' to find <p> elements in specs without invoking Kernel.p
+ * fixed project template to use require_all instead of require_rel
 
 === Version 0.2.2 / 2010-06-13
 
