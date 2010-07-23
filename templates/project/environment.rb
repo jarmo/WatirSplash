@@ -10,6 +10,6 @@ spec_dir = File.join(File.dirname(__FILE__), "spec/**/*.rb")
 filtered_spec_files = Dir.glob(spec_dir).delete_if do |file|
   File.directory?(file) || File.basename(file) =~ /.*spec\.rb$/
 end
-require_rel filtered_spec_files
+require_all filtered_spec_files
 require_rel "config.rb"
 require_rel "application_helper.rb"
