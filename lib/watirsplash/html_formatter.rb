@@ -19,13 +19,10 @@ module WatirSplash
     def initialize(options, output) # :nodoc:
       raise "output has to be a file path!" unless output.is_a?(String)
       @output_dir = File.expand_path(File.dirname(output))
+      archive_results
+
       puts "Results will be saved into the directory #{@output_dir}"
       @files_dir = File.join(@output_dir, "files")
-      if File.exists?(@output_dir)
-        archive_dir = File.join(@output_dir, "../archive")
-        FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
-        FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
-      end
       FileUtils.mkdir_p(@files_dir)
       @files_saved_during_example = []
       super
@@ -114,6 +111,16 @@ module WatirSplash
       file_path = File.join(@files_dir, "#{basename}_#{Time.now.strftime("%H%M%S")}_#{example_group_number}_#{example_number}#{extension}")
       @files_saved_during_example.unshift(:desc => description, :path => file_path)
       file_path
+    end
+
+    private
+
+    def archive_results
+      if File.exists?(@output_dir)
+        archive_dir = File.join(@output_dir, "../archive")
+        FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
+        FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
+      end
     end
 
   end
