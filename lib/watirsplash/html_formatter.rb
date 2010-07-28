@@ -28,15 +28,22 @@ module WatirSplash
       super
     end
 
+    def example_group_started(example_group) # :nodoc:
+      @files_saved_during_example.clear
+      super
+    end
+
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
       super
     end
 
     def extra_failure_content(failure) # :nodoc:
-      save_javascript_error
-      save_html
-      save_screenshot
+      if @browser.exists?
+        save_javascript_error
+        save_html
+        save_screenshot
+      end
 
       content = []
       content << "<span>"
@@ -60,7 +67,6 @@ module WatirSplash
         File.open(file_name, 'w') {|f| f.puts html}
       rescue => e
         $stderr.puts "saving of html failed: #{e.message}"
-        $stderr.puts e.backtrace
       end
       file_name
     end
@@ -77,7 +83,6 @@ module WatirSplash
         end
       rescue => e
         $stderr.puts "saving of screenshot failed: #{e.message}"
-        $stderr.puts e.backtrace
       end
       file_name
     end
@@ -96,7 +101,6 @@ module WatirSplash
         end
       rescue => e
         $stderr.puts "saving of javascript error failed: #{e.message}"
-        $stderr.puts e.backtrace
       end
       file_name
     end
