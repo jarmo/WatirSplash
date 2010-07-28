@@ -35,6 +35,7 @@ module WatirSplash
 
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
+      example.description << " (#{Time.now.strftime("%H:%M %d.%m")})"
       super
     end
 

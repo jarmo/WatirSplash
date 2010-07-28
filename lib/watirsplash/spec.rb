@@ -14,6 +14,12 @@ module Spec #:nodoc:all
   class ExampleGroup
     subject {self}
   end
+
+  module Example
+    class ExampleProxy
+      attr_accessor :description
+    end
+  end
 end
 
 # match_array is useful for matching arrays where some elements are regular expressions.
