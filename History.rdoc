@@ -1,3 +1,10 @@
+=== Version 0.2.4 / 2010-07-30
+
+ * timestamp is now inserted into example names
+
+Bug fixes:
+ * fixed project template generated with "watirsplash generate" command
+
 === Version 0.2.3 / 2010-07-23
 
 Bug fixes:
