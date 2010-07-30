@@ -132,11 +132,11 @@ After that the directory structure will be something like this:
         └───spec
     
 The contents of that ui-test directory will be:
-    ui-test\application_helper.rb
     ui-test\config.rb
     ui-test\environment.rb
     
     ui-test\spec
+    ui-test\spec\application_helper.rb
     ui-test\spec\dummy_spec.rb
     ui-test\spec\spec.opts
     
