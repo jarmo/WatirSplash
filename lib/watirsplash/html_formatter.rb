@@ -30,12 +30,16 @@ module WatirSplash
 
     def example_group_started(example_group) # :nodoc:
       @files_saved_during_example.clear
+      date = Time.now.strftime("%d.%m.%Y")
+      example_group.description += " (#{date})"
+      # needed for NestedTextFormatter
+      example_group.nested_descriptions.map! {|nested_description| nested_description + " (#{date})"}
       super
     end
 
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
-      example.description << " (#{Time.now.strftime("%H:%M %d.%m")})"
+      example.description << " (#{Time.now.strftime("%H:%M")})"
       super
     end
 

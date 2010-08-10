@@ -16,6 +16,10 @@ module Spec #:nodoc:all
   end
 
   module Example
+    class ExampleGroupProxy
+      attr_accessor :description
+    end
+
     class ExampleProxy
       attr_accessor :description
     end
