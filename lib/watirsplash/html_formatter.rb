@@ -30,16 +30,13 @@ module WatirSplash
 
     def example_group_started(example_group) # :nodoc:
       @files_saved_during_example.clear
-      date = Time.now.strftime("%d.%m.%Y")
-      example_group.description += " (#{date})"
-      # needed for NestedTextFormatter
-      example_group.nested_descriptions.map! {|nested_description| nested_description + " (#{date})"}
+      append_extra_information_to_desc(example_group)
       super
     end
 
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
-      example.description << " (#{Time.now.strftime("%H:%M")})"
+      example.description += "#{example.location.scan(/:\d+$/)} (#{Time.now.strftime("%H:%M:%S")})"
       super
     end
 
@@ -130,6 +127,16 @@ module WatirSplash
         FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
         FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
       end
+    end
+
+    def append_extra_information_to_desc(example_group)
+      date = Time.now.strftime("%d.%m.%Y")
+      spec_dir = Pathname.new(example_group.location)
+      relative_spec_path = spec_dir.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s
+      appended_description = " @ #{relative_spec_path}#{example_group.location.scan(/:\d+$/)} (#{date})"
+      example_group.description += appended_description
+      # needed for NestedTextFormatter
+      example_group.nested_descriptions.map! {|nested_description| nested_description + appended_description}
     end
 
   end
