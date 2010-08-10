@@ -1,3 +1,8 @@
+=== Version 0.2.5 / 2010-XX-XX
+
+ * spec relative filename with line number and date is shown in example_group name in the report
+ * only time is shown in example name in the report
+
 === Version 0.2.4 / 2010-07-30
 
  * timestamp is now inserted into example names
