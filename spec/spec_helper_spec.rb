@@ -30,7 +30,7 @@ describe WatirSplash::SpecHelper do
     result.should be_false
   end
 
-  it "has file_path methods formatter" do
+  it "has file_path methods" do
     file_name = "blah.temp"
     ext = File.extname(file_name)
     base = File.basename(file_name, ext)

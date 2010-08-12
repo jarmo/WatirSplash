@@ -93,19 +93,37 @@ module Watir
     def style
       currentstyle
     end
+
+    def click_no_wait
+      assert_enabled
+
+      highlight(:set)
+      element = "#{self.class}.new(#{@page_container.attach_command}, :unique_number, #{self.unique_number})"
+      @page_container.click_no_wait(element)
+      highlight(:clear)
+    end
   end
 
   module PageContainer #:nodoc:all
-    # patch for .click_no_wait
-    def eval_in_spawned_process(command)
-      command.strip!
-      ruby_code = "require 'rubygems';"
-      ruby_code << "require 'watir/ie';"
-      ruby_code << "pc = #{attach_command};"
-      ruby_code << "pc.instance_eval(#{command.inspect});"
-      exec_string = "start rubyw -e #{ruby_code.inspect}".gsub("\\\"", "'")
-      system(exec_string)
+    def click_no_wait(element)
+      ruby_code = "require 'rubygems';" <<
+              "require '#{File.expand_path(File.dirname(__FILE__))}/watir_core';" <<
+              "#{element}.click!"
+      system(spawned_click_no_wait_command(ruby_code))
     end
+
+    def spawned_click_no_wait_command(command)
+      unless $VERBOSE
+        "start rubyw -e #{command.inspect}"
+      else
+        puts "#click_no_wait command:"
+        command = "ruby -e #{command.inspect}"
+        puts command
+        command
+      end
+    end
+
+    private :spawned_click_no_wait_command
   end
 
   class Table < Element
