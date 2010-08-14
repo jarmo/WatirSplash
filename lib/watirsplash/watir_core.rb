@@ -2,7 +2,6 @@
 # to work with minimum functionality
 #
 # this is needed for #click_no_wait to perform faster
-t = Time.now
 module Watir
   # dummy modules for patching
   module Win32
@@ -78,4 +77,3 @@ module Watir
   end
 
 end
-puts Time.now - t
