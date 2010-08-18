@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
-  s.date = %q{2010-08-12}
+  s.date = %q{2010-08-19}
   s.default_executable = %q{watirsplash}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.email = %q{jarmo.p@gmail.com}
@@ -62,7 +62,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
 *************************}
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{watirsplash 0.2.4}
   s.test_files = [
     "spec/spec_helper_spec.rb",
@@ -77,7 +77,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<watir>, [">= 1.6.5"])
       s.add_runtime_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_runtime_dependency(%q<diff-lcs>, [">= 0"])
