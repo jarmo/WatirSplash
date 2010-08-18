@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirsplash}
-  s.version = "0.2.4"
+  s.version = "0.2.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %q{*************************
 
-Thank you for installing WatirSplash 0.2.4! Don't forget to take a look at README and History files!
+Thank you for installing WatirSplash 0.2.5! Don't forget to take a look at README and History files!
 
 Execute "watirsplash generate" under your project's directory to generate default project structure.
 
@@ -63,7 +63,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{watirsplash 0.2.4}
+  s.summary = %q{watirsplash 0.2.5}
   s.test_files = [
     "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
