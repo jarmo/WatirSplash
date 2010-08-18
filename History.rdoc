@@ -1,6 +1,7 @@
-=== Version 0.2.5 / 2010-XX-XX
+=== Version 0.2.5 / 2010-08-19
 
- * spec relative filename with line number and date is shown in example_group name in the report
+ * #click_no_wait performance improved by 2-3x - see more from http://jira.openqa.org/browse/WTR-449
+ * spec's relative filename with line number and date is shown in example_group name in the report
  * only time is shown in example name in the report
 
 === Version 0.2.4 / 2010-07-30
