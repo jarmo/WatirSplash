@@ -17,24 +17,34 @@ module Watir
     # and not 4, thus wait will stay blocking.
     # read more about IE READYSTATE property:
     # http://msdn.microsoft.com/en-us/library/aa768362(VS.85).aspx
+    #
+    # Block execution until the page has loaded.
+    # Raises Timeout::Error if page is not loaded within 5 minutes.
+    # =nodoc
+    # Note: This code needs to be prepared for the ie object to be closed at
+    # any moment!
     def wait(no_sleep=false)
       @xml_parser_doc = nil
       @down_load_time = 0.0
       a_moment = 0.2 # seconds
       start_load_time = Time.now
-
+      timeout = 5*60
+      timeout_error = Timeout::Error.new("Failed to load page within #{timeout} seconds!")
       begin
-        while @ie.busy # XXX need to add time out
+        while @ie.busy
           sleep a_moment
+          raise timeout_error if Time.now - start_load_time >= timeout
         end
         # this is the line which has been changed to accept also state 3
         until @ie.readyState == READYSTATE_INTERACTIVE ||
                 @ie.readyState == READYSTATE_COMPLETE do
           sleep a_moment
+          raise timeout_error if Time.now - start_load_time >= timeout
         end
         sleep a_moment
         until @ie.document do
           sleep a_moment
+          raise timeout_error if Time.now - start_load_time >= timeout
         end
 
         documents_to_wait_for = [@ie.document]
@@ -49,6 +59,7 @@ module Watir
         begin
           until doc.readyState == "complete" do
             sleep a_moment
+            raise timeout_error if Time.now - start_load_time >= timeout
           end
           @url_list << doc.location.href unless @url_list.include?(doc.location.href)
           doc.frames.length.times do |n|
