@@ -1,3 +1,7 @@
+=== Version 0.2.6 / 2010-XX-XX
+
+ * Timeout::Error will be thrown if browser hasn't loaded page within 5 minutes
+
 === Version 0.2.5 / 2010-08-19
 
  * #click_no_wait performance improved by 2-3x - see more from http://jira.openqa.org/browse/WTR-449
