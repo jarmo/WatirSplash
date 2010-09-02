@@ -19,7 +19,7 @@ describe WatirSplash::SpecHelper do
 
   it "has wait_until" do
     lambda {wait_until(0.5) {sleep 0.1; true}}.should_not raise_exception
-    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::Exception::TimeOutException)
+    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::WaitHelper::TimeoutError)
   end
 
   it "has wait_until?" do
@@ -48,7 +48,7 @@ describe WatirSplash::SpecHelper do
       file = download_file("download.zip")
       File.read(file).should == "this is a 'zip' file!"
     ensure
-      FileUtils.rm file
+      FileUtils.rm file rescue nil
     end
   end
 

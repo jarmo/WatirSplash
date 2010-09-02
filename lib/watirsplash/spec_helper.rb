@@ -3,7 +3,7 @@ module WatirSplash
   #
   # these methods can be used in specs directly
   module SpecHelper
-    include Waiter
+    include Watir::WaitHelper
 
     # opens the browser at specified url
     def open_browser_at url
@@ -27,10 +27,11 @@ module WatirSplash
     # * raises an exception if saving the file is unsuccessful
     # * returns absolute file_path of the saved file
     def download_file file_name
-      AutoItHelper.click_save
+      AutoIt::Window.new("File Download").save_button.click
       file_path = native_file_path(file_path(file_name))
-      AutoItHelper.set_edit(file_path)
-      AutoItHelper.click_save("Save As")
+      save_as_window = AutoIt::Window.new("Save As")
+      save_as_window.edit_text_field.set(file_path)
+      save_as_window.save_button.click
       wait_until {File.exists?(file_path)}
       file_path
     end
