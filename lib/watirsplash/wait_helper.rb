@@ -14,7 +14,7 @@ module Watir
     # Wait until the block evaluates to true or times out.
     #
 
-    def wait_until(timeout = 30, &block)
+    def wait_until(timeout = 60, &block)
       end_time = ::Time.now + timeout
 
       until ::Time.now > end_time
@@ -26,7 +26,7 @@ module Watir
       raise TimeoutError, "timed out after #{timeout} seconds"
     end
 
-    def wait_until?(timeout = 30, &block)
+    def wait_until?(timeout = 60, &block)
       wait_until(timeout, &block)
       true
     rescue TimeoutError
@@ -37,7 +37,7 @@ module Watir
     # Wait while the block evaluates to true or times out.
     #
 
-    def wait_while(timeout = 30, &block)
+    def wait_while(timeout = 60, &block)
       end_time = ::Time.now + timeout
 
       until ::Time.now > end_time
@@ -48,7 +48,7 @@ module Watir
       raise TimeoutError, "timed out after #{timeout} seconds"
     end
 
-    def wait_while?(timeout = 30, &block)
+    def wait_while?(timeout = 60, &block)
       wait_until(timeout, &block)
       true
     rescue TimeoutError

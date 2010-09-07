@@ -27,11 +27,11 @@ module WatirSplash
     # * raises an exception if saving the file is unsuccessful
     # * returns absolute file_path of the saved file
     def download_file file_name
-      AutoIt::Window.new("File Download").save_button.click
+      AutoIt::Window.new("File Download").button("&Save").click
       file_path = native_file_path(file_path(file_name))
       save_as_window = AutoIt::Window.new("Save As")
-      save_as_window.edit_text_field.set(file_path)
-      save_as_window.save_button.click
+      save_as_window.text_field("Edit1").set(file_path)
+      save_as_window.button("&Save").click
       wait_until {File.exists?(file_path)}
       file_path
     end

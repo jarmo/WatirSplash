@@ -21,20 +21,17 @@ module AutoIt
       @autoit.WinExists(@title) == 1
     end
 
+    def close
+      @autoit.WinClose(@title)
+      @autoit.WinKill(@title)
+    end
+
     def button(name)
       Button.new(self, name)
     end
 
-    def save_button
-      button("&Save")
-    end
-
     def text_field(name)
       TextField.new(self, name)
-    end
-
-    def edit_text_field
-      text_field("Edit1")
     end
 
     def method_missing name, *args #:nodoc:
@@ -54,12 +51,19 @@ module AutoIt
     # activates window automatically and makes sure that the click
     # was successful
     def click
+      clicked = false
       wait_until do
         @window.activate &&
                 @window.autoit.ControlFocus(@window.title, "", @name) == 1 &&
                 @window.autoit.ControlClick(@window.title, "", @name) == 1 &&
-                wait_until?(3) {not @window.exists?}
+                clicked = true # is clicked at least once
+
+        clicked && !exists?
       end
+    end
+
+    def exists?
+      not @window.autoit.ControlGetHandle(@window.title, "", @name).empty?
     end
   end
 
@@ -85,6 +89,10 @@ module AutoIt
 
     def value
       @window.autoit.ControlGetText(@window.title, "", @name)
+    end
+
+    def exists?
+      not @window.autoit.ControlGetHandle(@window.title, "", @name).empty?
     end
   end
 end

@@ -43,14 +43,14 @@ module ElementExtensions
   #
   # Optional argument:
   #
-  #   timeout   -  seconds to wait before timing out (default: 30)
+  #   timeout   -  seconds to wait before timing out (default: 60)
   #
   #     browser.button(:id, 'foo').when_present.click
   #     browser.div(:id, 'bar').when_present { |div| ... }
   #     browser.p(:id, 'baz').when_present(60).text
   #
 
-  def when_present(timeout = 30)
+  def when_present(timeout = 60)
     if block_given?
       Watir::WaitHelper.wait_until(timeout) { self.present? }
       yield self
@@ -59,11 +59,11 @@ module ElementExtensions
     end
   end
 
-  def wait_until_present(timeout = 30)
+  def wait_until_present(timeout = 60)
     Watir::WaitHelper.wait_until(timeout) { self.present? }
   end
 
-  def wait_while_present(timeout = 30)
+  def wait_while_present(timeout = 60)
     Watir::WaitHelper.wait_while(timeout) { self.present? }
   end
 
