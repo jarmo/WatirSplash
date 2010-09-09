@@ -14,6 +14,35 @@ describe Watir::IE do
     red_cell.style.color.should == "red"
   end
 
+  it "has #save_as method for Watir::Element" do
+    begin
+      goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
+      file_path = link(:text => "Download").save_as(File.path("download.zip"))
+      File.read(file_path).should == "this is a 'zip' file!"
+    ensure
+      FileUtils.rm file_path rescue nil
+    end
+  end
+
+  it "allows only absolute paths for #save_as" do
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
+    lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
+  end
+
+  it "works with FileField#set" do
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
+    field = file_field(:id => "upload")
+    file_path = File.expand_path(__FILE__)
+    field.set file_path
+    field.value.should match(/#{File.basename(__FILE__)}/)
+  end
+
+  it "doesn't allow to use FileField#set with non existing file" do
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
+    field = file_field(:id => "upload")
+    lambda {field.set "upload.zip"}.should raise_exception
+  end
+
   it "closes the browser even when Watir::IE#run_error_checks throws an exception" do
     @browser.add_checker lambda {raise "let's fail IE#wait in IE#close"}
     @browser.should exist

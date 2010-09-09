@@ -41,21 +41,6 @@ describe WatirSplash::SpecHelper do
     File.native_path(File.path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\.\\*", ".*"))
   end
 
-  it "has #save_as method for Watir::Element" do
-    begin
-      goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
-      file_path = link(:text => "Download").save_as(File.path("download.zip"))
-      File.read(file_path).should == "this is a 'zip' file!"
-    ensure
-      FileUtils.rm file_path rescue nil
-    end
-  end
-
-  it "allows only absolute paths for #save_as" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
-    lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
-  end
-
   it "redirects usages of method 'p' to Watir::IE#p instead of Kernel.p" do
     goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
     paragraph = p(:class => "my_pg")
