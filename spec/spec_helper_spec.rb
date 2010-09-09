@@ -30,26 +30,30 @@ describe WatirSplash::SpecHelper do
     result.should be_false
   end
 
-  it "has file_path methods" do
+  it "has File.path and File.native_path methods" do
     file_name = "blah.temp"
     ext = File.extname(file_name)
     base = File.basename(file_name, ext)
     expected_path = File.join(Dir.pwd, "results/files/#{base}_.*#{ext}")
 
-    file_path(file_name).should =~ Regexp.new(expected_path)
+    File.path(file_name).should =~ Regexp.new(expected_path)
     expected_path = expected_path.gsub("/", "\\")
-    native_file_path(file_path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\.\\*", ".*"))
+    File.native_path(File.path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\.\\*", ".*"))
   end
 
-  it "has download_file method" do
+  it "has #save_as method for Watir::Element" do
     begin
       goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
-      link(:text => "Download").click_no_wait
-      file = download_file("download.zip")
-      File.read(file).should == "this is a 'zip' file!"
+      file_path = link(:text => "Download").save_as(File.path("download.zip"))
+      File.read(file_path).should == "this is a 'zip' file!"
     ensure
-      FileUtils.rm file rescue nil
+      FileUtils.rm file_path rescue nil
     end
+  end
+
+  it "allows only absolute paths for #save_as" do
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
+    lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
   end
 
   it "redirects usages of method 'p' to Watir::IE#p instead of Kernel.p" do

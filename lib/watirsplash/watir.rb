@@ -117,6 +117,25 @@ module Watir
       @page_container.click_no_wait(element)
       highlight(:clear)
     end
+
+    # saves a file with the browser
+    #
+    # clicking the button opens a browser's save as dialog and saves the file document.pdf
+    #  button(:id => "something").download("c:/document.pdf") # => c:/document.pdf
+    #
+    # * raises an exception if saving the file is unsuccessful
+    # * returns saved file path
+    def save_as(file_path)
+      path = Pathname.new(file_path)
+      raise "path to #{file_path} has to be absolute!" unless path.absolute?
+      self.click_no_wait
+      AutoIt::Window.new("File Download").button("&Save").click
+      save_as_window = AutoIt::Window.new("Save As")
+      save_as_window.text_field("Edit1").set(File.native_path(file_path))
+      save_as_window.button("&Save").click
+      wait_until {File.exists?(file_path)}
+      file_path
+    end
   end
 
   module PageContainer #:nodoc:all
