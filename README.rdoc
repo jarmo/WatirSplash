@@ -89,7 +89,7 @@ testing right away!
 3) install WatirSplash:
     gem install watirsplash
 
-4) in your project directory:
+4) in your project's directory:
     watirsplash generate
 
 == WHAT NEXT?
