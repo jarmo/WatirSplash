@@ -29,7 +29,7 @@ describe WatirSplash::SpecHelper do
   end
 
   it "redirects usages of method 'p' to Watir::IE#p instead of Kernel.p" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
     paragraph = p(:class => "my_pg")
     paragraph.should exist
     paragraph.text.should == "This is a paragraph!"

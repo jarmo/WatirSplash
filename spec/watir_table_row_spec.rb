@@ -4,7 +4,7 @@ describe Watir::TableRow do
   include WatirSplash::SpecHelper
 
   before :all do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/tables.html"
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
   end
 
   it "#to_a works with regular row" do
@@ -19,13 +19,13 @@ describe Watir::TableRow do
 
   it "#to_a works with nested tables" do
     second_row = table(:id => "nested")[2]
-    second_row.to_a(2).should == [[["11", "12"], ["13","14"]], "3"]
+    second_row.to_a(2).should == [[["11", "12"], ["13", "14"]], "3"]
   end
 
   it "#to_a works with deep-nested tables" do
     second_row = table(:id => "deepnested")[2]
     second_row.to_a(3).should == [[["11", "12"],
-                                [[["404", "405"], ["406", "407"]], "14"]], "3"]
+                                   [[["404", "405"], ["406", "407"]], "14"]], "3"]
   end
 
   it "#to_a works with colspan" do

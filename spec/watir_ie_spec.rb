@@ -2,8 +2,11 @@ require "spec"
 
 describe Watir::IE do
 
+  before :each do
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
+  end
+
   it "uses currentStyle method to show computed style" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/tables.html"
     t = table(:id => "normal")
     normal_cell = t[1][1]
     normal_cell.text.should == "1"
@@ -16,7 +19,6 @@ describe Watir::IE do
 
   it "has #save_as method for Watir::Element" do
     begin
-      goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
       file_path = link(:text => "Download").save_as(File.path("download.zip"))
       File.read(file_path).should == "this is a 'zip' file!"
     ensure
@@ -25,12 +27,10 @@ describe Watir::IE do
   end
 
   it "allows only absolute paths for #save_as" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/download.html"
     lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
   end
 
   it "works with FileField#set" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
     field = file_field(:id => "upload")
     file_path = File.expand_path(__FILE__)
     field.set file_path
@@ -38,7 +38,6 @@ describe Watir::IE do
   end
 
   it "doesn't allow to use FileField#set with non existing file" do
-    goto "http://dl.dropbox.com/u/2731643/WatirSplash/elements.html"
     field = file_field(:id => "upload")
     lambda {field.set "upload.zip"}.should raise_exception
   end
