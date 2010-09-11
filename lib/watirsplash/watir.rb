@@ -99,7 +99,7 @@ module Watir
   end
 
   class Element #:nodoc:all
-    include WaitHelper
+    include ElementExtensions
 
     def_wrap_guard :currentstyle
 
@@ -133,7 +133,7 @@ module Watir
       save_as_window = AutoIt::Window.new("Save As")
       save_as_window.text_field("Edit1").set(File.native_path(file_path))
       save_as_window.button("&Save").click
-      wait_until {File.exists?(file_path)}
+      WaitHelper.wait_until {File.exists?(file_path)}
       file_path
     end
   end

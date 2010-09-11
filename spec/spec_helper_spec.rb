@@ -17,19 +17,6 @@ describe WatirSplash::SpecHelper do
     text_field.should be_visible
   end
 
-  it "has wait_until" do
-    lambda {wait_until(0.5) {sleep 0.1; true}}.should_not raise_exception
-    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::WaitHelper::TimeoutError)
-  end
-
-  it "has wait_until?" do
-    result = wait_until? {sleep 0.1; true}
-    result.should be_true
-
-    result = wait_until?(0.5) {sleep 0.1; false}
-    result.should be_false
-  end
-
   it "has File.path and File.native_path methods" do
     file_name = "blah.temp"
     ext = File.extname(file_name)

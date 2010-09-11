@@ -43,6 +43,19 @@ describe Watir::IE do
     lambda {field.set "upload.zip"}.should raise_exception
   end
 
+  it "has wait_until" do
+    lambda {wait_until(0.5) {sleep 0.1; true}}.should_not raise_exception
+    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::WaitHelper::TimeoutError)
+  end
+
+  it "has wait_until?" do
+    result = wait_until? {sleep 0.1; true}
+    result.should be_true
+
+    result = wait_until?(0.5) {sleep 0.1; false}
+    result.should be_false
+  end
+
   it "closes the browser even when Watir::IE#run_error_checks throws an exception" do
     @browser.add_checker lambda {raise "let's fail IE#wait in IE#close"}
     @browser.should exist
