@@ -1,6 +1,14 @@
 === Version 0.2.6 / 2010-XX-XX
 
- * Timeout::Error will be thrown if browser hasn't loaded page within 5 minutes
+ * moved a lot of documentation from the README to the wiki at http://github.com/jarmo/watirsplash/wiki
+ * Timeout::Error will be raised if browser hasn't loaded page within 5 minutes
+ * added Watir::WaitHelper with inconvenience methods like #when_present, #wait_until_present,
+   #wait_while_present, #wait_while and #wait_while? - see about usage from the wiki!
+     Timeout Exception class is now Watir::WaitHelper::TimeoutError when using the methods above
+ * removed #file_path and #native_file_path methods - use File.path and File.native_path methods instead
+ * removed #download_file method - use Watir::Element#save_as method instead:
+     # no need to perform #click_no_wait anymore
+     link(:id => 'something').save_as(File.path('download.zip')) # => returns full path to download.zip
 
 === Version 0.2.5 / 2010-08-19
 
