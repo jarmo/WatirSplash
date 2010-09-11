@@ -10,10 +10,7 @@ module WatirSplash
       @browser = Watir::Browser.new
       @browser.speed = :fast
       add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
-      begin
-        formatter.browser = @browser
-      rescue
-      end
+      formatter.browser = @browser rescue nil 
       goto url
       maximize
     end

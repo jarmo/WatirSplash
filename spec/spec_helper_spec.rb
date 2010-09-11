@@ -15,6 +15,7 @@ describe WatirSplash::SpecHelper do
     text_field = text_field(:name => "field1")
     text_field.should exist
     text_field.should be_visible
+    text_field.value == "empty value"
   end
 
   it "has File.path and File.native_path methods" do

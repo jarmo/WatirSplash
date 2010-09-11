@@ -86,10 +86,7 @@ module Watir
       return unless exists?
       @closing = true
       @ie.stop
-      begin
-        wait
-      rescue
-      end
+      wait rescue nil
       chwnd = @ie.hwnd.to_i
       @ie.quit
       while Win32API.new("user32", "IsWindow", 'L', 'L').Call(chwnd) == 1
