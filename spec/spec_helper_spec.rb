@@ -9,10 +9,10 @@ describe WatirSplash::SpecHelper do
   end
 
   it "redirects method calls to Watir::Browser" do
-    goto "http://google.com"
-    url.should =~ /google/
-    title.should =~ /google/i
-    text_field = text_field(:name => "q")
+    goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
+    url.should =~ /test/
+    title.should == "WatirSplash testing page"
+    text_field = text_field(:name => "field1")
     text_field.should exist
     text_field.should be_visible
   end
