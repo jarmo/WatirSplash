@@ -2,28 +2,34 @@ module AutoIt
   class Window
     include Watir::WaitHelper
 
-    attr_reader :title, :autoit
+    class << self
+      def autoit
+        @@autoit
+      end
+    end
+
+    @@autoit = Watir.autoit
+    attr_reader :title
 
     def initialize(window_title)
       @title = window_title
-      @autoit = Watir.autoit
     end
 
     # makes window active
     # * returns true if activation was successful and false otherwise
     def activate
-      @autoit.WinWait(@title, "", 1) == 1 &&
-              @autoit.WinActivate(@title) != 0 &&
-              @autoit.WinActive(@title) != 0
+      @@autoit.WinWait(@title, "", 1) == 1 &&
+              @@autoit.WinActivate(@title) != 0 &&
+              @@autoit.WinActive(@title) != 0
     end
 
     def exists?
-      @autoit.WinExists(@title) == 1
+      @@autoit.WinExists(@title) == 1
     end
 
     def close
-      @autoit.WinClose(@title)
-      @autoit.WinKill(@title)
+      @@autoit.WinClose(@title)
+      @@autoit.WinKill(@title)
     end
 
     def button(name)
@@ -35,7 +41,7 @@ module AutoIt
     end
 
     def method_missing name, *args #:nodoc:
-      @autoit.respond_to?(name) ? @autoit.send(name, *args) : super
+      @@autoit.respond_to?(name) ? @@autoit.send(name, *args) : super
     end
   end
 
@@ -54,8 +60,8 @@ module AutoIt
       clicked = false
       wait_until do
         @window.activate &&
-                @window.autoit.ControlFocus(@window.title, "", @name) == 1 &&
-                @window.autoit.ControlClick(@window.title, "", @name) == 1 &&
+                Window.autoit.ControlFocus(@window.title, "", @name) == 1 &&
+                Window.autoit.ControlClick(@window.title, "", @name) == 1 &&
                 clicked = true # is clicked at least once
 
         clicked && !exists?
@@ -63,7 +69,7 @@ module AutoIt
     end
 
     def exists?
-      not @window.autoit.ControlGetHandle(@window.title, "", @name).empty?
+      not Window.autoit.ControlGetHandle(@window.title, "", @name).empty?
     end
   end
 
@@ -81,18 +87,18 @@ module AutoIt
     def set(text)
       wait_until do
         @window.activate &&
-                @window.autoit.ControlFocus(@window.title, "", @name) == 1 &&
-                @window.autoit.ControlSetText(@window.title, "", @name, text) == 1 &&
+                Window.autoit.ControlFocus(@window.title, "", @name) == 1 &&
+                Window.autoit.ControlSetText(@window.title, "", @name, text) == 1 &&
                 value == text
       end
     end
 
     def value
-      @window.autoit.ControlGetText(@window.title, "", @name)
+      Window.autoit.ControlGetText(@window.title, "", @name)
     end
 
     def exists?
-      not @window.autoit.ControlGetHandle(@window.title, "", @name).empty?
+      not Window.autoit.ControlGetHandle(@window.title, "", @name).empty?
     end
   end
 end
