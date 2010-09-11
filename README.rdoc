@@ -3,9 +3,9 @@
 * Web: http://github.com/jarmo/WatirSplash
 * Author: Jarmo Pertman (mailto:jarmo.p[at]gmail.com)
 
-== DESCRIPTION:
+== DESCRIPTION
 
-WatirSplash makes browser-based testing in Ruby splashin' easy.
+WatirSplash makes browser-based web page testing in Ruby splashin' easy.
 It combines Watir (http://www.watir.com) for controlling the browser and
 RSpec (http://rspec.info) for testing framework. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
@@ -15,27 +15,9 @@ WatirSplash makes it easier to use best features of both of these tools together
 you won't have to spend time on thinking how to do that yourself - you can start
 testing right away!
 
-== FEATURES:
+== SYNOPSIS
 
-* generate command for generating default tests project structure
-* generate_common command for generating a project structure for common functionality in your tests
-* Browser will be opened and closed for each example group automatically
-* You can use Watir method names directly without having to specify a browser object:
-    text_field(:name => "locator") # instead of @browser.text_field(:name => "locator")
-* All needed libraries will be loaded and helper modules will be included automatically
-* All JavaScript errors will be detected and saved automatically
-* Some additional methods to help using Watir (download_file, wait_until, wait_until! etc.)
-* Some patches for different libraries which haven't made yet to the libraries themselves
-
-* Custom html formatter for RSpec:
-  - saves screenshot of the browser window
-  - saves html of the page
-  - saves all the files created/downloaded during the example and shows them on the report
-  - automatically archives test results for later reviewing
-
-== SYNOPSIS:
-
-=== With plain Watir and RSpec:
+=== With vanilla Watir and RSpec
     require 'watir'
     require 'spec'
 
@@ -66,7 +48,7 @@ testing right away!
 
 
 
-=== With WatirSplash:
+=== With WatirSplash
     describe "Google" do
         before :all do
             goto "http://google.com"
@@ -96,111 +78,23 @@ testing right away!
 
     2 examples, 0 failures
 
-== INSTALL:
+== INSTALL
 
-* install Ruby 1.8.6:
+1) install Ruby 1.8.6:
     http://rubyinstaller.org/
     
-* install ImageMagick with rmagick-win32 gem for saving the screenshots in PNG format:
+2) install ImageMagick with rmagick-win32 gem for saving the screenshots in PNG format:
     http://rubyforge.org/frs/?group_id=12&release_id=42049
 
-* install WatirSplash:
+3) install WatirSplash:
     gem install watirsplash
-    
-== USAGE:
-    
-If you have a web-application project (it may have been written in any programming language) without any browser-based tests,
-then it has probably a directory structure similar to this example:
-    C:\example_project
-    ├───doc
-    ├───lib
-    └───test
-    
-Now from the command line go to this directory and execute generate command:
-    C:\>cd example_project
 
-    C:\example_project>watirsplash generate
-    Creating WatirSplash project directory structure to C:/example_project/ui-test...
-    Done
-    
-After that the directory structure will be something like this:
-    C:\example_project
-    ├───doc
-    ├───lib
-    ├───test
-    └───ui-test
-        └───spec
-    
-The contents of that ui-test directory will be:
-    ui-test\config.rb
-    ui-test\environment.rb
-    
-    ui-test\spec
-    ui-test\spec\application_helper.rb
-    ui-test\spec\dummy_spec.rb
-    ui-test\spec\spec.opts
-    
-Just check out all the files to see some example code and comments in it and execute dummy_spec.rb
-to verify that everything works correctly:
-    spec spec\dummy_spec.rb
+4) in your project directory:
+    watirsplash generate
 
-You have to create your tests under spec directory so RSpec would load spec.opts automatically.
-You can have whatever directory structure under this directory just make sure that
-all test files have _spec.rb in the end of their filename (if using default RSpec options).
-    
-== USAGE FOR MULTIPLE PROJECTS:
+== WHAT NEXT?
 
-Usually you're going to write tests for multiple different projects. It would be shame if you'd
-going to create all those common helper methods again for different projects or just copy-paste
-the code from previous project's helpers. This is the place where ui-test-common comes into play.
-    
-ui-test-common would be a place where you can hold all your common functionality in helper
-modules/methods/classes and then use those things in your tests so you won't have multiple
-copies of similar or even same code in different places. So it helps you
-to keep DRY (http://en.wikipedia.org/wiki/Don't_repeat_yourself).
-    
-After finding yourself in a situation where a new project comes into play, then execute
-generate_common command once somewhere in a higher level of a directory tree than your project's ui-test directory
-to generate ui-test-common directory:
-    C:\example_project>cd ..
-
-    C:\>watirsplash generate_common
-    Creating WatirSplash common project directory structure to C:/ui-test-common...
-    Done
-
-It has a structure of:
-    C:\ui-test-common
-    └───lib
-    
-    ui-test-common\config.rb
-    ui-test-common\environment.rb
-    ui-test-common\lib
-    ui-test-common\lib\common_application_helper.rb
-    
-In environment.rb under project/ui-test you shall add common functionality to your project.
-Uncomment the following line:
-    WatirSplash::Util.load_common
-    
-This gives you by default the access to every method in ui-test-common/lib/common_application_helper.rb
-    
-Now, in ui-test-common/config.rb change the URL to your hostname and in project's config.rb:
-    URL = Config.full_url("/relative_path")
-    
-This gives you the ability to have host and port written only in one place.
-    
-Now move all the common functionality away from your project's files into ui-test-common files and start testing.
-From now on, add all common functionality into ui-test-common/lib
-
-== KNOWN PROBLEMS (& SOLUTIONS)
-
-=== PROBLEM #1
-
-If you see the following error message when running watirsplash:
-    R6034. An application has made an attempt to load the C runtime library incorrectly.
- 
-Solution:
-    This is caused by ImageMagick.
-    Install Microsoft Visual C++ 2008 SP1 Redistributable Package to solve the problem.
+You can read more information about the usage and features from the wiki at http://github.com/jarmo/WatirSplash/wiki
 
 == COPYRIGHT
 
