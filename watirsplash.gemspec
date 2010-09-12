@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirsplash}
-  s.version = "0.2.5"
+  s.version = "0.2.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
-  s.date = %q{2010-08-19}
+  s.date = %q{2010-09-12}
   s.default_executable = %q{watirsplash}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.email = %q{jarmo.p@gmail.com}
@@ -27,19 +27,22 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/watirsplash",
      "lib/watirsplash.rb",
-     "lib/watirsplash/autoit_helper.rb",
+     "lib/watirsplash/auto_it_helper.rb",
+     "lib/watirsplash/element_extensions.rb",
+     "lib/watirsplash/file_helper.rb",
      "lib/watirsplash/generator.rb",
      "lib/watirsplash/html_formatter.rb",
      "lib/watirsplash/spec.rb",
      "lib/watirsplash/spec_helper.rb",
      "lib/watirsplash/util.rb",
-     "lib/watirsplash/waiter.rb",
+     "lib/watirsplash/wait_helper.rb",
      "lib/watirsplash/watir.rb",
      "lib/watirsplash/watir_core.rb",
      "spec/spec.opts",
      "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
      "spec/util_spec.rb",
+     "spec/watir_element_spec.rb",
      "spec/watir_ie_spec.rb",
      "spec/watir_table_row_spec.rb",
      "spec/watir_table_spec.rb",
@@ -55,7 +58,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %q{*************************
 
-Thank you for installing WatirSplash 0.2.5! Don't forget to take a look at README and History files!
+Thank you for installing WatirSplash 0.2.6! Don't forget to take a look at README and History files!
 
 Execute "watirsplash generate" under your project's directory to generate default project structure.
 
@@ -63,11 +66,12 @@ Execute "watirsplash generate" under your project's directory to generate defaul
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{watirsplash 0.2.5}
+  s.summary = %q{watirsplash 0.2.6}
   s.test_files = [
     "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
      "spec/util_spec.rb",
+     "spec/watir_element_spec.rb",
      "spec/watir_ie_spec.rb",
      "spec/watir_table_row_spec.rb",
      "spec/watir_table_spec.rb"
