@@ -1,4 +1,4 @@
-=== Version 0.2.6 / 2010-XX-XX
+=== Version 0.2.6 / 2010-09-12
 
  * moved a lot of documentation from the README to the wiki at http://github.com/jarmo/watirsplash/wiki
  * Timeout::Error will be raised if browser hasn't loaded page within 5 minutes
