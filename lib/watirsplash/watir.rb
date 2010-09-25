@@ -140,7 +140,7 @@ module Watir
       raise "#{file_path} has to exist to set!" unless File.exists?(file_path)
       assert_exists
       self.click_no_wait
-      window = AutoIt::Window.new("[REGEXPTITLE:Choose (file|File to Upload)]")
+      window = AutoIt::Window.new(/choose file( to upload)?/i)
       window.text_field("Edit1").set(File.native_path(file_path))
       window.button("&Open").click
     end
