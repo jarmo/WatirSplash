@@ -27,8 +27,8 @@ Execute "watirsplash generate" under your project's directory to generate defaul
 
 #{"*"*25}}
 
-    gem.add_dependency("watir", ">=1.6.5")
-    gem.add_dependency("rspec", ">=1.3.0")
+    gem.add_dependency("watir", "=1.6.5")
+    gem.add_dependency("rspec", "=1.3.0")
     gem.add_dependency("diff-lcs")
     gem.add_dependency("require_all")
     gem.add_dependency("rmagick")
