@@ -1,3 +1,7 @@
+=== Version 0.2.8 / 2010-10-06
+
+ * use Watir 1.6.6 and RSpec 1.3.0 from now on
+
 === Version 0.2.7 / 2010-09-27
 
  * added explicit dependencies for Watir 1.6.5 and RSpec 1.3.0 so upcoming versions wouldn't break things accidentally
