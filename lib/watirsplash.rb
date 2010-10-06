@@ -1,6 +1,8 @@
 require "rubygems"
 require "require_all"
+gem "rspec", "=1.3.0"
 require "spec"
+gem "watir", "=1.6.6"
 require "watir"
 require "pathname"
 require_rel "watirsplash/wait_helper"
