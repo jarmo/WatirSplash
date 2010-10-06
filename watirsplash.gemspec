@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirsplash}
-  s.version = "0.2.7"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
-  s.date = %q{2010-09-27}
+  s.date = %q{2010-10-06}
   s.default_executable = %q{watirsplash}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.email = %q{jarmo.p@gmail.com}
@@ -37,7 +37,6 @@ Gem::Specification.new do |s|
      "lib/watirsplash/util.rb",
      "lib/watirsplash/wait_helper.rb",
      "lib/watirsplash/watir.rb",
-     "lib/watirsplash/watir_core.rb",
      "spec/spec.opts",
      "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
@@ -58,7 +57,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %q{*************************
 
-Thank you for installing WatirSplash 0.2.7! Don't forget to take a look at README and History files!
+Thank you for installing WatirSplash 0.2.8! Don't forget to take a look at README and History files!
 
 Execute "watirsplash generate" under your project's directory to generate default project structure.
 
@@ -66,7 +65,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{watirsplash 0.2.7}
+  s.summary = %q{watirsplash 0.2.8}
   s.test_files = [
     "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
