@@ -1,4 +1,4 @@
-=== Version 0.2.9 / 2010-10-xx
+=== Version 0.2.9 / 2010-10-14
 
  * AutoItHelper is no more! Using RAutomation gem instead
  * JavaScript error messages are not screenshotted anymore due to it's complexity and vagueness of the messages themselves
