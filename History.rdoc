@@ -1,3 +1,9 @@
+=== Version 0.2.9 / 2010-10-xx
+
+ * AutoItHelper is no more! Using RAutomation gem instead
+ * JavaScript error messages are not screenshotted anymore due to it's complexity and vagueness of the messages themselves
+ * deleted #wait_until? and #wait_while? methods
+
 === Version 0.2.8 / 2010-10-06
 
  * use Watir 1.6.6 and RSpec 1.3.0 from now on

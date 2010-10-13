@@ -42,7 +42,6 @@ module WatirSplash
 
     def extra_failure_content(failure) # :nodoc:
       if @browser.exists?
-        save_javascript_error
         save_html
         save_screenshot
       end
@@ -85,24 +84,6 @@ module WatirSplash
         end
       rescue => e
         $stderr.puts "saving of screenshot failed: #{e.message}"
-      end
-      file_name
-    end
-
-    def save_javascript_error # :nodoc:
-      file_name = nil
-      begin
-        if @browser.is_a?(Watir::IE) && @browser.status =~ /Error on page/
-          autoit = Watir::autoit
-          autoit.AutoItSetOption("MouseCoordMode", 0)
-          autoit.ControlClick("[TITLE:#{@browser.title}]", "", "[CLASS:msctls_statusbar32]", "left", 2)
-          popup_title = "[REGEXPTITLE:^(Windows )?Internet Explorer$]"
-          autoit.WinWait(popup_title, "", 10)
-          file_name = save_screenshot("JS_Error", autoit.WinGetHandle(popup_title).hex)
-          autoit.WinClose(popup_title)
-        end
-      rescue => e
-        $stderr.puts "saving of javascript error failed: #{e.message}"
       end
       file_name
     end

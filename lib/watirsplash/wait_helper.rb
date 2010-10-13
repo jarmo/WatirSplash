@@ -26,13 +26,6 @@ module Watir
       raise TimeoutError, "timed out after #{timeout} seconds"
     end
 
-    def wait_until?(timeout = 60, &block)
-      wait_until(timeout, &block)
-      true
-    rescue TimeoutError
-      false
-    end
-
     #
     # Wait while the block evaluates to true or times out.
     #
@@ -47,13 +40,5 @@ module Watir
 
       raise TimeoutError, "timed out after #{timeout} seconds"
     end
-
-    def wait_while?(timeout = 60, &block)
-      wait_until(timeout, &block)
-      true
-    rescue TimeoutError
-      false
-    end
-
   end # WaitHelper
 end # Watir

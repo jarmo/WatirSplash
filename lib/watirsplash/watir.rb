@@ -1,7 +1,7 @@
 module Watir
   module PageCheckers
     # raises an error if javascript error was found
-    JAVASCRIPT_ERRORS_CHECKER = lambda {|ie| raise "Got JavaScript error!" if ie.status =~ /Error on page/}
+    JAVASCRIPT_ERRORS_CHECKER = lambda {|ie| raise "Expected no JavaScript errors to appear on page, but having some!" if ie.status =~ /Error on page/}
   end
 end
 
@@ -25,10 +25,16 @@ module Watir
       path = Pathname.new(file_path)
       raise "path to #{file_path} has to be absolute!" unless path.absolute?
       self.click_no_wait
-      AutoIt::Window.new("File Download").button("&Save").click
-      save_as_window = AutoIt::Window.new("Save As")
-      save_as_window.text_field("Edit1").set(File.native_path(file_path))
-      save_as_window.button("&Save").click
+      download_window = RAutomation::Window.new(:title => "File Download",
+                                                :text => "Do you want to open or save this file?")
+      WaitHelper.wait_until {download_window.present?}
+      download_window.button(:value => "&Save").click
+
+      save_as_window = RAutomation::Window.new(:title => "Save As")
+      WaitHelper.wait_until {save_as_window.present?}
+      save_as_window.text_field(:class_name => "Edit1").set(File.native_path(file_path))
+      save_as_window.button(:value => "&Save").click
+
       WaitHelper.wait_until {File.exists?(file_path)}
       file_path
     end
@@ -39,9 +45,10 @@ module Watir
       raise "#{file_path} has to exist to set!" unless File.exists?(file_path)
       assert_exists
       self.click_no_wait
-      window = AutoIt::Window.new(/choose file( to upload)?/i)
-      window.text_field("Edit1").set(File.native_path(file_path))
-      window.button("&Open").click
+      window = RAutomation::Window.new(:title => /choose file( to upload)?/i)
+      WaitHelper.wait_until {window.present?}
+      window.text_field(:class_name => "Edit1").set(File.native_path(file_path))
+      window.button(:value => "&Open").click
     end
   end
 
