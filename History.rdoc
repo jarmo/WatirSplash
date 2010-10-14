@@ -1,3 +1,7 @@
+=== Version 0.2.10 / 2010-10-14
+
+ * Added Watir 1.6.6 dependency
+
 === Version 0.2.9 / 2010-10-14
 
  * AutoItHelper is no more! Using RAutomation gem instead
@@ -16,7 +20,7 @@
 
  * moved a lot of documentation from the README to the wiki at http://github.com/jarmo/watirsplash/wiki
  * Timeout::Error will be raised if browser hasn't loaded page within 5 minutes
- * added Watir::WaitHelper with inconvenience methods like #when_present, #wait_until_present,
+ * added Watir::WaitHelper with convenience methods like #when_present, #wait_until_present,
    #wait_while_present, #wait_while and #wait_while? - see about usage from the wiki!
      Timeout Exception class is now Watir::WaitHelper::TimeoutError when using the methods above
  * removed #file_path and #native_file_path methods - use File.path and File.native_path methods instead
