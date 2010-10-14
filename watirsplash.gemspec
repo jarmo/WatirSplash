@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirsplash}
-  s.version = "0.2.9"
+  s.version = "0.2.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
@@ -56,7 +56,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %q{*************************
 
-Thank you for installing WatirSplash 0.2.9! Don't forget to take a look at README and History files!
+Thank you for installing WatirSplash 0.2.10! Don't forget to take a look at README and History files!
 
 Execute "watirsplash generate" under your project's directory to generate default project structure.
 
@@ -64,7 +64,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{watirsplash 0.2.9}
+  s.summary = %q{watirsplash 0.2.10}
   s.test_files = [
     "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
@@ -80,7 +80,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<watir>, ["= 1.6.5"])
+      s.add_runtime_dependency(%q<watir>, ["= 1.6.6"])
       s.add_runtime_dependency(%q<rspec>, ["= 1.3.0"])
       s.add_runtime_dependency(%q<diff-lcs>, [">= 0"])
       s.add_runtime_dependency(%q<rautomation>, [">= 0"])
@@ -90,7 +90,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
       s.add_runtime_dependency(%q<win32console>, [">= 0"])
       s.add_runtime_dependency(%q<win32screenshot>, [">= 0.0.4"])
     else
-      s.add_dependency(%q<watir>, ["= 1.6.5"])
+      s.add_dependency(%q<watir>, ["= 1.6.6"])
       s.add_dependency(%q<rspec>, ["= 1.3.0"])
       s.add_dependency(%q<diff-lcs>, [">= 0"])
       s.add_dependency(%q<rautomation>, [">= 0"])
@@ -101,7 +101,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
       s.add_dependency(%q<win32screenshot>, [">= 0.0.4"])
     end
   else
-    s.add_dependency(%q<watir>, ["= 1.6.5"])
+    s.add_dependency(%q<watir>, ["= 1.6.6"])
     s.add_dependency(%q<rspec>, ["= 1.3.0"])
     s.add_dependency(%q<diff-lcs>, [">= 0"])
     s.add_dependency(%q<rautomation>, [">= 0"])
