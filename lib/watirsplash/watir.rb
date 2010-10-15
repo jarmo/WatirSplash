@@ -25,8 +25,7 @@ module Watir
       path = Pathname.new(file_path)
       raise "path to #{file_path} has to be absolute!" unless path.absolute?
       self.click_no_wait
-      download_window = RAutomation::Window.new(:title => "File Download",
-                                                :text => "Do you want to open or save this file?")
+      download_window = RAutomation::Window.new(:title => "File Download")
       WaitHelper.wait_until {download_window.present?}
       download_window.button(:value => "&Save").click
 
