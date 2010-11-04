@@ -1,3 +1,8 @@
+=== Version 0.3.0 / 2010-11-XX
+
+ * removed Watir::WaitHelper - use Watir's waiting methods instead
+ * using Watir 1.6.7
+
 === Version 0.2.12 / 2010-10-15
 
  * really fix integration with RAutomation and AutoIt - uninstall all versions of Watir before installing this version of WatirSplash due to the conflicts of Watir's AutoIt version and RAutomation AutoIt version

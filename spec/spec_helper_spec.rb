@@ -18,17 +18,6 @@ describe WatirSplash::SpecHelper do
     text_field.value == "empty value"
   end
 
-  it "has File.path and File.native_path methods" do
-    file_name = "blah.temp"
-    ext = File.extname(file_name)
-    base = File.basename(file_name, ext)
-    expected_path = File.join(Dir.pwd, "results/files/#{base}_.*#{ext}")
-
-    File.path(file_name).should =~ Regexp.new(expected_path)
-    expected_path = expected_path.gsub("/", "\\")
-    File.native_path(File.path(file_name)).should =~ Regexp.new(Regexp.escape(expected_path).gsub("\\.\\*", ".*"))
-  end
-
   it "redirects usages of method 'p' to Watir::IE#p instead of Kernel.p" do
     goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
     paragraph = p(:class => "my_pg")

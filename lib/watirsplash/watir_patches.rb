@@ -8,12 +8,10 @@ end
 # patches for Watir
 module Watir
   class IE #:nodoc:all
-    include WaitHelper
+    # trigger autoloading
   end
 
   class Element #:nodoc:all
-    include ElementExtensions
-
     # saves a file with the browser
     #
     # clicking the button opens a browser's save as dialog and saves the file document.pdf
@@ -25,16 +23,13 @@ module Watir
       path = Pathname.new(file_path)
       raise "path to #{file_path} has to be absolute!" unless path.absolute?
       self.click_no_wait
-      download_window = RAutomation::Window.new(:title => "File Download")
-      WaitHelper.wait_until {download_window.present?}
-      download_window.button(:value => "&Save").click
+      RAutomation::Window.new(:title => "File Download").button(:value => "&Save").click
 
       save_as_window = RAutomation::Window.new(:title => "Save As")
-      WaitHelper.wait_until {save_as_window.present?}
       save_as_window.text_field(:class_name => "Edit1").set(File.native_path(file_path))
       save_as_window.button(:value => "&Save").click
 
-      WaitHelper.wait_until {File.exists?(file_path)}
+      Wait.until {File.exists?(file_path)}
       file_path
     end
   end
@@ -45,7 +40,6 @@ module Watir
       assert_exists
       self.click_no_wait
       window = RAutomation::Window.new(:title => /choose file( to upload)?/i)
-      WaitHelper.wait_until {window.present?}
       window.text_field(:class_name => "Edit1").set(File.native_path(file_path))
       window.button(:value => "&Open").click
     end

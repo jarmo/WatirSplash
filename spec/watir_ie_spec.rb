@@ -6,52 +6,37 @@ describe Watir::IE do
     goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
   end
 
-  it "uses currentStyle method to show computed style" do
-    t = table(:id => "normal")
-    normal_cell = t[1][1]
-    normal_cell.text.should == "1"
-    normal_cell.style.color.should == "#000000"
+  context Watir::Element do
+    context "#save_as" do
+      it "saves file with the browser" do
+        begin
+          file_path = link(:text => "Download").save_as(File.path("download.zip"))
+          File.read(file_path).should == "this is a 'zip' file!"
+        ensure
+          FileUtils.rm file_path rescue nil
+        end
+      end
 
-    red_cell = t.cell(:class => "reddish")
-    red_cell.text.should == "9"
-    red_cell.style.color.should == "red"
-  end
-
-  it "has #save_as method for Watir::Element" do
-    begin
-      file_path = link(:text => "Download").save_as(File.path("download.zip"))
-      File.read(file_path).should == "this is a 'zip' file!"
-    ensure
-      FileUtils.rm file_path rescue nil
+      it "allows only absolute paths" do
+        lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
+      end
     end
   end
 
-  it "allows only absolute paths for #save_as" do
-    lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
-  end
+  context Watir::FileField do
+    context "#set" do
+      it "sets the file to upload with the browser" do
+        field = file_field(:id => "upload")
+        file_path = File.expand_path(__FILE__)
+        field.set file_path
+        field.value.should match(/#{File.basename(__FILE__)}/)
+      end
 
-  it "works with FileField#set" do
-    field = file_field(:id => "upload")
-    file_path = File.expand_path(__FILE__)
-    field.set file_path
-    field.value.should match(/#{File.basename(__FILE__)}/)
-  end
-
-  it "doesn't allow to use FileField#set with non existing file" do
-    field = file_field(:id => "upload")
-    lambda {field.set "upload.zip"}.should raise_exception
-  end
-
-  it "has wait_until" do
-    lambda {wait_until(0.5) {sleep 0.1; true}}.should_not raise_exception
-    lambda {wait_until(0.5) {sleep 0.1; false}}.should raise_exception(Watir::WaitHelper::TimeoutError)
-  end
-
-  it "closes the browser even when Watir::IE#run_error_checks throws an exception" do
-    @browser.add_checker lambda {raise "let's fail IE#wait in IE#close"}
-    @browser.should exist
-    lambda {@browser.close}.should_not raise_exception
-    @browser.should_not exist
+      it "doesn't allow to use with non existing files" do
+        field = file_field(:id => "upload")
+        lambda {field.set "upload.zip"}.should raise_exception
+      end
+    end
   end
 
 end
