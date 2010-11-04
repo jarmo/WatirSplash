@@ -1,4 +1,4 @@
-Spec::Runner.configure do |config| #:nodoc:
+RSpec.configure do |config| #:nodoc:
   config.include(WatirSplash::SpecHelper)
 
   config.before(:all) do
@@ -10,19 +10,20 @@ Spec::Runner.configure do |config| #:nodoc:
   end
 end
 
-module Spec #:nodoc:all
-  class ExampleGroup
-    subject {self}
-  end
-
-  module Example
-    class ExampleGroupProxy
-      attr_accessor :description
+module RSpec #:nodoc:all
+  module Core
+    class ExampleGroup
+      subject {self}
     end
 
-    class ExampleProxy
-      attr_accessor :description
+    class Configuration
+      def reporter=(reporter)
+        @reporter = reporter
+      end
+
+      public :built_in_formatter
     end
+
   end
 end
 
@@ -31,7 +32,7 @@ end
 #
 #    ["1", "2", "66", "3"].should match_array(expected_array)
 #    table(:id => "table_id").to_a.should match_array(expected_array)
-Spec::Matchers.define :match_array do |array2|
+RSpec::Matchers.define :match_array do |array2|
   match do |array1|
     raise "match_array works only with Array objects!" unless array1.is_a?(Array) && array2.is_a?(Array)
     match?(array1, array2)

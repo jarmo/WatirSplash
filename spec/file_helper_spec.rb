@@ -1,5 +1,3 @@
-require "spec"
-
 describe File do
 
   before :all do

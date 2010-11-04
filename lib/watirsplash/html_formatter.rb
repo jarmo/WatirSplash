@@ -1,4 +1,4 @@
-require 'spec/runner/formatter/html_formatter'
+require 'rspec/core/formatters/html_formatter'
 require 'win32/screenshot'
 require 'rmagick'
 require 'pathname'
@@ -10,14 +10,13 @@ module WatirSplash
   # * saves html of the browser upon test failure
   # * saves javascript error dialog upon test failure
   # * saves all files generated/downloaded during the test and shows them in the report
-  class HtmlFormatter < ::Spec::Runner::Formatter::HtmlFormatter
+  class HtmlFormatter < ::RSpec::Core::Formatters::HtmlFormatter
 
     # currently used browser object
     # needed for saving of screenshots and html
     attr_writer :browser
 
-    def initialize(options, output) # :nodoc:
-      raise "output has to be a file path!" unless output.is_a?(String)
+    def initialize(output) # :nodoc:
       @output_dir = File.expand_path(File.dirname(output))
       archive_results
 
@@ -25,22 +24,22 @@ module WatirSplash
       @files_dir = File.join(@output_dir, "files")
       FileUtils.mkdir_p(@files_dir)
       @files_saved_during_example = []
-      super
+      super(File.open(output, "w"))
     end
 
     def example_group_started(example_group) # :nodoc:
       @files_saved_during_example.clear
-      append_extra_information_to_desc(example_group)
+      #append_extra_information_to_description(example_group)
       super
     end
 
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
-      example.description += "#{example.location.scan(/:\d+$/)} (#{Time.now.strftime("%H:%M:%S")})"
+      example.metadata[:description] += "#{example.metadata[:location].scan(/:\d+$/)} (#{Time.now.strftime("%H:%M:%S")})"
       super
     end
 
-    def extra_failure_content(failure) # :nodoc:
+    def extra_failure_content(exception) # :nodoc:
       if @browser.exists?
         save_screenshot
         save_html
@@ -110,7 +109,7 @@ module WatirSplash
       end
     end
 
-    def append_extra_information_to_desc(example_group)
+    def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")
       spec_dir = Pathname.new(example_group.location)
       relative_spec_path = spec_dir.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s

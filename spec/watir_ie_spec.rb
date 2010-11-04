@@ -1,5 +1,3 @@
-require "spec"
-
 describe Watir::IE do
 
   before :each do

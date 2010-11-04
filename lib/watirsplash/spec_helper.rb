@@ -3,25 +3,17 @@ module WatirSplash
   #
   # these methods can be used in specs directly
   module SpecHelper
-    include Watir::WaitHelper
 
     # opens the browser at specified url
     def open_browser_at url
       @browser = Watir::Browser.new
       @browser.speed = :fast
       add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
-      formatter.browser = @browser rescue nil 
+      Util.formatter.browser = @browser 
       goto url
       maximize
     end
-
-    # returns WatirSplash::HtmlFormatter object, nil if not in use
-    def formatter
-      @formatter ||= Spec::Runner.options.formatters.find {|f| f.kind_of?(WatirSplash::HtmlFormatter) rescue false}
-    end
-
-    module_function :formatter
-
+    
     def method_missing name, *args #:nodoc:
       @browser.respond_to?(name) ? @browser.send(name, *args) : super
     end

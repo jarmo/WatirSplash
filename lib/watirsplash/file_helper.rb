@@ -5,7 +5,7 @@ class File
     # all file names generated with this method will
     # be shown on the report upon test failure.
     def path(file_name, description=nil)
-      WatirSplash::SpecHelper.formatter.file_path(file_name, description)
+      WatirSplash::Util.formatter.file_path(file_name, description)
     end
 
     # returns native file path
