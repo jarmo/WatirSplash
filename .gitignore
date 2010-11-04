@@ -1,6 +1,7 @@
-coverage
-pkg
-archive
-results
+coverage/
+pkg/
+archive/
+results/
 .idea
 todo.txt
+rdoc/
