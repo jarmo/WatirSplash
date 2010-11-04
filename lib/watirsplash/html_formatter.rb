@@ -42,8 +42,8 @@ module WatirSplash
 
     def extra_failure_content(failure) # :nodoc:
       if @browser.exists?
-        save_html
         save_screenshot
+        save_html
       end
 
       content = []
