@@ -2,6 +2,7 @@
 
  * removed Watir::WaitHelper - use Watir's waiting methods instead
  * using Watir 1.6.7
+ * use WATIRSPLASH_RESULTS_PATH environment variable for specifying custom spec results location
 
 === Version 0.2.12 / 2010-10-15
 

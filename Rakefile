@@ -43,8 +43,7 @@ rescue LoadError
 end
 
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |t|
-end
+RSpec::Core::RakeTask.new(:spec)
 
 RSpec::Core::RakeTask.new(:rcov) do |t|
   t.rcov = true
