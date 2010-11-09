@@ -16,7 +16,7 @@ end
 #
 # You can read more about RSpec-s before and after syntax from:
 # http://rspec.info/documentation/before_and_after.html
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.include(ApplicationHelper)
   config.before(:all) {goto Config::Application::URL}
 end

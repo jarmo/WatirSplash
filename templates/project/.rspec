@@ -1,11 +1,2 @@
---color
 --require
 watirsplash
---require
-watirsplash/html_formatter
---format
-WatirSplash::HtmlFormatter:results/index.html
---format
-nested
---diff
-u

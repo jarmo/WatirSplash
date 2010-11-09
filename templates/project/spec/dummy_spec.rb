@@ -1,7 +1,7 @@
 # This is a fully working spec file which you can run to see if
 # your configuration is correct and everything is working as expected
 
-describe "WatirSplash" do
+describe WatirSplash do
 
   it "has the browser window opened" do
     url.should == "about:blank"
@@ -21,7 +21,7 @@ describe "WatirSplash" do
   end
 
   it "is in pending status" do
-    goto "http://google.com"
+    goto "http://google.com/ncr"
     title.should == "Google"
     text_field(:name => "q").set "Bing"
     search_button = button(:name => "btnG")
@@ -35,7 +35,7 @@ describe "WatirSplash" do
   end
 
   it "has access to global methods after generate_common command has been used" do
-    pending "it fails as long as there's not executed 'watirsplash generate_common' command
+    pending "it fails as long as 'watirsplash generate_common' command hasn'b been executed
 and ui-test-common is not loaded by this project" do
       new_global_method.should == "it just works"
     end
