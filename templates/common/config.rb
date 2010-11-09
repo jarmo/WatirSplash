@@ -4,7 +4,7 @@
 
   module Config
     module Application
-      URL = Config.full_url("my_subpage/index.html") # => equals "http://localhost/my_subpage/index.html
+      URL = Config.full_url("my_subpage/index.html") # => "http://localhost/my_subpage/index.html
     end
   end
 =end
@@ -21,6 +21,6 @@ module Config
   end
 end
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.include(CommonApplicationHelper)
 end

@@ -5,7 +5,7 @@
   Use the following code to do it automatically:
   WatirSplash::Util.load_common
 
-  Add all your require statements into this file to avoid unnecessary
+  Add all your global require statements into this file to avoid unnecessary
   code in your other projects' files
 
   By default everything in lib directory will be loaded

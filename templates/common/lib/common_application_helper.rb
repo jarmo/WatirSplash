@@ -1,5 +1,5 @@
-# You can create under this directory common libraries/helpers/methods which you would
-# like to use within your specs in different projects
+# You can create common libraries/helpers/methods under this directory
+# to use within your specs within different projects
 
 module CommonApplicationHelper
 
