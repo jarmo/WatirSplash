@@ -19,6 +19,7 @@ begin
     ignored_files = File.readlines(".gitignore").map {|l| l.strip.gsub("*", "")}
     ignored_files << ".gitignore" << ".gemspec"
     gem.files = Dir.glob("**/*").delete_if {|f| f =~ Regexp.union(*ignored_files)}
+    gem.files << "templates/project/.rspec"
     gem.post_install_message = %Q{#{"*"*25}
 
 Thank you for installing WatirSplash #{version}! Don't forget to take a look at README and History files!
