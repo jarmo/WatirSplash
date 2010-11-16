@@ -15,15 +15,6 @@ module RSpec #:nodoc:all
     class ExampleGroup
       subject {self}
     end
-
-    class Configuration
-      def reporter=(reporter)
-        @reporter = reporter
-      end
-
-      public :built_in_formatter
-    end
-
   end
 end
 
