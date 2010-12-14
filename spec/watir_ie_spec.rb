@@ -27,7 +27,7 @@ describe Watir::IE do
         field = file_field(:id => "upload")
         file_path = File.expand_path(__FILE__)
         field.set file_path
-        field.value.should match(/#{File.basename(__FILE__)}/)
+        wait_until(5) {field.value =~ /#{File.basename(__FILE__)}/}
       end
 
       it "doesn't allow to use with non existing files" do

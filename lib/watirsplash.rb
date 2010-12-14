@@ -1,8 +1,6 @@
 require "rubygems"
 require "require_all"
 require "rautomation"
-# initialize explicitly RAutomation::Window object to load correct version of AutoIt
-RAutomation::Window.new(:title => "sometitle")
 require "rspec"
 require "watir"
 require "pathname"
