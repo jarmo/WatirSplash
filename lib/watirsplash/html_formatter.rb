@@ -29,7 +29,7 @@ module WatirSplash
 
     def example_group_started(example_group) # :nodoc:
       @files_saved_during_example.clear
-      #append_extra_information_to_description(example_group)
+      append_extra_information_to_description(example_group)
       super
     end
 
@@ -111,12 +111,11 @@ module WatirSplash
 
     def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")
-      spec_dir = Pathname.new(example_group.location)
-      relative_spec_path = spec_dir.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s
-      appended_description = " @ #{relative_spec_path}#{example_group.location.scan(/:\d+$/)} (#{date})"
-      example_group.description += appended_description
-      # needed for NestedTextFormatter
-      example_group.nested_descriptions.map! {|nested_description| nested_description + appended_description}
+      spec_location, line_no = example_group.metadata[:example_group][:block].to_s.scan(/@(.*)(:\d+)>$/).flatten
+      spec_location = Pathname.new(spec_location)
+      relative_spec_path = spec_location.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s
+      appended_description = " @ #{relative_spec_path}#{line_no} (#{date})"
+      example_group.metadata[:example_group][:description] += appended_description
     end
 
   end

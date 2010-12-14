@@ -28,7 +28,7 @@ module WatirSplash
         documentation_formatter = config.send(:built_in_formatter, :documentation).new(config.output)
         results_path = ENV["WATIRSPLASH_RESULTS_PATH"] || "results/index.html"
         @@html_formatter = WatirSplash::HtmlFormatter.new(results_path)
-        config.instance_variable_set(:@reporter, RSpec::Core::Reporter.new(documentation_formatter, @@html_formatter))
+        config.instance_variable_set(:@reporter, RSpec::Core::Reporter.new(@@html_formatter, documentation_formatter))
       end
 
       def formatter
