@@ -1,0 +1,44 @@
+# This is a fully working spec file which you can run to see if
+# your configuration is correct and everything is working as expected
+
+describe WatirSplash do
+
+  it "has the browser window opened" do
+    url.should == Config::<%= name %>::URL
+  end
+
+  it "has easy access to <%= name %>Helper methods" do
+    # <%= name %>Helper#helper_method_one will be executed
+    helper_method_one.should == "one"
+    # <%= name %>Helper#has_second_method? will be executed
+    should have_second_method
+    # <%= name %>Helper#correct? method will be executed
+    should_not be_correct
+  end
+
+  it "fails the example and makes a screenshot of the browser" do
+    false.should be_true
+  end
+
+  it "is in pending status" do
+    goto "http://google.com/ncr"
+    title.should == "Google"
+    text_field(:name => "q").set "Bing"
+    search_button = button(:name => "btnG")
+    search_button.should exist
+    search_button.should be_visible
+    search_button.click
+    text.should include("Bing")
+    pending "this is a known 'bug'" do
+      title.should == "Bing"
+    end
+  end
+
+  it "has access to global methods after \"new --common\" command has been used" do
+    pending "it fails as long as 'watirsplash new --common' command hasn't been executed
+and ui-test-common is not loaded by this project" do
+      new_global_method.should == "it just works"
+    end
+  end
+
+end
