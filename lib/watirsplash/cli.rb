@@ -2,7 +2,6 @@ require "thor"
 require "thor/group"
 require "watirsplash/generators/new_project"
 require "watirsplash/generators/new_common_project"
-require "uri"
 
 module WatirSplash
   class CLI < Thor
@@ -20,7 +19,7 @@ module WatirSplash
 
     desc "new_common", "Create a new WatirSplash common project."
     def new_common
-      WatirSplash::Generators::NewCommonProject.start
+      WatirSplash::Generators::NewCommonProject.start([options[:url]])
     end
   end  
 end

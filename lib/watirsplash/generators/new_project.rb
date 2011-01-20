@@ -1,3 +1,5 @@
+require "uri"
+
 module WatirSplash
   module Generators
     class NewProject < Thor::Group
