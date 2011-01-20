@@ -3,7 +3,7 @@ module WatirSplash
     class NewCommonProject < Thor::Group
       include Thor::Actions
 
-      argument :url, :desc => "url for the application main page", :default => "http://localhost"
+      argument :url 
 
       def self.source_root
         File.dirname(__FILE__) + "/templates"
