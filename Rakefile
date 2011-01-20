@@ -19,7 +19,7 @@ begin
     ignored_files = File.readlines(".gitignore").map {|l| l.strip.gsub("*", "")}
     ignored_files << ".gitignore" << ".gemspec"
     gem.files = Dir.glob("**/*").delete_if {|f| f =~ Regexp.union(*ignored_files)}
-    gem.files << "templates/project/.rspec"
+    gem.files << "lib/watirsplash/generators/templates/new_project/.rspec"
     gem.post_install_message = %Q{#{"*"*25}
 
 Thank you for installing WatirSplash #{version}! Don't forget to take a look at README and History files!
@@ -29,14 +29,12 @@ Execute "watirsplash generate" under your project's directory to generate defaul
 #{"*"*25}}
 
     gem.add_dependency("watir", "=1.6.7")
-    gem.add_dependency("rspec", "~>2.3")
-    gem.add_dependency("diff-lcs")
-    gem.add_dependency("rautomation", "~>0")
+    gem.add_dependency("rspec", "~>2.4")
+    gem.add_dependency("rautomation", "~>0.1")
     gem.add_dependency("require_all")
-    gem.add_dependency("rmagick")
     gem.add_dependency("syntax")
-    gem.add_dependency("win32console")
     gem.add_dependency("win32screenshot", "~>1.0")
+    gem.add_dependency("thor", "~>0.14")
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
