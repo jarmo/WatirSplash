@@ -49,7 +49,7 @@ module WatirSplash
       end
 
       def has_environment? dir
-        return File.exists?(File.join(dir, "environment.rb"))
+        File.exists?(File.join(dir, "environment.rb"))
       end
 
     end

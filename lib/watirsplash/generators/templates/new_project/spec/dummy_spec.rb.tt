@@ -24,18 +24,14 @@ describe WatirSplash do
     goto "http://google.com/ncr"
     title.should == "Google"
     text_field(:name => "q").set "Bing"
-    search_button = button(:name => "btnG")
-    search_button.should exist
-    search_button.should be_visible
-    search_button.click
     text.should include("Bing")
     pending "this is a known 'bug'" do
       title.should == "Bing"
     end
   end
 
-  it "has access to global methods after \"new --common\" command has been used" do
-    pending "it fails as long as 'watirsplash new --common' command hasn't been executed
+  it "has access to global methods after \"new_common\" command has been used" do
+    pending "it fails as long as 'watirsplash new_common' command hasn't been executed
 and ui-test-common is not loaded by this project" do
       new_global_method.should == "it just works"
     end

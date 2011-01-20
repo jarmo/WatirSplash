@@ -2,6 +2,7 @@ require "thor"
 require "thor/group"
 require "watirsplash/generators/new_project"
 require "watirsplash/generators/new_common_project"
+require "watirsplash/generators/migrate_project"
 
 module WatirSplash
   class CLI < Thor
@@ -20,6 +21,13 @@ module WatirSplash
       :desc => "url for the application main page" 
     def new_common
       WatirSplash::Generators::NewCommonProject.start([options[:url]])
+    end
+
+    if File.basename(Dir.pwd) =~ /^ui-test(-common)?$/
+      desc "migrate", "Migrates old WatirSplash generated project to new."
+      def migrate
+        WatirSplash::Generators::MigrateProject.start
+      end
     end
 
   end  
