@@ -23,7 +23,7 @@ module WatirSplash
     module_function :formatter
 
     def method_missing name, *args #:nodoc:
-      @browser.respond_to?(name) ? @browser.send(name, *args) : super
+      @browser.respond_to?(name) ? @browser.send(name, *args) {yield} : super
     end
 
     # make sure that using method 'p' will be invoked on @browser

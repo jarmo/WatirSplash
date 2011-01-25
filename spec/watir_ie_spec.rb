@@ -26,20 +26,20 @@ describe Watir::IE do
     end
   end
 
-  it "allows only absolute paths for #save_as" do
-    lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
-  end
+  context Watir::FileField do
+    context "#set" do
+      it "sets the file to upload with the browser" do
+        field = file_field(:id => "upload")
+        file_path = File.expand_path(__FILE__)
+        field.set file_path
+        wait_until(5) {field.value =~ /#{File.basename(__FILE__)}/}
+      end
 
-  it "works with FileField#set" do
-    field = file_field(:id => "upload")
-    file_path = File.expand_path(__FILE__)
-    field.set file_path
-    field.value.should match(/#{File.basename(__FILE__)}/)
-  end
-
-  it "doesn't allow to use FileField#set with non existing file" do
-    field = file_field(:id => "upload")
-    lambda {field.set "upload.zip"}.should raise_exception
+      it "doesn't allow to use FileField#set with non existing file" do
+        field = file_field(:id => "upload")
+        lambda {field.set "upload.zip"}.should raise_exception
+      end
+    end
   end
 
   it "has wait_until" do
