@@ -34,7 +34,7 @@ Execute "watirsplash generate" under your project's directory to generate defaul
     gem.add_dependency("require_all")
     gem.add_dependency("syntax")
     gem.add_dependency("win32console")
-    gem.add_dependency("win32screenshot", "~>1.0")
+    gem.add_dependency("win32screenshot", "~>1.0.2")
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
