@@ -27,10 +27,25 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/watirsplash",
      "lib/watirsplash.rb",
+     "lib/watirsplash/cli.rb",
      "lib/watirsplash/file_helper.rb",
+     "lib/watirsplash/generators/migrate_project.rb",
+     "lib/watirsplash/generators/new_common_project.rb",
+     "lib/watirsplash/generators/new_project.rb",
+     "lib/watirsplash/generators/templates/new_common_project/config.rb.tt",
+     "lib/watirsplash/generators/templates/new_common_project/environment.rb",
+     "lib/watirsplash/generators/templates/new_common_project/lib/common_application_helper.rb",
+     "lib/watirsplash/generators/templates/new_project/.rspec",
+     "lib/watirsplash/generators/templates/new_project/config.rb.tt",
+     "lib/watirsplash/generators/templates/new_project/environment.rb.tt",
+     "lib/watirsplash/generators/templates/new_project/spec/%formatted_name%_helper.rb.tt",
+     "lib/watirsplash/generators/templates/new_project/spec/dummy_spec.rb.tt",
      "lib/watirsplash/html_formatter.rb",
+     "lib/watirsplash/rspec_patches.rb",
      "lib/watirsplash/spec_helper.rb",
      "lib/watirsplash/util.rb",
+     "lib/watirsplash/watir_patches.rb",
+     "spec/file_helper_spec.rb",
      "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
      "spec/util_spec.rb",
@@ -49,13 +64,11 @@ Execute "watirsplash generate" under your project's directory to generate defaul
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{watirsplash 0.2.13}
   s.test_files = [
-    "spec/spec_helper_spec.rb",
+    "spec/file_helper_spec.rb",
+     "spec/spec_helper_spec.rb",
      "spec/spec_match_array_spec.rb",
      "spec/util_spec.rb",
-     "spec/watir_element_spec.rb",
-     "spec/watir_ie_spec.rb",
-     "spec/watir_table_row_spec.rb",
-     "spec/watir_table_spec.rb"
+     "spec/watir_ie_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -63,33 +76,30 @@ Execute "watirsplash generate" under your project's directory to generate defaul
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<watir>, ["= 1.6.6"])
-      s.add_runtime_dependency(%q<rspec>, ["= 1.3.0"])
-      s.add_runtime_dependency(%q<diff-lcs>, [">= 0"])
-      s.add_runtime_dependency(%q<rautomation>, ["~> 0.4"])
+      s.add_runtime_dependency(%q<watir>, ["= 1.7.1"])
+      s.add_runtime_dependency(%q<rspec>, ["~> 2.4"])
+      s.add_runtime_dependency(%q<rautomation>, ["~> 0.1"])
       s.add_runtime_dependency(%q<require_all>, [">= 0"])
       s.add_runtime_dependency(%q<syntax>, [">= 0"])
-      s.add_runtime_dependency(%q<win32console>, [">= 0"])
-      s.add_runtime_dependency(%q<win32screenshot>, ["~> 1.0.2"])
+      s.add_runtime_dependency(%q<win32screenshot>, ["~> 1.0"])
+      s.add_runtime_dependency(%q<thor>, ["~> 0"])
     else
-      s.add_dependency(%q<watir>, ["= 1.6.6"])
-      s.add_dependency(%q<rspec>, ["= 1.3.0"])
-      s.add_dependency(%q<diff-lcs>, [">= 0"])
-      s.add_dependency(%q<rautomation>, ["~> 0.4"])
+      s.add_dependency(%q<watir>, ["= 1.7.1"])
+      s.add_dependency(%q<rspec>, ["~> 2.4"])
+      s.add_dependency(%q<rautomation>, ["~> 0.1"])
       s.add_dependency(%q<require_all>, [">= 0"])
       s.add_dependency(%q<syntax>, [">= 0"])
-      s.add_dependency(%q<win32console>, [">= 0"])
-      s.add_dependency(%q<win32screenshot>, ["~> 1.0.2"])
+      s.add_dependency(%q<win32screenshot>, ["~> 1.0"])
+      s.add_dependency(%q<thor>, ["~> 0"])
     end
   else
-    s.add_dependency(%q<watir>, ["= 1.6.6"])
-    s.add_dependency(%q<rspec>, ["= 1.3.0"])
-    s.add_dependency(%q<diff-lcs>, [">= 0"])
-    s.add_dependency(%q<rautomation>, ["~> 0.4"])
+    s.add_dependency(%q<watir>, ["= 1.7.1"])
+    s.add_dependency(%q<rspec>, ["~> 2.4"])
+    s.add_dependency(%q<rautomation>, ["~> 0.1"])
     s.add_dependency(%q<require_all>, [">= 0"])
     s.add_dependency(%q<syntax>, [">= 0"])
-    s.add_dependency(%q<win32console>, [">= 0"])
-    s.add_dependency(%q<win32screenshot>, ["~> 1.0.2"])
+    s.add_dependency(%q<win32screenshot>, ["~> 1.0"])
+    s.add_dependency(%q<thor>, ["~> 0"])
   end
 end
 
