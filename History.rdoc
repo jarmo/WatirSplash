@@ -1,4 +1,4 @@
-=== Version 0.2.13 / 2011-01-25
+=== Version 0.2.14 / 2011-01-25
 
 * use newer RAutomation
 * use newer Win32::Screenshot - you may now uninstall ImageMagick and RMagick
