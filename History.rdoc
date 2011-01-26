@@ -4,6 +4,11 @@
  * using Watir 1.6.7
  * use WATIRSPLASH_RESULTS_PATH environment variable for specifying custom spec results location
 
+=== Version 0.2.14 / 2011-01-25
+
+* use newer RAutomation
+* use newer Win32::Screenshot - you may now uninstall ImageMagick and RMagick
+
 === Version 0.2.12 / 2010-10-15
 
  * really fix integration with RAutomation and AutoIt - uninstall all versions of Watir before installing this version of WatirSplash due to the conflicts of Watir's AutoIt version and RAutomation AutoIt version

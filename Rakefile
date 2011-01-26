@@ -14,8 +14,8 @@ begin
     gem.executables = ["watirsplash"]
     gem.extra_rdoc_files = ["README.rdoc", "History.rdoc", "License.txt"]
     gem.rdoc_options << "--main" << "README.rdoc" <<
-            "--template" << "hanna" <<
-            "--inline-source" << "--format=html"
+    "--template" << "hanna" <<
+    "--inline-source" << "--format=html"
     ignored_files = File.readlines(".gitignore").map {|l| l.strip.gsub("*", "")}
     ignored_files << ".gitignore" << ".gemspec"
     gem.files = Dir.glob("**/*").delete_if {|f| f =~ Regexp.union(*ignored_files)}
@@ -30,11 +30,13 @@ Execute "watirsplash generate" under your project's directory to generate defaul
 
     gem.add_dependency("watir", "=1.7.1")
     gem.add_dependency("rspec", "~>2.4")
-    gem.add_dependency("rautomation", "~>0.1")
     gem.add_dependency("require_all")
     gem.add_dependency("syntax")
-    gem.add_dependency("win32screenshot", "~>1.0")
     gem.add_dependency("thor", "~>0")
+    gem.add_dependency("rautomation", "~>0.4")
+    gem.add_dependency("require_all")
+    gem.add_dependency("syntax")
+    gem.add_dependency("win32screenshot", "~>1.0.2")
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
