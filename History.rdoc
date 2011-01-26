@@ -1,7 +1,9 @@
-=== Version 0.3.0 / 2010-11-XX
+=== Version 1.0.0 / 2011-01-26
 
+ * using RSpec 2
+   - if you have projects using WatirSplash <= 0.2.14 then execute `watirsplash migrate` under ui-test and ui-test-common directories!
  * removed Watir::WaitHelper - use Watir's waiting methods instead
- * using Watir 1.6.7
+ * using Watir 1.7.1
  * use WATIRSPLASH_RESULTS_PATH environment variable for specifying custom spec results location
 
 === Version 0.2.14 / 2011-01-25

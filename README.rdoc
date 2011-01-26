@@ -7,7 +7,7 @@
 
 WatirSplash makes browser-based web page testing in Ruby splashin' easy.
 It combines Watir (http://www.watir.com) for controlling the browser and
-RSpec (http://rspec.info) for testing framework. This powerful combination gives you
+RSpec (http://relishapp.com/rspec) for testing framework. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
 you don't need to have any extra documentation for your applications.
 
@@ -19,7 +19,7 @@ testing right away!
 
 === With vanilla Watir and RSpec
     require 'watir'
-    require 'spec'
+    require 'rspec'
 
     describe "Google" do
         before :all do
@@ -68,7 +68,7 @@ testing right away!
         end
     end
     
-    C:\project\ui-test>spec spec\google_spec.rb
+    C:\project\ui-test>rspec spec\google_spec.rb
     Results will be saved into the directory C:/project/ui-test/results
     Google
       has search field
@@ -87,7 +87,7 @@ testing right away!
     gem install watirsplash
 
 3) in your project's directory:
-    watirsplash generate
+    watirsplash new
 
 == WHAT NEXT?
 
@@ -95,4 +95,4 @@ You can read more information about the usage and features from the wiki at http
 
 == COPYRIGHT
 
-Copyright © 2010 Jarmo Pertman. See LICENSE for details.
+Copyright © 2010-2011 Jarmo Pertman. See LICENSE for details.

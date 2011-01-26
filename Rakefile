@@ -22,9 +22,11 @@ begin
     gem.files << "lib/watirsplash/generators/templates/new_project/.rspec"
     gem.post_install_message = %Q{#{"*"*25}
 
-Thank you for installing WatirSplash #{version}! Don't forget to take a look at README and History files!
+Thank you for installing WatirSplash #{version}! Don't forget to take a look at the README and History files!
 
-Execute "watirsplash generate" under your project's directory to generate default project structure.
+Execute `watirsplash new` under your project's directory to generate default project structure.
+
+PS! If you are using older WatirSplash version <= 0.2.14, then execute `watirsplash migrate` under ui-test and ui-test-common!
 
 #{"*"*25}}
 
