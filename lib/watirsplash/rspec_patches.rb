@@ -1,3 +1,32 @@
+require 'rspec/core/formatters/html_formatter'
+require 'rspec/core/formatters/snippet_extractor'
+
+# patch for https://github.com/rspec/rspec-core/issues/#issue/214
+module RSpec
+  module Core
+    module Formatters
+      class HtmlFormatter < BaseTextFormatter
+        def extra_failure_content(exception)
+          require 'rspec/core/formatters/snippet_extractor'
+          backtrace = exception.backtrace.map {|line| backtrace_line(line)}
+          backtrace.compact!
+          @snippet_extractor ||= SnippetExtractor.new
+          "    <pre class=\"ruby\"><code>#{@snippet_extractor.snippet(backtrace)}</code></pre>"
+        end
+      end
+
+      class SnippetExtractor
+        def snippet(backtrace)
+          raw_code, line = snippet_for(backtrace[0])
+          highlighted = @@converter.convert(raw_code, false)
+          highlighted << "\n<span class=\"comment\"># gem install syntax to get syntax highlighting</span>" if @@converter.is_a?(NullConverter)
+          post_process(highlighted, line)
+        end
+      end
+    end
+  end
+end
+
 RSpec.configure do |config| #:nodoc:
   config.include(WatirSplash::SpecHelper)
 

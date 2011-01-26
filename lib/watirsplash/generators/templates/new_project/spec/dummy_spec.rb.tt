@@ -24,7 +24,7 @@ describe WatirSplash do
     goto "http://google.com/ncr"
     title.should == "Google"
     text_field(:name => "q").set "Bing"
-    text.should include("Bing")
+    wait_until(15) {text.include? "Bing"}
     pending "this is a known 'bug'" do
       title.should == "Bing"
     end
