@@ -9,7 +9,18 @@ end
 
 # patches for Watir
 module Watir
-  class Element #:nodoc:all
+  class IE #:nodoc:all
+    alias_method :_initialize, :initialize
+
+    def initialize suppress_new_window=nil
+      _initialize suppress_new_window
+      self.speed = :fast
+      add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
+      maximize
+    end
+  end
+
+  class Element 
     # saves a file with the browser
     #
     # clicking the button opens a browser's save as dialog and saves the file document.pdf
