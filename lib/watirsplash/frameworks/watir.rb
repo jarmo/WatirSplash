@@ -1,3 +1,9 @@
+begin
+  require "watir"
+rescue Gem::LoadError
+  Kernel.warn "Unable to load Watir gem. Install it with 'gem install watir -v 1.7.1'"
+end
+
 require "watir/ie"
 
 module Watir
