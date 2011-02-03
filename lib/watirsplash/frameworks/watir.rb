@@ -1,3 +1,5 @@
+require "watir/ie"
+
 module Watir
   module PageCheckers
     # raises an error if javascript error was found
@@ -7,10 +9,6 @@ end
 
 # patches for Watir
 module Watir
-  class IE #:nodoc:all
-    # trigger autoloading
-  end
-
   class Element #:nodoc:all
     # saves a file with the browser
     #
