@@ -32,12 +32,9 @@ module Watir
 
     def save_screenshot(params)
       params[:hwnd] ||= hwnd
-      bring_to_front
-      begin
-        ::Win32::Screenshot::Take.of(:window, :hwnd => params[:hwnd]).write(params[:file_name])
-      rescue => e
-        $stderr.puts "saving of screenshot failed: #{e.message}"
-      end
+      ::Win32::Screenshot::Take.of(:window, :hwnd => params[:hwnd]).write(params[:file_name])
+    rescue => e
+      $stderr.puts "saving of screenshot failed: #{e.message}"
     end
   end
 
