@@ -7,6 +7,7 @@ rescue Gem::LoadError
 end
 
 require "watir/ie"
+require 'win32/screenshot'
 
 module Watir
   module PageCheckers
@@ -25,6 +26,16 @@ module Watir
       self.speed = :fast
       add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
       maximize
+    end
+
+    def save_screenshot(params)
+      params[:hwnd] ||= hwnd
+      bring_to_front
+      begin
+        ::Win32::Screenshot::Take.of(:window, :hwnd => params[:hwnd]).write(params[:file_name])
+      rescue => e
+        $stderr.puts "saving of screenshot failed: #{e.message}"
+      end
     end
   end
 

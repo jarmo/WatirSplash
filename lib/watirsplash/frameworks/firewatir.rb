@@ -13,5 +13,9 @@ module FireWatir #:nodoc:all
     end
 
     alias_method :exist?, :exists?
+
+    def save_screenshot(params)
+      # currently not yet supported
+    end
   end
 end

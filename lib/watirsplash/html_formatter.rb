@@ -1,5 +1,4 @@
 require 'rspec/core/formatters/html_formatter'
-require 'win32/screenshot'
 require 'pathname'
 require 'fileutils'
 
@@ -39,7 +38,7 @@ module WatirSplash
     end
 
     def extra_failure_content(exception) # :nodoc:
-      if @browser.exists?
+      if @browser && @browser.exists?
         save_screenshot
         save_html
       end
@@ -72,13 +71,7 @@ module WatirSplash
 
     def save_screenshot(description="Screenshot", hwnd=nil) # :nodoc:
       file_name = file_path("screenshot.png", description)
-      hwnd ||= @browser.hwnd
-      @browser.bring_to_front
-      begin
-        Win32::Screenshot::Take.of(:window, :hwnd => hwnd).write(file_name)
-      rescue => e
-        $stderr.puts "saving of screenshot failed: #{e.message}"
-      end
+      @browser.save_screenshot(:file_name => file_name, :hwnd => hwnd)
       file_name
     end
 
