@@ -50,10 +50,6 @@ module WatirSplash
         require "watirsplash/frameworks/#{framework}"        
       end
 
-      def browser
-        Watir::Browser.new
-      end
-
       private
 
       def default_framework

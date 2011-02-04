@@ -1,8 +1,10 @@
+supported_version = "1.7.1"
+
 begin
-  gem "watir", "1.7.1"
+  gem "watir", supported_version
   require "watir"
 rescue Gem::LoadError
-  puts "Unable to load Watir gem. Install it with 'gem install watir -v 1.7.1'"
+  puts "Unable to load Watir gem. Install it with:\ngem install watir -v #{supported_version}"
   exit 1
 end
 

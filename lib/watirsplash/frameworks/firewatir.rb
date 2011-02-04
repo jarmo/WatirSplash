@@ -1,8 +1,10 @@
+supported_version = "1.7.1"
+
 begin
-  gem "firewatir", "1.7.1"
+  gem "firewatir", supported_version
   require "firewatir"
 rescue Gem::LoadError
-  puts "Unable to load FireWatir gem. Install it with 'gem install firewatir -v 1.7.1'"
+  puts "Unable to load FireWatir gem. Install it with:\ngem install firewatir -v #{supported_version}"
   exit 1
 end
 
