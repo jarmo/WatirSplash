@@ -10,9 +10,18 @@ module WatirSplash
       Util.formatter.browser = @browser 
       goto url
     end
-    
+
     def method_missing name, *args #:nodoc:
-      @browser.respond_to?(name) ? @browser.send(name, *args) {yield} : super
+      if @browser.respond_to?(name)
+        SpecHelper.module_eval %Q[
+          def #{name}(*args)
+            @browser.send(:#{name}, *args) {yield}
+          end
+        ]
+        @browser.send(name, *args) {yield}
+      else
+        super
+      end
     end
 
     # make sure that using method 'p' will be invoked on @browser
