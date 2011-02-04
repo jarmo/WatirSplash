@@ -1,7 +1,9 @@
 begin
+  gem "watir", "1.7.1"
   require "watir"
 rescue Gem::LoadError
-  Kernel.warn "Unable to load Watir gem. Install it with 'gem install watir -v 1.7.1'"
+  puts "Unable to load Watir gem. Install it with 'gem install watir -v 1.7.1'"
+  exit 1
 end
 
 require "watir/ie"

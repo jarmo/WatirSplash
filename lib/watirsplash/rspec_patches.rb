@@ -35,7 +35,7 @@ RSpec.configure do |config| #:nodoc:
   end
 
   config.after(:all) do
-    close
+    close if @browser
   end
 end
 

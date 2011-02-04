@@ -1,0 +1,1 @@
+WatirSplash::Util.framework = :watir

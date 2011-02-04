@@ -6,7 +6,7 @@ module WatirSplash
 
     # opens the browser at specified url
     def open_browser_at url
-      @browser = Watir::Browser.new
+      @browser = WatirSplash::Util.browser
       Util.formatter.browser = @browser 
       goto url
     end

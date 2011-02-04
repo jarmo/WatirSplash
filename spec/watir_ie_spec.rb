@@ -1,10 +1,10 @@
-describe Watir::IE do
+describe "Watir::IE", :if => WatirSplash::Util.framework == :watir do
 
   before :each do
     goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
   end
 
-  context Watir::Element do
+  context "Watir::Element" do
     context "#save_as" do
       it "saves file with the browser" do
         begin
@@ -21,7 +21,7 @@ describe Watir::IE do
     end
   end
 
-  context Watir::FileField do
+  context "Watir::FileField" do
     context "#set" do
       it "sets the file to upload with the browser" do
         field = file_field(:id => "upload")
