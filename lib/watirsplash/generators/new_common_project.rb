@@ -4,6 +4,7 @@ module WatirSplash
       include Thor::Actions
 
       argument :url 
+      argument :framework
 
       def self.source_root
         File.dirname(__FILE__) + "/templates"

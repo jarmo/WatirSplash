@@ -1,3 +1,15 @@
+# What framework to use? Possible values are:
+#   * watir
+#   * firewatir
+#   * watir-webdriver/ie
+#   * watir-webdriver/firefox
+#   * watir-webdriver/chrome
+<%=
+  load_cmd = ""
+  load_cmd += "# " if load_common
+  load_cmd += "WatirSplash::Util.framework = \"#{framework}\""
+%> 
+
 # Config for your application
 module Config
   module <%= name %>

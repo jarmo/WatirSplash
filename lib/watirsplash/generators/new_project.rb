@@ -7,6 +7,7 @@ module WatirSplash
 
       argument :name 
       argument :url
+      argument :framework
       argument :load_common, :optional => true
 
       def self.source_root

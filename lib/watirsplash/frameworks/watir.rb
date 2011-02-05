@@ -1,6 +1,6 @@
-WatirSplash::Frameworks::Helper.load_gem :gem => "watir", :version => "1.7.1"
+WatirSplash::Frameworks::Helper.load_gems({:gem => "watir", :version => "1.7.1"}, 
+  {:gem => "win32screenshot", :require => "win32/screenshot"})
 require "watir/ie"
-WatirSplash::Frameworks::Helper.load_gem :gem => "win32screenshot", :require => "win32/screenshot"
 
 module Watir
   module PageCheckers

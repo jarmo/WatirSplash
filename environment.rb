@@ -1,1 +1,2 @@
-WatirSplash::Util.framework = :watir
+WatirSplash::Util.framework = "watir"
+

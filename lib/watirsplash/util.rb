@@ -46,7 +46,7 @@ module WatirSplash
       end
 
       def load_framework
-        self.framework ||= default_framework
+        self.framework = ENV["WATIRSPLASH_FRAMEWORK"] || framework || default_framework
         require "watirsplash/frameworks/#{framework}"        
       end
 
