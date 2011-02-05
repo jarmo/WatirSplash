@@ -1,12 +1,4 @@
-supported_version = "1.7.1"
-
-begin
-  gem "firewatir", supported_version
-  require "firewatir"
-rescue Gem::LoadError
-  puts "Unable to load FireWatir gem. Install it with:\ngem install firewatir -v #{supported_version}"
-  exit 1
-end
+WatirSplash::Frameworks::Helper.load_gem :gem => "firewatir", :version => "1.7.1"
 
 module FireWatir #:nodoc:all
   class Firefox

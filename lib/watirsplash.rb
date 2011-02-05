@@ -11,5 +11,6 @@ require_rel "watirsplash/util"
 require_rel "watirsplash/html_formatter"
 WatirSplash::Util.configure_rspec_formatters
 WatirSplash::Util.load_environment
+require_rel "watirsplash/frameworks/helper"
 WatirSplash::Util.load_framework
 

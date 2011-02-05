@@ -1,15 +1,6 @@
-supported_version = "1.7.1"
-
-begin
-  gem "watir", supported_version
-  require "watir"
-rescue Gem::LoadError
-  puts "Unable to load Watir gem. Install it with:\ngem install watir -v #{supported_version}"
-  exit 1
-end
-
+WatirSplash::Frameworks::Helper.load_gem :gem => "watir", :version => "1.7.1"
 require "watir/ie"
-require 'win32/screenshot'
+WatirSplash::Frameworks::Helper.load_gem :gem => "win32screenshot", :require => "win32/screenshot"
 
 module Watir
   module PageCheckers

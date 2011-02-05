@@ -1,12 +1,4 @@
-supported_version = "0.1.9"
-
-begin
-  gem "watir-webdriver", supported_version 
-  require "watir-webdriver"
-rescue Gem::LoadError
-  puts "Unable to load Watir-WebDriver gem. Install it with:\ngem install watir-webdriver -v #{supported_version}"
-  exit 1
-end
+WatirSplash::Frameworks::Helper.load_gem :gem => "watir-webdriver", :version => "0.1.9"
 
 module Watir
   class Browser
