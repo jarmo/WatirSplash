@@ -15,7 +15,7 @@ module WatirSplash
           unless failed_gems.empty?
             puts "\nSome dependencies are missing. Install them with:"
             failed_gems.each do |failed_gem|
-              puts "  gem install #{failed_gem[:gem]}#{failed_gem[:version] ? " -v #{failed_gem[:version]}" : ""}"
+              puts "  gem install #{failed_gem[:gem]}#{failed_gem[:version] ? " -v #{failed_gem[:version].gsub(/^[~>=]*\s*/, "")}" : ""}"
             end
             puts
             exit 1 unless failed_gems.empty?          
