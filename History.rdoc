@@ -1,3 +1,7 @@
+=== Version 1.1.1 / 2011-02-17
+
+ * Minor fix for RSpec involving example groups without enough metadata
+
 === Version 1.1.0 / 2011-02-17
 
  * browser methods will be cached by #method_missing for faster lookup
