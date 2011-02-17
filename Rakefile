@@ -24,9 +24,9 @@ begin
 
 Thank you for installing WatirSplash #{version}! Don't forget to take a look at the README and History files!
 
-Execute `watirsplash new` under your project's directory to generate default project structure.
+Execute `watirsplash new` under your project's directory to generate a default project structure.
 
-PS! If you are using older WatirSplash version <= 0.2.14, then execute `watirsplash migrate` under ui-test and ui-test-common!
+PS! If you are using an older WatirSplash version <= 0.2.14, then execute `watirsplash migrate` under the ui-test and ui-test-common directories!
 
 #{"*"*25}}
 
