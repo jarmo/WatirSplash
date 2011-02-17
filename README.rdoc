@@ -105,7 +105,7 @@ It is possible to specify what framework to use in ui-test/config.rb and/or in u
 If framework is not specified manually then a default framework will be used for the current platform.
 
 PS! Please note that all frameworks are not 100% compatible with each other. If you find any concrete incompatibilities then
-it would be great if you'd contribute contribute fixes or information to the authors of the frameworks.
+it would be great if you'd contribute fixes or information to the authors of the frameworks.
 
 == WHAT'S NEXT?
 
