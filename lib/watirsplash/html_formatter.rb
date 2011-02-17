@@ -100,6 +100,7 @@ module WatirSplash
     def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")
       spec_location, line_no = example_group.metadata[:example_group][:block].to_s.scan(/@(.*)(:\d+)>$/).flatten
+      return unless spec_location
       spec_location = Pathname.new(spec_location)
       relative_spec_path = spec_location.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s
       appended_description = " @ #{relative_spec_path}#{line_no} (#{date})"
