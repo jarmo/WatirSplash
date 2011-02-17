@@ -1,3 +1,8 @@
+=== Version 1.1.0 / 2011-02-17
+
+ * browser methods will be cached by #method_missing for faster lookup
+ * added support for different frameworks - Watir, FireWatir and Watir-WebDriver
+
 === Version 1.0.0 / 2011-01-26
 
  * using RSpec 2
