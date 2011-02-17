@@ -26,13 +26,10 @@ Thank you for installing WatirSplash #{version}! Don't forget to take a look at 
 
 Execute `watirsplash new` under your project's directory to generate a default project structure.
 
-PS! If you are using an older WatirSplash version <= 0.2.14, then execute `watirsplash migrate` under the ui-test and ui-test-common directories!
-
 #{"*"*25}}
 
-    gem.add_dependency("rspec", "~>2.4")
+    gem.add_dependency("rspec", "~>2.5")
     gem.add_dependency("require_all")
-    gem.add_dependency("syntax")
     gem.add_dependency("thor", "~>0")
     gem.add_dependency("require_all")
     gem.add_dependency("syntax")

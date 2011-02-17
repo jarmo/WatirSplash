@@ -80,16 +80,34 @@ testing right away!
 
 == INSTALL
 
-1) install Ruby 1.8:
-    http://rubyinstaller.org/
+1) install Ruby
     
 2) install WatirSplash:
     gem install watirsplash
 
-3) in your project's directory:
+3) execute in your project's directory:
     watirsplash new
 
-== WHAT NEXT?
+== SUPPORTED PLATFORMS & BROWSERS
+
+WatirSplash supports different frameworks/browsers on different operating systems:
+* Linux & OS X - firewatir, watir-webdriver/chrome and watir-webdriver/firefox
+* Windows - firewatir, watir, watir-webdriver/chrome, watir-webdriver/ie, watir-webdriver/firefox
+
+Each framework drives a specific browser:
+* FireWatir - Firefox
+* Watir - IE
+* Watir-WebDriver - Chrome, IE and Firefox
+
+It is possible to specify what framework to use in ui-test/config.rb and/or in ui-test-common/config.rb files:
+    WatirSplash::Util.framework = "watir-webdriver/firefox"
+
+If framework is not specified manually then a default framework will be used for the current platform.
+
+PS! Please note that all frameworks are not 100% compatible with each other. If you find any concrete incompatibilities then
+it would be great if you'd contribute contribute fixes or information to the authors of the frameworks.
+
+== WHAT'S NEXT?
 
 You can read more information about the usage and features from the wiki at http://github.com/jarmo/WatirSplash/wiki
 
