@@ -1,9 +1,7 @@
-WatirSplash::Frameworks::Helper.load_gem :gem => "watir-webdriver", :version => "0.1.9"
+WatirSplash::Frameworks::Helper.load_gem :gem => "watir-webdriver", :version => ">=0.2.0"
 
 module Watir
   class Browser
-    alias_method :exists?, :exist?
-
     def save_screenshot(params)
       driver.save_screenshot(params[:file_name])
     end
