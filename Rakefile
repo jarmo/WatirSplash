@@ -29,7 +29,6 @@ Execute `watirsplash new` under your project's directory to generate a default p
 #{"*"*25}}
 
     gem.add_dependency("rspec", "~>2.5")
-    gem.add_dependency("require_all")
     gem.add_dependency("thor", "~>0")
     gem.add_dependency("require_all")
     gem.add_dependency("syntax")

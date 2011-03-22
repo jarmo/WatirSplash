@@ -1,3 +1,9 @@
+=== Version 1.1.2 / 2011-03-22
+
+ * bump watir/firewatir dependency to 1.8.0
+ * bump watir-webdriver dependency to 0.2.1
+ * patch temporarily MiniMagick to handle spaces in file paths when saving screenshots on Windows (https://github.com/probablycorey/mini_magick/pull/38)
+  
 === Version 1.1.1 / 2011-02-17
 
  * Minor fix for RSpec involving example groups without enough metadata
