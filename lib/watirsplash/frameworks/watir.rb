@@ -1,5 +1,6 @@
-WatirSplash::Frameworks::Helper.load_gems({:gem => "watir", :version => "1.7.1"}, 
+WatirSplash::Frameworks::Helper.load_gems({:gem => "watir", :version => "1.8.0"}, 
   {:gem => "win32screenshot", :require => "win32/screenshot", :version => ">=1.0.2"})
+require "watirsplash/mini_magick_patch"
 require "watir/ie"
 
 module Watir

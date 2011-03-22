@@ -1,4 +1,4 @@
-WatirSplash::Frameworks::Helper.load_gem :gem => "watir-webdriver", :version => ">=0.2.0"
+WatirSplash::Frameworks::Helper.load_gem :gem => "watir-webdriver", :version => ">=0.2.1"
 
 module Watir
   class Browser
