@@ -25,10 +25,10 @@ module WatirSplash
       def configure_rspec_formatters
         config = RSpec.configuration
         config.color_enabled = true
-        documentation_formatter = config.send(:built_in_formatter, :documentation).new(config.output)
         results_path = ENV["WATIRSPLASH_RESULTS_PATH"] || "results/index.html"
         @@html_formatter = WatirSplash::HtmlFormatter.new(results_path)
-        config.instance_variable_set(:@reporter, RSpec::Core::Reporter.new(@@html_formatter, documentation_formatter))
+        config.formatters.unshift(@@html_formatter)
+        config.add_formatter(:documentation)
       end
 
       def formatter
