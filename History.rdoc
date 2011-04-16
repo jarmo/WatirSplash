@@ -5,6 +5,7 @@
  * added #make as an alias for #change as a RSpec matcher
  * bump watir/firewatir dependency to 1.8.1
  * bump watir-webdriver dependency to 0.2.2
+ * bump win32screenshot dependency to 1.0.3
 
 === Version 1.1.2 / 2011-03-22
 
