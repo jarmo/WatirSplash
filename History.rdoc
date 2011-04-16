@@ -1,3 +1,7 @@
+=== Version 1.2.1 / 2011-04-17
+
+ * use RSpec's multiple formatters support functionality directly
+
 === Version 1.2.0 / 2011-04-16
 
  * fixed Watir::Browser#attach for Watir::IE
