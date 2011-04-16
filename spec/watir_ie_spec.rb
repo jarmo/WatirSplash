@@ -16,7 +16,7 @@ describe "Watir::IE", :if => WatirSplash::Util.framework == :watir do
       end
 
       it "allows only absolute paths" do
-        lambda {link(:text => "Download").save_as("download.zip")}.should raise_exception
+        expect {link(:text => "Download").save_as("download.zip")}.to raise_exception
       end
     end
   end
@@ -32,7 +32,7 @@ describe "Watir::IE", :if => WatirSplash::Util.framework == :watir do
 
       it "doesn't allow to use with non existing files" do
         field = file_field(:id => "upload")
-        lambda {field.set "upload.zip"}.should raise_exception
+        expect {field.set "upload.zip"}.to raise_exception
       end
     end
   end
