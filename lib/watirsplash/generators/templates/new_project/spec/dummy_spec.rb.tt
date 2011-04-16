@@ -23,8 +23,9 @@ describe WatirSplash do
   it "is in pending status" do
     goto "http://google.com/ncr"
     title.should == "Google"
-    text_field(:name => "q").set "Bing"
-    wait_until(15) {text.include? "Bing"}
+    expect {
+      text_field(:name => "q").set "Bing"
+    }.to make {text.include?("Bing")}.in(15)
     pending "this is a known 'bug'" do
       title.should == "Bing"
     end
