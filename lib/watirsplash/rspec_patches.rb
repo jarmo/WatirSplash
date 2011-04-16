@@ -72,3 +72,63 @@ RSpec::Matchers.define :match_array do |array2|
     true
   end
 end
+
+# patch for #in(timeout) method
+module RSpec::Matchers
+  class Change
+    def matches?(event_proc)
+      raise_block_syntax_error if block_given?
+
+      # to make #change work with #in(timeout) method
+      @before = evaluate_value_proc unless defined? @before
+      event_proc.call
+      @after = evaluate_value_proc
+
+      (!change_expected? || changed?) && matches_before? && matches_after? && matches_amount? && matches_min? && matches_max?
+    end
+  end
+
+  alias_method :make, :change
+end
+
+# add #in(timeout) method for every matcher for allowing to wait until some condition.
+#     div.click
+#     another_div.should be_present.in(5)
+#
+#     expect {
+#       div.click
+#     }.to change {another_div.text}.from("before").to("after").in(5)
+#
+#     expect {
+#       div.click
+#     }.to make {another_div.present?}.in(5)
+#
+# use with ActiveSupport to use descriptive methods for numbers:
+#     require "active_support"
+#     another_div.should exist.in(5.minutes)
+RSpec::Matchers.constants.each do |const|
+  RSpec::Matchers.const_get(const).class_eval do
+    def in(timeout)
+      @timeout = timeout
+      self
+    end
+
+    inst_methods = instance_methods.map {|m| m.to_sym}
+
+    if inst_methods.include? :matches?
+      alias_method :__matches?, :matches? 
+
+      def matches?(actual)
+        @timeout ? (Watir::Wait.until(@timeout) {__matches?(actual)} rescue false) : __matches?(actual)
+      end
+    end
+
+    if inst_methods.include? :does_not_match?
+      alias_method :__does_not_match?, :does_not_match?
+
+      def does_not_match?(actual)
+        @timeout ? (Watir::Wait.until(@timeout) {__does_not_match?(actual)} rescue false) : __does_not_match?(actual)
+      end
+    end
+  end
+end
