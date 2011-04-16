@@ -1,3 +1,11 @@
+=== Version 1.2.0 / 2011-04-16
+
+ * fixed Watir::Browser#attach for Watir::IE
+ * added #in(timeout) method for all RSpec matchers
+ * added #make as an alias for #change as a RSpec matcher
+ * bump watir/firewatir dependency to 1.8.1
+ * bump watir-webdriver dependency to 0.2.2
+
 === Version 1.1.2 / 2011-03-22
 
  * bump watir/firewatir dependency to 1.8.0
