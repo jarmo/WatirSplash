@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{watirsplash}
-  s.version = "1.2.1"
+  s.version = "1.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jarmo Pertman"]
-  s.date = %q{2011-04-17}
+  s.date = %q{2011-04-22}
   s.default_executable = %q{watirsplash}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.email = %q{jarmo.p@gmail.com}
@@ -65,7 +65,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %q{*************************
 
-Thank you for installing WatirSplash 1.2.1! Don't forget to take a look at the README and History files!
+Thank you for installing WatirSplash 1.3.0! Don't forget to take a look at the README and History files!
 
 Execute `watirsplash new` under your project's directory to generate a default project structure.
 
@@ -73,7 +73,7 @@ Execute `watirsplash new` under your project's directory to generate a default p
   s.rdoc_options = ["--charset=UTF-8", "--main", "README.rdoc", "--template", "hanna", "--inline-source", "--format=html"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{watirsplash 1.2.1}
+  s.summary = %q{watirsplash 1.3.0}
   s.test_files = [
     "spec/file_helper_spec.rb",
      "spec/rspec_patches_spec.rb",
