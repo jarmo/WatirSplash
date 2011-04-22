@@ -26,7 +26,20 @@ describe "RSpec patches" do
         }.to make {div(:id => "div1").present?}.in(2)
       end
 
-      it "handles also #does_not_match?" do
+      it "handles #should_not via matcher's #matches?" do
+        h = {:special => true}
+        Thread.new {sleep 0.5; h.delete :special}
+        h.should_not have_key(:special).in(1)
+      end
+
+      it "fails when #should_not is not satisfied within timeout via matcher's #matches?" do
+        h = {:special => true}
+        expect {
+          h.should_not have_key(:special).in(0.1)
+        }.to raise_error
+      end
+
+      it "handles #should_not via matcher's #does_not_match?" do
         RSpec::Matchers.define :have_my_key do |expected|
           match_for_should_not do |actual|
             !actual.has_key?(expected)
@@ -36,6 +49,27 @@ describe "RSpec patches" do
         h = {:special => true}
         Thread.new {sleep 0.5; h.delete :special}
         h.should_not have_my_key(:special).in(1)
+      end
+      
+      it "fails when #should_not is not satisfied within timeout via matcher's #does_not_match?" do
+        RSpec::Matchers.define :have_my_key do |expected|
+          match_for_should_not do |actual|
+            !actual.has_key?(expected)
+          end
+        end
+
+        h = {:special => true}
+        expect {
+          h.should_not have_my_key(:special).in(0.1)
+        }.to raise_error
+      end
+    end
+
+    context "#soon" do
+      it "is an alias for #in(30)" do
+        expect {
+          link(:id => "toggle").click
+        }.to make {div(:id => "div1").present?}.soon
       end
     end
 

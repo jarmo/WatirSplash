@@ -103,6 +103,10 @@ end
 #       div.click
 #     }.to make {another_div.present?}.in(5)
 #
+#     expect {
+#       div.click
+#     }.to change {another_div.text}.soon
+#
 # use with ActiveSupport to use descriptive methods for numbers:
 #     require "active_support"
 #     another_div.should exist.in(5.minutes)
@@ -111,6 +115,10 @@ RSpec::Matchers.constants.each do |const|
     def in(timeout)
       @timeout = timeout
       self
+    end
+
+    def soon 
+      self.in(30)
     end
 
     inst_methods = instance_methods.map {|m| m.to_sym}
@@ -128,6 +136,10 @@ RSpec::Matchers.constants.each do |const|
 
       def does_not_match?(actual)
         @timeout ? (Watir::Wait.until(@timeout) {__does_not_match?(actual)} rescue false) : __does_not_match?(actual)
+      end
+    else
+      def does_not_match?(actual)
+        @timeout ? !(Watir::Wait.while(@timeout) {__matches?(actual)} rescue true) : !__matches?(actual)
       end
     end
   end
