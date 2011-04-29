@@ -5,37 +5,37 @@ describe "RSpec patches" do
   end
 
   context "RSpec::Matchers" do
-    context "#in" do
+    context "#within" do
       it "can be used with #change" do
         expect {
           link(:id => "toggle").click
-        }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").in(2)
+        }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").within(2)
       end
 
       it "will fail upon timeout" do
         expect {
           expect {
             link(:id => "toggle").click
-          }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").in(0.1)
+          }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").within(0.1)
         }.to raise_exception(%q{result should have been changed to "Div is hidden", but is now "Div is shown"})
       end
 
       it "can be used with #make" do
         expect {
           link(:id => "toggle").click
-        }.to make {div(:id => "div1").present?}.in(2)
+        }.to make {div(:id => "div1").present?}.within(2)
       end
 
       it "handles #should_not via matcher's #matches?" do
         h = {:special => true}
         Thread.new {sleep 0.5; h.delete :special}
-        h.should_not have_key(:special).in(1)
+        h.should_not have_key(:special).within(1)
       end
 
       it "fails when #should_not is not satisfied within timeout via matcher's #matches?" do
         h = {:special => true}
         expect {
-          h.should_not have_key(:special).in(0.1)
+          h.should_not have_key(:special).within(0.1)
         }.to raise_error
       end
 
@@ -48,9 +48,9 @@ describe "RSpec patches" do
 
         h = {:special => true}
         Thread.new {sleep 0.5; h.delete :special}
-        h.should_not have_my_key(:special).in(1)
+        h.should_not have_my_key(:special).within(1)
       end
-      
+
       it "fails when #should_not is not satisfied within timeout via matcher's #does_not_match?" do
         RSpec::Matchers.define :have_my_key do |expected|
           match_for_should_not do |actual|
@@ -60,7 +60,7 @@ describe "RSpec patches" do
 
         h = {:special => true}
         expect {
-          h.should_not have_my_key(:special).in(0.1)
+          h.should_not have_my_key(:special).within(0.1)
         }.to raise_error
       end
     end
@@ -80,6 +80,26 @@ describe "RSpec patches" do
         }.to make {text_field(:name => "field1").value.empty?}
       end
     end
-  end
 
+    context "#seconds" do
+      it "is for syntactic sugar" do
+        RSpec::Matchers::Matcher.new(nil) {}.within(2).seconds.instance_variable_get(:@timeout).should == 2
+      end
+
+      it "has #second as an alias" do
+        RSpec::Matchers::Matcher.new(nil) {}.within(1).second.instance_variable_get(:@timeout).should == 1
+      end
+    end
+
+    context "#minutes" do
+      it "converts timeout into minutes" do
+        RSpec::Matchers::Matcher.new(nil) {}.within(2).minutes.instance_variable_get(:@timeout).should == 2*60
+      end
+
+      it "has #minute as an alias" do
+        RSpec::Matchers::Matcher.new(nil) {}.within(1).minute.instance_variable_get(:@timeout).should == 1*60
+      end
+    end
+
+  end
 end

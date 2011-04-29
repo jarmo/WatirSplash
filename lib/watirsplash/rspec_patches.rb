@@ -112,16 +112,39 @@ end
 #     another_div.should exist.in(5.minutes)
 RSpec::Matchers.constants.each do |const|
   RSpec::Matchers.const_get(const).class_eval do
-    def in(timeout)
-      @timeout = timeout
-      self
-    end
-
-    def soon 
-      self.in(30)
-    end
 
     inst_methods = instance_methods.map {|m| m.to_sym}
+
+    if inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?)
+      def in(timeout)
+        Kernel.warn "DEPRECATION NOTICE: #in(timeout) is DEPRECATED, please use #within(timeout) method instead!"
+        within(timeout)
+      end
+
+      def within(timeout)
+        @timeout = timeout
+        self
+      end
+
+      def soon 
+        within(30)
+      end      
+
+      def seconds
+        # for syntactic sugar
+        self
+      end
+
+      alias_method :second, :seconds
+
+      def minutes
+        return unless @timeout
+        @timeout *= 60
+        self
+      end
+
+      alias_method :minute, :minutes
+    end
 
     if inst_methods.include? :matches?
       alias_method :__matches?, :matches? 
