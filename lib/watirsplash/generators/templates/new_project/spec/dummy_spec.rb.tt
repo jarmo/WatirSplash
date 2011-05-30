@@ -25,7 +25,7 @@ describe WatirSplash do
     title.should == "Google"
     expect {
       text_field(:name => "q").set "Bing"
-    }.to make {text.include?("Bing")}.in(15)
+    }.to make {text.include?("Bing")}.within(15)
     pending "this is a known 'bug'" do
       title.should == "Bing"
     end
