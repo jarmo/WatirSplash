@@ -1,3 +1,7 @@
+=== Version 1.4.2 / 2011-06-01
+
+ * handle correctly RSpec shared examples by html formatter
+
 === Version 1.4.1 / 2011-06-01
 
  * bump rspec dependency to 2.6.0

@@ -99,7 +99,7 @@ module WatirSplash
 
     def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")
-      spec_location, line_no = example_group.metadata[:example_group][:block].to_s.scan(/@(.*)(:\d+)>$/).flatten
+      spec_location, line_no = extract_example_group_metadata example_group.metadata[:example_group]
       return unless spec_location
       spec_location = Pathname.new(spec_location)
       relative_spec_path = spec_location.relative_path_from(Pathname.new(Dir.pwd + "/spec")).to_s
@@ -107,5 +107,12 @@ module WatirSplash
       example_group.metadata[:example_group][:description] += appended_description
     end
 
+    def extract_example_group_metadata example_group
+      unless example_group[:example_group]
+        example_group[:block].to_s.scan(/@(.*)(:\d+)>$/).flatten
+      else
+        example_group_metadata example_group[:example_group]
+      end
+    end
   end
 end
