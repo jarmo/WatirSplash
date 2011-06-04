@@ -78,13 +78,15 @@ module RSpec::Matchers
   class Change
     def matches?(event_proc)
       raise_block_syntax_error if block_given?
-
+      
       # to make #change work with #in(timeout) method
-      @before = evaluate_value_proc unless defined? @before
-      event_proc.call
-      @after = evaluate_value_proc
-
-      (!change_expected? || changed?) && matches_before? && matches_after? && matches_amount? && matches_min? && matches_max?
+      unless defined? @actual_before
+        @actual_before = evaluate_value_proc
+        event_proc.call
+      end
+      @actual_after = evaluate_value_proc
+    
+      (!change_expected? || changed?) && matches_before? && matches_after? && matches_expected_delta? && matches_min? && matches_max?
     end
   end
 
