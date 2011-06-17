@@ -117,7 +117,9 @@ RSpec::Matchers.constants.each do |const|
 
     inst_methods = instance_methods.map {|m| m.to_sym}
 
-    if inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?)
+    if !(inst_methods.include?(:__matches?) || inst_methods.include?(:__does_not_match?)) && 
+        (inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?))
+
       def in(timeout)
         Kernel.warn "DEPRECATION NOTICE: #in(timeout) is DEPRECATED, please use #within(timeout) method instead!"
         within(timeout)
@@ -162,7 +164,7 @@ RSpec::Matchers.constants.each do |const|
       def does_not_match?(actual)
         @timeout ? (Watir::Wait.until(@timeout) {__does_not_match?(actual)} rescue false) : __does_not_match?(actual)
       end
-    else
+    elsif inst_methods.include? :matches?
       def does_not_match?(actual)
         @timeout ? !(Watir::Wait.while(@timeout) {__matches?(actual)} rescue true) : !__matches?(actual)
       end

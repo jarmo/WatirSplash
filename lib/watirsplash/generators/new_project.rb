@@ -19,8 +19,9 @@ module WatirSplash
       end
 
       def load_common_cmd
-        cmd = "WatirSplash::Util.load_common"
-        cmd = "# Uncomment the following line to load functionality from ui-test-common\n# " + cmd unless load_common
+        cmd = ""
+        cmd = "# Uncomment the following line to load functionality from ui-test-common\r\n# " unless load_common
+        cmd += "WatirSplash::Util.load_common"
         cmd
       end
 
