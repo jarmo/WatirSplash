@@ -8,14 +8,7 @@ require "watirsplash"
 
 <%= load_common_cmd %>
 
-# What framework to use? Possible values are:
-#   * default
-#   * watir
-#   * firewatir
-#   * watir-webdriver/ie
-#   * watir-webdriver/firefox
-#   * watir-webdriver/chrome
-WatirSplash::Util.framework = %<= %Q{"#{framework}"} %> 
+<%= frameworks_banner %>
 
 # Load the framework specified by the environment variable WATIRSPLASH_FRAMEWORK or WatirSplash::Util.framework
 WatirSplash::Util.load_framework

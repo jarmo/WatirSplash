@@ -4,6 +4,7 @@ module WatirSplash
   module Generators
     class NewProject < Thor::Group
       include Thor::Actions
+      include Helper
 
       argument :name 
       argument :url
@@ -15,7 +16,7 @@ module WatirSplash
       end
 
       def generate
-        directory("new_project", "ui-test")
+        directory("new_project", File.basename(Dir.pwd) == "ui-test" ? "." : "ui-test")
       end
 
       def load_common_cmd

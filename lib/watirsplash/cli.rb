@@ -1,5 +1,6 @@
 require "thor"
 require "thor/group"
+require "watirsplash/generators/helper"
 require "watirsplash/generators/new_project"
 require "watirsplash/generators/new_common_project"
 require "watirsplash/generators/migrate_project"
@@ -7,9 +8,11 @@ require "watirsplash/util"
 
 module WatirSplash
   class CLI < Thor
+    extend Generators::Helper
+
     framework_option = proc do
       method_option :framework, :default => "default", :aliases => "-f",
-        :desc => "Framework to use. Possible values are watir, firewatir, watir-webdriver/ie, watir-webdriver/firefox and watir-webdriver/chrome."
+        :desc => "Framework to use. Possible values are #{supported_frameworks.join(", ")}."
     end
 
     desc "new [APPLICATION_NAME]", "Create a new WatirSplash project."

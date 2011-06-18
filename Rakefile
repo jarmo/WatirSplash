@@ -24,7 +24,7 @@ begin
 
 Thank you for installing WatirSplash #{version}! Don't forget to take a look at the README and History files!
 
-Execute `watirsplash new` under your project's directory to generate a default project structure.
+Make sure to execute `watirsplash new` under your project's directory to generate/upgrade a default project structure.
 
 #{"*"*25}}
 
