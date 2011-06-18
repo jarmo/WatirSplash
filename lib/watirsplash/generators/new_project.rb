@@ -16,7 +16,13 @@ module WatirSplash
       end
 
       def generate
-        directory("new_project", File.basename(Dir.pwd) == "ui-test" ? "." : "ui-test")
+        dest = File.basename(Dir.pwd) == "ui-test" ? "." : "ui-test"
+        directory("new_project", dest)
+        template("../../../Gemfile", "#{dest}/Gemfile")
+        gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIRSPLASH/, "\"#{WatirSplash::Version::WATIRSPLASH}\"")
+        gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR/, "\"#{WatirSplash::Version::WATIRH}\"")
+        gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WIN32SCREENSHOT/, "\"#{WatirSplash::Version::WIN32SCREENSHOT}\"")
+        gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR_WEBDRIVER/, "\"#{WatirSplash::Version::WATIR_WEBDRIVER}\"")
       end
 
       def load_common_cmd

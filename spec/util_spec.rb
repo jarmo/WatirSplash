@@ -26,23 +26,4 @@ end"
                                    "ui-test-common directory was not found! It has to exist somewhere higher in directory tree than your project's directory and it has to have environment.rb file in it!")
   end
 
-  it "loads project's environment.rb automatically" do
-    env_file = "../environment.rb"
-    raise "environment.rb file should not exist due to testing!" if File.exists?(env_file)
-    begin
-      File.open(env_file, "w") do |file|
-        file.puts "
-module GlobalApplication
-  ENVIRONMENT_LOADED = true
-end"
-      end
-
-      lambda {GlobalApplication::ENVIRONMENT_LOADED}.should raise_exception
-      lambda {WatirSplash::Util.load_environment}.should_not raise_exception
-      GlobalApplication::ENVIRONMENT_LOADED.should be_true
-    ensure
-      FileUtils.rm_rf(env_file)
-    end
-  end
-
 end

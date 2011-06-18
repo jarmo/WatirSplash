@@ -1,4 +1,5 @@
-WatirSplash::Frameworks::Helper.load_gem :gem => "firewatir", :version => "1.9.0"
+WatirSplash::Frameworks::Helper.load_gem :gem => "firewatir",
+  :version => WatirSplash::Version::WATIR
 
 module FireWatir #:nodoc:all
   class Firefox

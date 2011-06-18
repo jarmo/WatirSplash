@@ -1,16 +1,19 @@
 # -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
+require "watirsplash/version"
 
 Gem::Specification.new do |s|
+  require "ruby-debug"; debugger;
   s.name = %q{watirsplash}
-  version = File.read("VERSION").strip
+  version = WatirSplash::Version::WATIRSPLASH 
   s.version = version
   s.authors = [%q{Jarmo Pertman}]
   s.email = %q{jarmo.p@gmail.com}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
-  s.post_install_message = %q{*************************
+  s.post_install_message = %Q{*************************
 
-Thank you for installing WatirSplash 1.4.3! Don't forget to take a look at the README and History files!
+Thank you for installing WatirSplash {version}! Don't forget to take a look at the README and History files!
 
 Execute `watirsplash new` under your project's directory to generate a default project structure.
 
@@ -22,6 +25,7 @@ Execute `watirsplash new` under your project's directory to generate a default p
   s.require_paths = ["lib"]
   
   s.add_dependency("rspec", "~>2.6")
+  s.add_dependency("rake", "0.8.7")
   s.add_dependency("bundler", "~>1.0")
   s.add_dependency("thor", "~>0")
   s.add_dependency("require_all")

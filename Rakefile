@@ -14,7 +14,7 @@ task :default => :spec
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "WatirSplash #{File.read('VERSION').strip}"
+  rdoc.title = "WatirSplash #{WatirSplash::Version::WATIRSPLASH}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
