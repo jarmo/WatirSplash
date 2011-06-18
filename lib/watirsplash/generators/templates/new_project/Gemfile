@@ -1,0 +1,6 @@
+source :rubygems
+
+# load WatirSplash specific dependencies
+eval(File.read("Gemfile.watirsplash"))
+
+# add your project specific dependencies here
