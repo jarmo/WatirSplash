@@ -2,7 +2,6 @@ source :rubygems
 
 # load WatirSplash and it's dependencies
 gemspec
-gem "watirsplash", WatirSplash::Version::WATIRSPLASH unless File.exists?("watirsplash.gemspec")
 
 platforms :mingw, :mswin do
     gem "watir", WatirSplash::Version::WATIR

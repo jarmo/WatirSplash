@@ -1,4 +1,5 @@
 require "uri"
+require "watirsplash/version"
 
 module WatirSplash
   module Generators
@@ -20,8 +21,7 @@ module WatirSplash
         directory("new_project", dest)
         template("../../../../Gemfile", "#{dest}/Gemfile")
         
-        require "watirsplash/version"
-        gsub_file("#{dest}/Gemfile", "gemspec", "")
+        gsub_file("#{dest}/Gemfile", "gemspec", %Q{gem "watirsplash", "#{WatirSplash::Version::WATIRSPLASH}"})
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIRSPLASH.*/, "\"#{WatirSplash::Version::WATIRSPLASH}\"")
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR_WEBDRIVER/, "\"#{WatirSplash::Version::WATIR_WEBDRIVER}\"")
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR/, "\"#{WatirSplash::Version::WATIR}\"")
