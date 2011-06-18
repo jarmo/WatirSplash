@@ -1,11 +1,3 @@
-# What framework to use? Possible values are:
-#   * watir
-#   * firewatir
-#   * watir-webdriver/ie
-#   * watir-webdriver/firefox
-#   * watir-webdriver/chrome
-<%= "WatirSplash::Util.framework = \"#{framework}\"" %> 
-
 =begin
   Global configuration constants
   For example, you can use the URL constant below from your projects' config.rb like this:

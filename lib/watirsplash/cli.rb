@@ -8,8 +8,8 @@ require "watirsplash/util"
 module WatirSplash
   class CLI < Thor
     framework_option = proc do
-      method_option :framework, :default => WatirSplash::Util.send(:default_framework).to_s, :aliases => "-f",
-        :desc => "Framework to use. Possible values are watir, firewatir, watir-webdriver/ie, watir-webdriver/firefox, watir-webdriver/chrome."
+      method_option :framework, :default => "default", :aliases => "-f",
+        :desc => "Framework to use. Possible values are watir, firewatir, watir-webdriver/ie, watir-webdriver/firefox and watir-webdriver/chrome."
     end
 
     desc "new [APPLICATION_NAME]", "Create a new WatirSplash project."
@@ -31,7 +31,7 @@ module WatirSplash
     end
 
     if File.basename(Dir.pwd) =~ /^ui-test(-common)?$/
-      desc "migrate", "Migrates old WatirSplash generated project to new."
+      desc "migrate", "Migrate old WatirSplash (version < 1.0) generated project to new."
       def migrate
         WatirSplash::Generators::MigrateProject.start
       end

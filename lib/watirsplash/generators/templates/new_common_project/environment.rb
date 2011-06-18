@@ -11,5 +11,14 @@
   By default everything in lib directory will be loaded
 =end
 
+# What framework to use? Possible values are:
+#   * default
+#   * watir
+#   * firewatir
+#   * watir-webdriver/ie
+#   * watir-webdriver/firefox
+#   * watir-webdriver/chrome
+WatirSplash::Util.framework = %<= %Q{"#{framework}"} %>
+
 require_rel "lib/"
 require_rel "config.rb"

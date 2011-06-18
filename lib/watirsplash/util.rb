@@ -13,14 +13,6 @@ module WatirSplash
         require File.join(dir, "environment.rb")
       end
 
-      # loads environment.rb for the project if it exists in the ui-test
-      # or in some higher level directory 
-      def load_environment
-        Pathname(Dir.pwd).ascend do |path|
-          require File.join(path, "environment.rb") if has_environment?(path)
-        end
-      end
-
       # configure RSpec to use documentation and WatirSplash::HtmlFormatter formatters
       def configure_rspec_formatters
         config = RSpec.configuration
@@ -38,7 +30,8 @@ module WatirSplash
       @@framework = nil
 
       def framework= framework
-        @@framework = framework.to_sym
+        framework = framework.to_sym
+        @@framework = framework == :default ? default_framework : framework.to_sym
       end
 
       def framework
@@ -47,7 +40,7 @@ module WatirSplash
 
       def load_framework
         self.framework = ENV["WATIRSPLASH_FRAMEWORK"] || framework || default_framework
-        require "watirsplash/frameworks/#{framework}"        
+        require "watirsplash/frameworks/#{framework}"
       end
 
       private
