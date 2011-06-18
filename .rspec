@@ -1,2 +1,2 @@
 --require
-environment.rb
+spec/environment.rb

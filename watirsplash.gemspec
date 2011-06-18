@@ -3,7 +3,6 @@ $:.push File.expand_path("../lib", __FILE__)
 require "watirsplash/version"
 
 Gem::Specification.new do |s|
-  require "ruby-debug"; debugger;
   s.name = %q{watirsplash}
   version = WatirSplash::Version::WATIRSPLASH 
   s.version = version
