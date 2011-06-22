@@ -22,7 +22,6 @@ module WatirSplash
         template("../../../../Gemfile", "#{dest}/Gemfile")
         
         gsub_file("#{dest}/Gemfile", "gemspec", %Q{gem "watirsplash", "#{WatirSplash::Version::WATIRSPLASH}"})
-        gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIRSPLASH.*/, "\"#{WatirSplash::Version::WATIRSPLASH}\"")
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR_WEBDRIVER/, "\"#{WatirSplash::Version::WATIR_WEBDRIVER}\"")
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WATIR/, "\"#{WatirSplash::Version::WATIR}\"")
         gsub_file("#{dest}/Gemfile", /WatirSplash::Version::WIN32SCREENSHOT/, "\"#{WatirSplash::Version::WIN32SCREENSHOT}\"")
