@@ -9,6 +9,7 @@ module WatirSplash
       @browser = WatirSplash::Browser.new
       Util.formatter.browser = @browser 
       goto url
+      @browser
     end
 
     def method_missing name, *args #:nodoc:
