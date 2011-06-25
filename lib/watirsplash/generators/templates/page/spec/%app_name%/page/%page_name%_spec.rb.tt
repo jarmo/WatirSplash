@@ -1,0 +1,6 @@
+<%- page_path = app_name + "::Page::" + page_name %>
+describe <%= page_path %> do
+  it "has something on the page" do
+    page = <%= page_path %>.new
+  end
+end

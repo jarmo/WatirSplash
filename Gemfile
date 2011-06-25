@@ -11,4 +11,5 @@ end
 gem "watir-webdriver", WatirSplash::Version::WATIR_WEBDRIVER
 gem "firewatir", WatirSplash::Version::WATIR
 
-# add your project specific dependencies here
+# add your project specific dependencies here:
+# gem "ruby-debug", "0.10.3"

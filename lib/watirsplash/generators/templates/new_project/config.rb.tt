@@ -1,9 +1,7 @@
 # Config for your application
-module Config
-  module <%= name %>
-    # URL, which will be opened before every test
-    #
-    # Replace it with the URL of your application under test
+module <%= name %>
+  module Config
+    # URL of your application under test
     # or if ui-test-common is used then
     # URL = Config.full_url("/relative/url/index.html")
     URL = <%= formatted_url %>
@@ -17,6 +15,6 @@ end
 # You can read more about RSpec-s before and after syntax from:
 # http://relishapp.com/rspec/rspec-core/dir/hooks/before-and-after-hooks
 RSpec.configure do |config|
-  config.include(<%= name %>Helper)
-  config.before(:all) {goto Config::<%= name %>::URL}
+  config.include(<%= name %>::Helper)
+  config.before(:all) {goto <%= name %>::Config::URL}
 end

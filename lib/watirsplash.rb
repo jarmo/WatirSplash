@@ -10,5 +10,6 @@ require_rel "watirsplash/rspec_patches"
 require_rel "watirsplash/util"
 require_rel "watirsplash/html_formatter"
 require_rel "watirsplash/frameworks/helper"
+require_rel "watirsplash/page/base"
 WatirSplash::Util.configure_rspec_formatters
 

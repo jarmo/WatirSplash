@@ -21,7 +21,7 @@ module WatirSplash
     method_option :url, :default => "about:blank", :aliases => "-u",
       :desc => "URL to open in the browser before each test. May be relative if WatirSplash common project is loaded."
     framework_option.call
-    def new(name = "Application")
+    def new(name = "App")
       WatirSplash::Generators::NewProject.start([Thor::Util.camel_case(name), options[:url], options[:framework], options.load_common?])
     end
 
@@ -31,6 +31,13 @@ module WatirSplash
     framework_option.call    
     def new_common
       WatirSplash::Generators::NewCommonProject.start([options[:url], options[:framework]])
+    end
+
+    desc "page APPLICATION_NAME PAGE_NAME", "Create a new WatirSplash page."
+    method_option :url, :default => nil, :aliases => "-u",
+      :desc => "URL for the page, leave empty if it's not directly accessible."
+    def page(app_name = "App", page_name = "Main")
+      WatirSplash::Generators::Page.start([Thor::Util.camel_case(app_name), Thor::Util.camel_case(page_name), options[:url]])
     end
 
     if File.basename(Dir.pwd) =~ /^ui-test(-common)?$/

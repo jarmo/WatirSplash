@@ -1,0 +1,21 @@
+# <%= formatted_name %>::Helper module has helper methods for easy usage in specs
+# see spec/dummy_spec.rb
+
+module <%= formatted_name %>
+  module Helper
+
+    def helper_method_one
+      "one"
+    end
+
+    def has_second_method?
+      true
+    end
+
+    def correct?
+      false
+    end
+
+  end
+end
+
