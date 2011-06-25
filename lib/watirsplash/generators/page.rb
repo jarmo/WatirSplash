@@ -4,7 +4,6 @@ module WatirSplash
   module Generators
     class Page < Thor::Group
       include Thor::Actions
-      #include Helper
 
       argument :app_name 
       argument :page_name
