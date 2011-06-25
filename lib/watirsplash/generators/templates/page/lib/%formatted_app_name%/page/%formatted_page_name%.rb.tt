@@ -1,7 +1,7 @@
 module <%= app_name %>
   module Page
     class <%= page_name %> < WatirSplash::Page::Base
-      <%= %Q[url #{url}] if url %>
+      <%= page_body %>
     end
   end
 end

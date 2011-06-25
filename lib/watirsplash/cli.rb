@@ -4,6 +4,7 @@ require "watirsplash/generators/helper"
 require "watirsplash/generators/new_project"
 require "watirsplash/generators/new_common_project"
 require "watirsplash/generators/migrate_project"
+require "watirsplash/generators/page"
 require "watirsplash/util"
 
 module WatirSplash
@@ -33,11 +34,11 @@ module WatirSplash
       WatirSplash::Generators::NewCommonProject.start([options[:url], options[:framework]])
     end
 
-    desc "page APPLICATION_NAME PAGE_NAME", "Create a new WatirSplash page."
+    desc "page APPLICATION_NAME PAGE_NAME [element_name:element_type:locator_name:locator_value]", "Create a new WatirSplash page."
     method_option :url, :default => nil, :aliases => "-u",
-      :desc => "URL for the page, leave empty if it's not directly accessible."
-    def page(app_name = "App", page_name = "Main")
-      WatirSplash::Generators::Page.start([Thor::Util.camel_case(app_name), Thor::Util.camel_case(page_name), options[:url]])
+      :desc => "URL for the page if directly accessible."
+    def page(app_name = "App", page_name = "Main", *elements)
+      WatirSplash::Generators::Page.start([Thor::Util.camel_case(app_name), Thor::Util.camel_case(page_name), elements, options[:url]])
     end
 
     if File.basename(Dir.pwd) =~ /^ui-test(-common)?$/
