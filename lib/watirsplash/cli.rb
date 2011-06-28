@@ -2,7 +2,6 @@ require "thor"
 require "thor/group"
 require "watirsplash/generators/helper"
 require "watirsplash/generators/new_project"
-require "watirsplash/generators/new_common_project"
 require "watirsplash/generators/migrate_project"
 require "watirsplash/generators/page"
 require "watirsplash/util"
@@ -16,29 +15,19 @@ module WatirSplash
         :desc => "Framework to use. Possible values are #{supported_frameworks.join(", ")}."
     end
 
-    desc "new [APPLICATION_NAME]", "Create a new WatirSplash project."
-    method_option :load_common, :type => :boolean, :default => false, :aliases => "-l",
-      :desc => "Load WatirSplash common project automatically."
+    desc "new [DIRECTORY_NAME]", "Create a new WatirSplash project."
     method_option :url, :default => "about:blank", :aliases => "-u",
       :desc => "URL to open in the browser before each test. May be relative if WatirSplash common project is loaded."
     framework_option.call
-    def new(name = "App")
+    def new(name = "ui-test")
       WatirSplash::Generators::NewProject.start([Thor::Util.camel_case(name), options[:url], options[:framework], options.load_common?])
     end
 
-    desc "new_common", "Create a new WatirSplash common project."
-    method_option :url, :default => "http://localhost", :aliases => "-u",
-      :desc => "URL for the application main page." 
-    framework_option.call    
-    def new_common
-      WatirSplash::Generators::NewCommonProject.start([options[:url], options[:framework]])
-    end
-
-    desc "page APPLICATION_NAME PAGE_NAME [element_name:element_type:locator_name:locator_value]", "Create a new WatirSplash page."
+    desc "page PAGE_NAME [element_name:element_type:locator_name:locator_value]", "Create a new WatirSplash page."
     method_option :url, :default => nil, :aliases => "-u",
       :desc => "URL for the page if directly accessible."
-    def page(app_name = "App", page_name = "Main", *elements)
-      WatirSplash::Generators::Page.start([Thor::Util.camel_case(app_name), Thor::Util.camel_case(page_name), elements, options[:url]])
+    def page(page_name = "Main", *elements)
+      WatirSplash::Generators::Page.start([Thor::Util.camel_case(page_name), elements, options[:url]])
     end
 
     if File.basename(Dir.pwd) =~ /^ui-test(-common)?$/

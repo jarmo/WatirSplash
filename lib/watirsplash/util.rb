@@ -3,16 +3,6 @@ module WatirSplash
   class Util
     class << self
 
-      # loads ui-test-common/environment.rb
-      #
-      # ui-test-common has to be located at some higher level within directory
-      # structure compared to project/ui-test directory
-      def load_common
-        dir = common_dir
-        puts "Loading ui-test-common from #{dir}..."
-        require File.join(dir, "environment.rb")
-      end
-
       # configure RSpec to use documentation and WatirSplash::HtmlFormatter formatters
       def configure_rspec_formatters
         config = RSpec.configuration
@@ -54,21 +44,6 @@ module WatirSplash
         else
           raise "Unsupported platform: #{RUBY_PLATFORM}"
         end
-      end
-
-      def common_dir
-        ui_test_common_dir = "ui-test-common"
-        Pathname(Dir.pwd).ascend do |path|
-          if File.exists?(dir = File.join(path, ui_test_common_dir)) &&
-                  has_environment?(dir)
-            return dir
-          end
-        end
-        raise "#{ui_test_common_dir} directory was not found! It has to exist somewhere higher in directory tree than your project's directory and it has to have environment.rb file in it!"
-      end
-
-      def has_environment? dir
-        File.exists?(File.join(dir, "environment.rb"))
       end
 
     end
