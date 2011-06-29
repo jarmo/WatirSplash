@@ -12,7 +12,7 @@ module WatirSplash
 
     # currently used browser object
     # needed for saving of screenshots and html
-    attr_writer :browser
+    attr_accessor :browser
 
     def initialize(output) # :nodoc:
       @output_dir = File.expand_path(File.dirname(output))

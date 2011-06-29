@@ -9,7 +9,7 @@ describe "Array match_array matcher" do
     ["1", ["2", "55"], "3"].should match_array(expected_ary)
   end
 
-  it "doesn't work with other objects than Array" do
+  it "doesn't work with other objects except Array" do
     lambda {"".should match_array("")}.should raise_exception
     lambda {[].should match_array("")}.should raise_exception
     lambda {"".should match_array([])}.should raise_exception

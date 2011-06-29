@@ -19,7 +19,6 @@ module Watir
       self.speed = :fast
       @error_checkers ||= []
       add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
-      maximize if @ie # @ie is not set here when attaching...
     end
 
     def save_screenshot(params)

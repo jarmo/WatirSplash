@@ -1,9 +1,8 @@
 describe WatirSplash::SpecHelper do
 
   it "opens browser automatically" do
-    @browser.should exist
-    @browser.url.should == "about:blank"
-    @browser.title.should == ""
+    WatirSplash::Util.formatter.browser.should exist
+    WatirSplash::Util.formatter.browser.url.should == "about:blank"
   end
 
   it "redirects method calls to Watir::Browser" do

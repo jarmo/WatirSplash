@@ -43,11 +43,11 @@ module WatirSplash
       end
 
       def spec_body
-        str = "#{formatted_page_name} = #{page_path}.new#{$/}"
+        str = "#{formatted_page_name}_page = #{page_path}.new#{$/}"
 
         elements.each do |element|
           name, type, locator_name, locator_value = element.split(":")
-          str += %Q[    # #{formatted_page_name}.#{name} # => #{type}(:#{locator_name} => "#{locator_value}")
+          str += %Q[    # #{formatted_page_name}_page.#{name} # => #{type}(:#{locator_name} => "#{locator_value}")
 ]
         end
         str

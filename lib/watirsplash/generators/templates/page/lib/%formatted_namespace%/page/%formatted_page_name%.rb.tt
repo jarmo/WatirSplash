@@ -1,6 +1,6 @@
 module <%= namespace %>
   module Page
-    class <%= page_name %> < WatirSplash::Page::Base
+    class <%= Thor::Util.camel_case page_name %> < WatirSplash::Page::Base
       <%= page_body %>
     end
   end

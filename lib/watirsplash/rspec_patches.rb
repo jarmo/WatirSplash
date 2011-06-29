@@ -31,7 +31,7 @@ RSpec.configure do |config| #:nodoc:
   config.include(WatirSplash::SpecHelper)
 
   config.after(:all) do
-    close if @browser
+    WatirSplash::Util.formatter.browser.close if WatirSplash::Util.formatter.browser
   end
 end
 
