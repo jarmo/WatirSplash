@@ -23,7 +23,7 @@ module WatirSplash
       end
 
       def formatted_namespace
-        Thro::Util.snake_case(namespace)
+        Thor::Util.snake_case(namespace)
       end
 
       def page_body
