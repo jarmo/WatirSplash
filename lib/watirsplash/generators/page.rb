@@ -22,6 +22,10 @@ module WatirSplash
         Thor::Util.snake_case(page_name)
       end
 
+      def formatted_namespace
+        Thro::Util.snake_case(namespace)
+      end
+
       def page_body
         str = ""
         str += %Q[url "#{url}"
