@@ -5,6 +5,6 @@ module WatirSplash
     # possible runtime dependencies
     WATIR = "1.9.0"
     WIN32SCREENSHOT = "~>1.0.4"
-    WATIR_WEBDRIVER = "~>0.2.4"
+    WATIR_WEBDRIVER = "~>0.2.5"
   end
 end
