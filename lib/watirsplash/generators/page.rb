@@ -54,7 +54,7 @@ module WatirSplash
       end
 
       def page_path
-        "#{namespace}::Page::#{page_name}"
+        "#{Thor::Util.camel_case(namespace)}::Page::#{Thor::Util.camel_case(page_name)}"
       end
 
     end

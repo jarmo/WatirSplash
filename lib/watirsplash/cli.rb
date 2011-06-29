@@ -27,7 +27,7 @@ module WatirSplash
       method_option :module, :default => "App", :aliases => "-m",
         :desc => "Namespace module for the page."
       def page(page_name = "Main", *elements)
-        WatirSplash::Generators::Page.start([Thor::Util.camel_case(page_name.gsub("-", "_")), elements, Thor::Util.camel_case(options[:module].gsub("-", "_")), options[:url]])
+        WatirSplash::Generators::Page.start([page_name.gsub("-", "_"), elements, options[:module].gsub("-", "_"), options[:url]])
       end
     end
 
