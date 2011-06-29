@@ -4,14 +4,6 @@ module WatirSplash
   # these methods can be used in specs directly
   module SpecHelper
 
-    # opens the browser at specified url
-    def open_browser_at url
-      @browser = WatirSplash::Browser.new
-      Util.formatter.browser = @browser 
-      goto url
-      @browser
-    end
-
     def method_missing name, *args #:nodoc:
       if @browser.respond_to?(name)
         SpecHelper.module_eval %Q[

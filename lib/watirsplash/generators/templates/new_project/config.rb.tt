@@ -1,20 +1,7 @@
 # Config for your application
-module <%= name %>
+module <%= Thor::Util.camel_case(name) %>
   module Config
-    # URL of your application under test
-    # or if ui-test-common is used then
-    # URL = Config.full_url("/relative/url/index.html")
+    # Main URL of your application under test
     URL = <%= formatted_url %>
   end
-end
-
-# A global configuration for specs in this project, which will include by default
-# an <%= name %>Helper module and open Config::<%= name %>::URL with
-# the browser.
-#
-# You can read more about RSpec-s before and after syntax from:
-# http://relishapp.com/rspec/rspec-core/dir/hooks/before-and-after-hooks
-RSpec.configure do |config|
-  config.include(<%= name %>::Helper)
-  config.before(:all) {goto <%= name %>::Config::URL}
 end

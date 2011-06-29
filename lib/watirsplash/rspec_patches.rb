@@ -30,10 +30,6 @@ end
 RSpec.configure do |config| #:nodoc:
   config.include(WatirSplash::SpecHelper)
 
-  config.before(:all) do
-    open_browser_at "about:blank"
-  end
-
   config.after(:all) do
     close if @browser
   end

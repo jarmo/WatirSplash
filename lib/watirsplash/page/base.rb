@@ -16,7 +16,8 @@ module WatirSplash
           @browser = browser
           Util.formatter.browser = @browser 
         else
-          @browser = open_browser_at @@url
+          @browser = WatirSplash::Browser.new
+          @browser.goto @@url
         end
       end
 
