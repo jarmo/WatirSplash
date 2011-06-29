@@ -5,9 +5,9 @@ module WatirSplash
     class Page < Thor::Group
       include Thor::Actions
 
-      argument :app_name 
       argument :page_name
       argument :elements
+      argument :namespace
       argument :url, :optional => true
 
       def self.source_root
@@ -15,12 +15,7 @@ module WatirSplash
       end
 
       def generate
-        dest = File.basename(Dir.pwd) == "ui-test" ? "." : "ui-test"
-        directory("page", dest)
-      end
-
-      def formatted_app_name
-        Thor::Util.snake_case(app_name)
+        directory("page", ".")
       end
 
       def formatted_page_name
@@ -55,7 +50,7 @@ module WatirSplash
       end
 
       def page_path
-        "#{app_name}::Page::#{page_name}"
+        "#{namespace}::Page::#{page_name}"
       end
 
     end

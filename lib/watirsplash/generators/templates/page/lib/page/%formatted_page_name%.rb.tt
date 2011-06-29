@@ -1,4 +1,4 @@
-module <%= app_name %>
+module <%= namespace %>
   module Page
     class <%= page_name %> < WatirSplash::Page::Base
       <%= page_body %>

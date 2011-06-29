@@ -18,7 +18,7 @@ module WatirSplash
       def generate
         directory("new_project", name)
         template("../../../../Gemfile", "#{name}/Gemfile")
-        
+
         gsub_file("#{name}/Gemfile", "gemspec", %Q{gem "watirsplash", "#{WatirSplash::Version::WATIRSPLASH}"})
         gsub_file("#{name}/Gemfile", /WatirSplash::Version::WATIR_WEBDRIVER/, "\"#{WatirSplash::Version::WATIR_WEBDRIVER}\"")
         gsub_file("#{name}/Gemfile", /WatirSplash::Version::WATIR/, "\"#{WatirSplash::Version::WATIR}\"")
@@ -28,14 +28,14 @@ module WatirSplash
       def formatted_url
         uri = URI.parse(url)
         if !default_url? && uri.relative?
-          %Q[Config.full_url("#{uri}")] 
+          %Q[URI.join(#{formatted_name}::Config::URL, "#{uri}").to_s] 
         else
           %Q["#{uri}"]
         end
       end
 
       def formatted_name
-        name
+        Thor::Util.camel_case name.gsub("-", "_")
       end
 
       def default_url?

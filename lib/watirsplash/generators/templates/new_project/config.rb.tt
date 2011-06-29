@@ -1,5 +1,5 @@
 # Config for your application
-module <%= Thor::Util.camel_case(name) %>
+module <%= formatted_name %>
   module Config
     # Main URL of your application under test
     URL = <%= formatted_url %>
