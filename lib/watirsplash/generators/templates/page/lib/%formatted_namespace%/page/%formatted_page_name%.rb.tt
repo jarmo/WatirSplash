@@ -1,4 +1,4 @@
-module <%= namespace %>
+module <%= Thor::Util.camel_case namespace %>
   module Page
     class <%= Thor::Util.camel_case page_name %> < WatirSplash::Page::Base
       <%= page_body %>
