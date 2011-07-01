@@ -23,7 +23,6 @@ Execute `watirsplash new` under your project's directory to generate a default p
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.add_dependency("rspec", "~>2.6")
   s.add_dependency("rake", "0.8.7")
   s.add_dependency("bundler", "~>1.0")
   s.add_dependency("thor", "~>0")
