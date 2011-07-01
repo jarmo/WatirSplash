@@ -13,10 +13,10 @@ module WatirSplash
 
       def initialize(browser=nil)
         if browser
-          WatirSplash::Util.formatter.browser = browser 
+          @browser = WatirSplash::Util.formatter.browser = browser 
         else
-          browser = WatirSplash::Browser.new
-          browser.goto @@url
+          @browser = WatirSplash::Browser.new
+          @browser.goto @@url
         end
       end
 

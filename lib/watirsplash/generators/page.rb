@@ -8,6 +8,7 @@ module WatirSplash
       argument :page_name
       argument :elements
       argument :namespace
+      argument :create_spec, :optional => true
       argument :url, :optional => true
 
       def self.source_root
@@ -15,7 +16,8 @@ module WatirSplash
       end
 
       def generate
-        directory("page", ".")
+        directory("page/lib", "lib")
+        directory("page/spec", "spec") if create_spec
       end
 
       def formatted_page_name
@@ -35,7 +37,7 @@ module WatirSplash
           name, type, locator_name, locator_value = element.split(":")
           str += %Q[
       def #{name}
-        #{type}(:#{locator_name} => "#{locator_value}") 
+        #{type}(:#{locator_name} => "#{locator_value}")
       end
 ]
         end

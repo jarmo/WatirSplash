@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
   s.post_install_message = %Q{*************************
 
-Thank you for installing WatirSplash {version}! Don't forget to take a look at the README and History files!
+Thank you for installing WatirSplash #{version}! Don't forget to take a look at the README and History files!
 
 Execute `watirsplash new` under your project's directory to generate a default project structure.
 

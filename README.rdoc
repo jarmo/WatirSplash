@@ -6,8 +6,8 @@
 == DESCRIPTION
 
 WatirSplash makes browser-based web page testing in Ruby splashin' easy.
-It combines Watir (http://www.watir.com) for controlling the browser and
-RSpec (http://relishapp.com/rspec) for testing framework. This powerful combination gives you
+It combines Watir, FireWatir or Watir-WebDriver for controlling the browser and
+RSpec for testing framework. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
 you don't need to have any extra documentation for your applications.
 
@@ -15,78 +15,100 @@ WatirSplash makes it easier to use best features of both of these tools together
 you won't have to spend time on thinking how to do that yourself - you can start
 testing right away!
 
-== SYNOPSIS
+== GETTING STARTED
 
-=== With vanilla Watir and RSpec
-    require 'watir'
-    require 'rspec'
+1) Install Ruby (version 1.8.7 is recommended)
 
-    describe "Google" do
-        before :all do
-            @browser = Watir::Browser.new
-            @browser.maximize
-            @browser.goto "http://google.com"
-            @browser.url.should =~ /google/
+2) Install WatirSplash
+    C:\my_project>gem install watirsplash
+
+3) Create a new project
+    C:\my_project>watirsplash new
+          create  ui-test
+          ...
+
+    C:\my_project>cd ui-test
+
+4) Install all possible runtime dependencies
+    C:\my_project\ui-test>bundle install
+    Fetching source index for http://rubygems.org/
+    ...
+    Using watirsplash
+    ...
+
+5) Create a "search" page class and a spec skeleton for it
+    C:\my_project\ui-test>watirsplash page search --url http://bing.com
+          create  lib
+          create  lib/app/page/search.rb
+          create  spec
+          create  spec/app/page/search_spec.rb
+
+6) Create a "results" page class without spec
+    C:\Users\jarmo\Desktop\minu\projects\Ruby\my_project\ui-test>watirsplash page results --no-spec
+           exist  lib
+          create  lib/app/page/results.rb
+
+7) Modify the created files
+    # lib\app\page\search.rb
+    module App
+      module Page
+        class Search < WatirSplash::Page::Base
+          url "http://bing.com"
+
+          def search_field
+            text_field(:name => "q")
+          end
+
+          def search_button
+            return_for button(:name => "go"),
+              # clicking the search button results a page transition to "results" page
+              :click => lambda {Results.new @browser}
+          end
         end
-
-        it "has search field" do
-            text_field = @browser.text_field(:name => "q")
-            text_field.should exist
-            text_field.should be_visible
-        end
-
-        it "performs search" do
-            @browser.text_field(:name => "q").set "Bing"
-            @browser.button(:name => "btnG").click
-            @browser.text.should include("Bing")
-        end
-
-        after :all do
-            @browser.close
-        end
+      end
     end
 
 
+    # lib\app\page\results.rb
+    module App
+      module Page
+        class Results < WatirSplash::Page::Base
 
-=== With WatirSplash
-    describe "Google" do
-        before :all do
-            goto "http://google.com"
-            url.should =~ /google/
+          def result index
+            div(:id => "results").
+              ul(:class => "sb_results").
+              li(:class => /sa_wr/, :index => index).
+              text
+          end
+
         end
-        
-        it "has search field" do
-            text_field = text_field(:name => "q")
-            text_field.should exist
-            text_field.should be_visible
-        end
-        
-        it "performs search" do
-            text_field(:name => "q").set "Bing"
-            button(:name => "btnG").click
-            text.should include("Bing")
-        end
+      end
     end
-    
-    C:\project\ui-test>rspec spec\google_spec.rb
-    Results will be saved into the directory C:/project/ui-test/results
-    Google
-      has search field
-      performs search
 
-    Finished in 6.782388 seconds
 
-    2 examples, 0 failures
+    # spec\app\page\search_spec.rb
+    describe App::Page::Search do
+      it "has something on the search page" do
+        search_page = App::Page::Search.new
+        search_page.search_field.set "watirsplash"
+        results_page = search_page.search_button.click
+        results_page.result(1).should =~ /watirsplash/i
+      end
+    end
 
-== INSTALL
+8) Execute all specs
+    C:\my_project\ui-test>rspec spec
+    Results will be saved into the directory C:/my_project/ui-test/results
 
-1) install Ruby
-    
-2) install WatirSplash:
-    gem install watirsplash
+    App::Page::Search @ app/page/search_spec.rb:1 (30.06.2011)
+      has something on the search page:2 (09:34:30)
 
-3) execute in your project's directory:
-    watirsplash new
+    Finished in 4.48 seconds
+    1 example, 0 failures
+
+9) Check out the html report at results/index.html
+
+10) Repeat & profit! 
 
 == SUPPORTED PLATFORMS & BROWSERS
 
@@ -99,15 +121,17 @@ Each framework drives a specific browser:
 * Watir - IE
 * Watir-WebDriver - Chrome, IE and Firefox
 
-It is possible to specify what framework to use in ui-test/config.rb and/or in ui-test-common/config.rb files:
+It is possible to specify what framework to use in config.rb file:
     WatirSplash::Util.framework = "watir-webdriver/firefox"
 
-If framework is not specified manually then a default framework will be used for the current platform.
+It is also possible to specify used framework by using environment variable WATIRSPLASH_FRAMEWORK.
+
+If framework is not specified manually then the default framework will be used for the current platform.
 
 PS! Please note that all frameworks are not 100% compatible with each other. If you find any concrete incompatibilities then
 it would be great if you'd contribute fixes or information to the authors of the frameworks.
 
-== WHAT'S NEXT?
+== MORE INFORMATION?
 
 You can read more information about the usage and features from the wiki at http://github.com/jarmo/WatirSplash/wiki
 
