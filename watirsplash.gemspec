@@ -10,13 +10,6 @@ Gem::Specification.new do |s|
   s.email = %q{jarmo.p@gmail.com}
   s.description = %q{WatirSplash makes testing of web applications splashin' easy by combining best features of Watir, RSpec and Ruby!}
   s.homepage = %q{http://github.com/jarmo/WatirSplash}
-  s.post_install_message = %Q{*************************
-
-Thank you for installing WatirSplash #{version}! Don't forget to take a look at the README and History files!
-
-Execute `watirsplash new` under your project's directory to generate a default project structure.
-
-*************************}
   s.summary = %Q{watirsplash #{version}}
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- spec/*`.split("\n")
