@@ -1,3 +1,18 @@
+=== Version 2.0.0 / 2011-07-xx
+
+ * introducing Page Objects - generate them with `watirsplash page` generator
+ * use WatirSplash::Browser.new to open up a browser and set it to RSpec-s formatter too
+ * removed ui-test-common functionality - just load it's environment.rb if you really need to use it
+ * do not load framework automatically anymore when requiring watirsplash - use WatirSplash::Util.load_framework method in environment.rb or config.rb instead
+ * do not maximize browser window anymore automatically
+ * load environment.rb directly in .rspec file
+ * added :default option for frameworks
+ * bumped dependencies for win32screenshot, watir, firewatir and watir-webdriver
+ * use Bundler for specifying dependencies from now on
+ * moved File.path and File.native_path methods to WatirSplash::Util.file_path and .file_native_path since File.path method conflicts with Ruby 1.9
+  
+  PS! This version is not fully backwards compatible due to some core changes, but it is possible to make your old project working with it.
+
 === Version 1.4.3 / 2011-06-05
 
  * fix #change matcher in conjunction with #within for rspec 2.6.0

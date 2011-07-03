@@ -37,14 +37,14 @@ testing right away!
     ...
 
 5) Create a "search" page class and a spec skeleton for it
-    C:\my_project\ui-test>watirsplash page search --url http://bing.com
+    C:\my_project\ui-test>bundle exec watirsplash page search --url http://bing.com
           create  lib
           create  lib/app/page/search.rb
           create  spec
           create  spec/app/page/search_spec.rb
 
 6) Create a "results" page class without spec
-    C:\Users\jarmo\Desktop\minu\projects\Ruby\my_project\ui-test>watirsplash page results --no-spec
+    C:\my_project\ui-test>bundle exec watirsplash page results --no-spec
            exist  lib
           create  lib/app/page/results.rb
 
@@ -97,7 +97,7 @@ testing right away!
     end
 
 8) Execute all specs
-    C:\my_project\ui-test>rspec spec
+    C:\my_project\ui-test>bundle exec rspec spec
     Results will be saved into the directory C:/my_project/ui-test/results
 
     App::Page::Search @ app/page/search_spec.rb:1 (30.06.2011)
