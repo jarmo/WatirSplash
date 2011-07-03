@@ -8,7 +8,7 @@ describe "Watir::IE", :if => WatirSplash::Util.framework == :watir do
     context "#save_as" do
       it "saves file with the browser" do
         begin
-          file_path = link(:text => "Download").save_as(File.path("download.zip"))
+          file_path = link(:text => "Download").save_as(WatirSplash::Util.file_path("download.zip"))
           File.read(file_path).should == "this is a 'zip' file!"
         ensure
           FileUtils.rm file_path rescue nil

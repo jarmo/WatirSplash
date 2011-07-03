@@ -44,7 +44,7 @@ module Watir
       RAutomation::Window.new(:title => "File Download").button(:value => "&Save").click
 
       save_as_window = RAutomation::Window.new(:title => "Save As")
-      save_as_window.text_field(:class => "Edit", :index => 0).set(File.native_path(file_path))
+      save_as_window.text_field(:class => "Edit", :index => 0).set(WatirSplash::Util.file_native_path(file_path))
       save_as_window.button(:value => "&Save").click
 
       Wait.until {File.exists?(file_path)}
@@ -58,7 +58,7 @@ module Watir
       assert_exists
       self.click_no_wait
       window = RAutomation::Window.new(:title => /choose file( to upload)?/i)
-      window.text_field(:class => "Edit", :index => 0).set(File.native_path(file_path))
+      window.text_field(:class => "Edit", :index => 0).set(WatirSplash::Util.file_native_path(file_path))
       window.button(:value => "&Open").click
     end
   end

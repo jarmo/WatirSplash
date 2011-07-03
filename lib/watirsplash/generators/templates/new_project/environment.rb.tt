@@ -8,7 +8,7 @@ require "watirsplash"
 # Load the framework specified by the environment variable WATIRSPLASH_FRAMEWORK or WatirSplash::Util.framework
 WatirSplash::Util.load_framework
 
-require_all File.join(File.dirname(__FILE__), "lib/**/*.rb")
+require_all Dir.glob(File.join(File.dirname(__FILE__), "lib/**/*.rb"))
 require_rel "config.rb"
 
 # Add all your require statements into this file to avoid unnecessary
