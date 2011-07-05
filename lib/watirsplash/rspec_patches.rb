@@ -29,10 +29,6 @@ end
 
 RSpec.configure do |config| #:nodoc:
   config.include(WatirSplash::SpecHelper)
-
-  config.after(:all) do
-    WatirSplash::Util.formatter.browser.close if WatirSplash::Util.formatter.browser
-  end
 end
 
 module RSpec #:nodoc:all

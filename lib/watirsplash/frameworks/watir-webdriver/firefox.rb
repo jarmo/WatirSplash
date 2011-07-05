@@ -3,9 +3,7 @@ require_rel "../watir-webdriver.rb"
 module WatirSplash
   class Browser
     def self.new
-      browser = Watir::Browser.new :firefox
-      Util.formatter.browser = browser
-      browser
+      prepare Watir::Browser.new(:firefox)
     end
   end
 end

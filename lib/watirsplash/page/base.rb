@@ -13,23 +13,23 @@ module WatirSplash
 
       def initialize(browser=nil)
         if browser
-          @browser = WatirSplash::Util.formatter.browser = browser 
+          @browser = WatirSplash::Browser.current = browser 
         else
           @browser = WatirSplash::Browser.new
           @browser.goto @@url
         end
       end
 
-      def return_for element, methodz
+      def modify element, methodz
         methodz.each_pair do |meth, return_value|
           element.instance_eval do 
-            instance_variable_set("@#{meth}_return_value", return_value)
+            instance_variable_set("@_#{meth}_return_value_proc", return_value)
             instance_eval %Q[
               self.class.send(:alias_method, :__#{meth}, :#{meth}) if respond_to? :#{meth}
 
               def #{meth}(*args)
                 self.send(:__#{meth}, *args) if respond_to? :__#{meth}
-                instance_variable_get("@#{meth}_return_value").call(*args)
+                instance_variable_get("@_#{meth}_return_value_proc").call(*args)
               end
             ]
           end

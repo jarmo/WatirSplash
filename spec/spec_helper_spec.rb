@@ -1,10 +1,5 @@
 describe WatirSplash::SpecHelper do
 
-  it "opens browser automatically" do
-    WatirSplash::Util.formatter.browser.should exist
-    WatirSplash::Util.formatter.browser.url.should == "about:blank"
-  end
-
   it "redirects method calls to Watir::Browser" do
     goto "http://dl.dropbox.com/u/2731643/WatirSplash/test.html"
     url.should =~ /test/

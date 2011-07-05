@@ -10,5 +10,9 @@ RSpec.configure do |config|
   config.before(:all) do
     WatirSplash::Browser.new
   end
+
+  config.after(:all) do
+    WatirSplash::Browser.current.close
+  end
 end
 

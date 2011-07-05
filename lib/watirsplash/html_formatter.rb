@@ -10,10 +10,6 @@ module WatirSplash
   # * saves all files generated/downloaded during the test and shows them in the report
   class HtmlFormatter < ::RSpec::Core::Formatters::HtmlFormatter
 
-    # currently used browser object
-    # needed for saving of screenshots and html
-    attr_accessor :browser
-
     def initialize(output) # :nodoc:
       @output_dir = File.expand_path(File.dirname(output))
       archive_results
@@ -38,7 +34,7 @@ module WatirSplash
     end
 
     def extra_failure_content(exception) # :nodoc:
-      if @browser && @browser.exists?
+      if WatirSplash::Browser.current && WatirSplash::Browser.current.exists?
         save_screenshot
         save_html
       end
@@ -61,7 +57,7 @@ module WatirSplash
     def save_html # :nodoc:
       file_name = file_path("browser.html")
       begin
-        html = @browser.html
+        html = WatirSplash::Browser.current.html
         File.open(file_name, 'w') {|f| f.puts html}
       rescue => e
         $stderr.puts "saving of html failed: #{e.message}"
@@ -71,7 +67,7 @@ module WatirSplash
 
     def save_screenshot(description="Screenshot", hwnd=nil) # :nodoc:
       file_name = file_path("screenshot.png", description)
-      @browser.save_screenshot(:file_name => file_name, :hwnd => hwnd)
+      WatirSplash::Browser.current.save_screenshot(:file_name => file_name, :hwnd => hwnd)
       file_name
     end
 

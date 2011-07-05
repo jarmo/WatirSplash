@@ -5,3 +5,13 @@ module <%= formatted_name %>
     URL = <%= formatted_url %>
   end
 end
+
+RSpec.configure do |config|
+  config.before :all do
+    # WatirSplash::Browser.new 
+  end
+
+  config.after(:all) do
+    WatirSplash::Browser.current.close if WatirSplash::Browser.current
+  end  
+end

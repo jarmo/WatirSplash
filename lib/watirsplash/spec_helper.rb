@@ -5,13 +5,13 @@ module WatirSplash
   module SpecHelper
 
     def method_missing name, *args #:nodoc:
-      if WatirSplash::Util.formatter.browser.respond_to?(name)
+      if WatirSplash::Browser.current.respond_to?(name)
         SpecHelper.module_eval %Q[
           def #{name}(*args)
-            WatirSplash::Util.formatter.browser.send(:#{name}, *args) {yield}
+            WatirSplash::Browser.current.send(:#{name}, *args) {yield}
           end
         ]
-        WatirSplash::Util.formatter.browser.send(name, *args) {yield}
+        self.send(name, *args) {yield}
       else
         super
       end
@@ -21,7 +21,7 @@ module WatirSplash
     # and not Kernel
     # use Kernel.p if you need to dump some variable 
     def p *args #:nodoc:
-      WatirSplash::Util.formatter.browser.p *args
+      WatirSplash::Browser.current.p *args
     end
 
   end
