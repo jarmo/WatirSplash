@@ -112,11 +112,6 @@ RSpec::Matchers.constants.each do |const|
     if !(inst_methods.include?(:__matches?) || inst_methods.include?(:__does_not_match?)) && 
         (inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?))
 
-      def in(timeout)
-        Kernel.warn "DEPRECATION NOTICE: #in(timeout) is DEPRECATED, please use #within(timeout) method instead!"
-        within(timeout)
-      end
-
       def within(timeout)
         @timeout = timeout
         self
