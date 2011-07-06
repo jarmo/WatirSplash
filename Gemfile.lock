@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    watirsplash (2.0.0)
+    watirsplash (2.0.1.rc1)
       bundler (~> 1.0)
       rake (= 0.8.7)
       require_all

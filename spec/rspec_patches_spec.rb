@@ -81,7 +81,6 @@ describe "RSpec patches" do
 
     context "#during" do
       it "will pass upon timeout" do
-        require "ruby-debug"; debugger;
         t = Time.now
         true.should be_true.during(0.5)
         (Time.now - t).should be >= 0.5
