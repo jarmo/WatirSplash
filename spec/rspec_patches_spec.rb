@@ -79,6 +79,61 @@ describe "RSpec patches" do
       end
     end
 
+    context "#during" do
+      it "will pass upon timeout" do
+        require "ruby-debug"; debugger;
+        t = Time.now
+        true.should be_true.during(0.5)
+        (Time.now - t).should be >= 0.5
+      end
+
+      it "handles #should_not via matcher's #matches?" do
+        t = Time.now
+        h = {}
+        h.should_not have_key(:special).during(1)
+        (Time.now - t).should be >= 1
+      end
+
+      it "fails when #should_not is not satisfied during timeout via matcher's #matches?" do
+        t = Time.now
+        h = {}
+        Thread.new {sleep 0.5; h[:special] = true}
+        expect {
+          h.should_not have_key(:special).during(1)
+        }.to raise_error
+        (Time.now - t).should be_between(0.5, 1)
+      end
+
+      it "handles #should_not via matcher's #does_not_match?" do
+        RSpec::Matchers.define :have_my_key do |expected|
+          match_for_should_not do |actual|
+            !actual.has_key?(expected)
+          end
+        end
+
+        t = Time.now
+        h = {}
+        h.should_not have_my_key(:special).during(1)
+        (Time.now - t).should be >= 1
+      end
+
+      it "fails when #should_not is not satisfied within timeout via matcher's #does_not_match?" do
+        RSpec::Matchers.define :have_my_key do |expected|
+          match_for_should_not do |actual|
+            !actual.has_key?(expected)
+          end
+        end
+
+        t = Time.now
+        h = {}
+        Thread.new {sleep 0.5; h[:special] = true}
+        expect {
+          h.should_not have_my_key(:special).during(1)
+        }.to raise_error
+        (Time.now - t).should be_between(0.5, 1)
+      end
+    end
+
     context "#soon" do
       it "is an alias for #in(30)" do
         t = Time.now
@@ -99,21 +154,25 @@ describe "RSpec patches" do
 
     context "#seconds" do
       it "is for syntactic sugar" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(2).seconds.instance_variable_get(:@timeout).should == 2
+        RSpec::Matchers::Matcher.new(nil) {}.within(2).seconds.instance_variable_get(:@within_timeout).should == 2
+        RSpec::Matchers::Matcher.new(nil) {}.during(3).seconds.instance_variable_get(:@during_timeout).should == 3
       end
 
       it "has #second as an alias" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(1).second.instance_variable_get(:@timeout).should == 1
+        RSpec::Matchers::Matcher.new(nil) {}.within(1).second.instance_variable_get(:@within_timeout).should == 1
+        RSpec::Matchers::Matcher.new(nil) {}.during(2).second.instance_variable_get(:@during_timeout).should == 2
       end
     end
 
     context "#minutes" do
       it "converts timeout into minutes" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(2).minutes.instance_variable_get(:@timeout).should == 2*60
+        RSpec::Matchers::Matcher.new(nil) {}.within(2).minutes.instance_variable_get(:@within_timeout).should == 2*60
+        RSpec::Matchers::Matcher.new(nil) {}.during(3).minutes.instance_variable_get(:@during_timeout).should == 3*60
       end
 
       it "has #minute as an alias" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(1).minute.instance_variable_get(:@timeout).should == 1*60
+        RSpec::Matchers::Matcher.new(nil) {}.within(1).minute.instance_variable_get(:@within_timeout).should == 1*60
+        RSpec::Matchers::Matcher.new(nil) {}.during(2).minute.instance_variable_get(:@during_timeout).should == 2*60
       end
     end
 
