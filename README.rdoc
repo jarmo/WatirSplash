@@ -60,7 +60,7 @@ testing right away!
           end
 
           def search_button
-            return_for button(:name => "go"),
+            modify button(:name => "go"),
               # clicking the search button results a page transition to "results" page
               :click => lambda {Results.new @browser}
           end
