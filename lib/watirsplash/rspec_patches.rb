@@ -70,14 +70,14 @@ module RSpec::Matchers
   class Change
     def matches?(event_proc)
       raise_block_syntax_error if block_given?
-      
+
       # to make #change work with #in(timeout) method
       unless defined? @actual_before
         @actual_before = evaluate_value_proc
         event_proc.call
       end
       @actual_after = evaluate_value_proc
-    
+
       (!change_expected? || changed?) && matches_before? && matches_after? && matches_expected_delta? && matches_min? && matches_max?
     end
   end
@@ -110,10 +110,15 @@ RSpec::Matchers.constants.each do |const|
     inst_methods = instance_methods.map {|m| m.to_sym}
 
     if !(inst_methods.include?(:__matches?) || inst_methods.include?(:__does_not_match?)) && 
-        (inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?))
+      (inst_methods.include?(:matches?) || inst_methods.include?(:does_not_match?))
 
       def within(timeout)
-        @timeout = timeout
+        @within_timeout = timeout
+        self
+      end
+
+      def during(timeout)
+        @during_timeout = timeout
         self
       end
 
@@ -129,8 +134,8 @@ RSpec::Matchers.constants.each do |const|
       alias_method :second, :seconds
 
       def minutes
-        return unless @timeout
-        @timeout *= 60
+        @within_timeout *= 60 if @within_timeout
+        @during_timeout *= 60 if @during_timeout
         self
       end
 
@@ -141,7 +146,13 @@ RSpec::Matchers.constants.each do |const|
       alias_method :__matches?, :matches? 
 
       def matches?(actual)
-        @timeout ? (Watir::Wait.until(@timeout) {__matches?(actual)} rescue false) : __matches?(actual)
+        if @within_timeout
+          Watir::Wait.until(@within_timeout) {__matches?(actual)} rescue false
+        elsif @during_timeout
+          Watir::Wait.while(@during_timeout) {__matches?(actual)} rescue true
+        else
+          __matches?(actual)
+        end
       end
     end
 
@@ -149,11 +160,23 @@ RSpec::Matchers.constants.each do |const|
       alias_method :__does_not_match?, :does_not_match?
 
       def does_not_match?(actual)
-        @timeout ? (Watir::Wait.until(@timeout) {__does_not_match?(actual)} rescue false) : __does_not_match?(actual)
+        if @within_timeout
+          Watir::Wait.until(@within_timeout) {__does_not_match?(actual)} rescue false
+        elsif @during_timeout
+          Watir::Wait.while(@during_timeout) {__does_not_match?(actual)} rescue true
+        else
+          __does_not_match?(actual)
+        end
       end
     elsif inst_methods.include? :matches?
       def does_not_match?(actual)
-        @timeout ? !(Watir::Wait.while(@timeout) {__matches?(actual)} rescue true) : !__matches?(actual)
+        if @within_timeout
+          Watir::Wait.until(@within_timeout) {!__matches?(actual)} rescue false
+        elsif @during_timeout
+          Watir::Wait.while(@during_timeout) {!__matches?(actual)} rescue true
+        else
+          !__matches?(actual)
+        end
       end
     end
   end
