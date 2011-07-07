@@ -24,29 +24,41 @@ describe "RSpec patches" do
 
     context "#within" do
       it "can be used with #change" do
+        div(:id => "div2").text.should == "Div is shown"
+
         t = Time.now
         expect {
           link(:id => "toggle").click
         }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").within(2)
-        (Time.now - t).should be <= 2
+        (Time.now - t).should be_between(1, 2)
+
+        div(:id => "div2").text.should == "Div is hidden"
       end
 
       it "will fail upon timeout" do
+        div(:id => "div2").text.should == "Div is shown"
+
         t = Time.now
         expect {
           expect {
             link(:id => "toggle").click
           }.to change {div(:id => "div2").text}.from("Div is shown").to("Div is hidden").within(0.5)
         }.to raise_exception(%q{result should have been changed to "Div is hidden", but is now "Div is shown"})
-        (Time.now - t).should be >= 0.5
+        (Time.now - t).should be_between(0.5, 0.7)
+
+        div(:id => "div2").text.should == "Div is shown"        
       end
 
       it "can be used with #make" do
+        div(:id => "div1").should be_present
+
         t = Time.now
         expect {
           link(:id => "toggle").click
-        }.to make {div(:id => "div1").present?}.within(2)
-        (Time.now - t).should be <= 2
+        }.to make {div(:id => "div1").present?}.from(true).to(false).within(2)
+        (Time.now - t).should be_between(1, 2)
+
+        div(:id => "div1").should_not be_present
       end
 
       it "handles #should_not via matcher's #matches?" do
@@ -54,7 +66,9 @@ describe "RSpec patches" do
         h = {:special => true}
         Thread.new {sleep 0.5; h.delete :special}
         h.should_not have_key(:special).within(1)
-        (Time.now - t).should be_between(0.5, 1)
+        (Time.now - t).should be_between(0.5, 0.7)
+
+        h.should_not have_key(:special)
       end
 
       it "fails when #should_not is not satisfied within timeout via matcher's #matches?" do
@@ -63,7 +77,7 @@ describe "RSpec patches" do
         expect {
           h.should_not have_key(:special).within(0.5)
         }.to raise_error
-        (Time.now - t).should be >= 0.5
+        (Time.now - t).should be_between(0.5, 0.7)
       end
 
       it "handles #should_not via matcher's #does_not_match?" do
@@ -77,7 +91,9 @@ describe "RSpec patches" do
         h = {:special => true}
         Thread.new {sleep 0.5; h.delete :special}
         h.should_not have_my_key(:special).within(1)
-        (Time.now - t).should be_between(0.5, 1)
+        (Time.now - t).should be_between(0.5, 0.7)
+
+        h.should_not have_key(:special)
       end
 
       it "fails when #should_not is not satisfied within timeout via matcher's #does_not_match?" do
@@ -92,7 +108,7 @@ describe "RSpec patches" do
         expect {
           h.should_not have_my_key(:special).within(0.5)
         }.to raise_error
-        (Time.now - t).should be >= 0.5
+        (Time.now - t).should be_between(0.5, 0.7)
       end
     end
 
@@ -100,14 +116,14 @@ describe "RSpec patches" do
       it "will pass upon timeout" do
         t = Time.now
         true.should be_true.during(0.5)
-        (Time.now - t).should be >= 0.5
+        (Time.now - t).should be_between(0.5, 0.7)
       end
 
       it "handles #should_not via matcher's #matches?" do
         t = Time.now
         h = {}
         h.should_not have_key(:special).during(1)
-        (Time.now - t).should be >= 1
+        (Time.now - t).should be_between(1, 1.2)
       end
 
       it "fails when #should_not is not satisfied during timeout via matcher's #matches?" do
@@ -117,7 +133,9 @@ describe "RSpec patches" do
         expect {
           h.should_not have_key(:special).during(1)
         }.to raise_error
-        (Time.now - t).should be_between(0.5, 1)
+        (Time.now - t).should be_between(0.5, 0.7)
+        
+        h.should have_key(:special)
       end
 
       it "handles #should_not via matcher's #does_not_match?" do
@@ -130,7 +148,7 @@ describe "RSpec patches" do
         t = Time.now
         h = {}
         h.should_not have_my_key(:special).during(1)
-        (Time.now - t).should be >= 1
+        (Time.now - t).should be_between(1, 1.2)
       end
 
       it "fails when #should_not is not satisfied within timeout via matcher's #does_not_match?" do
@@ -142,21 +160,19 @@ describe "RSpec patches" do
 
         t = Time.now
         h = {}
+        h.should_not have_my_key(:special)
+
         Thread.new {sleep 0.5; h[:special] = true}
         expect {
           h.should_not have_my_key(:special).during(1)
         }.to raise_error
-        (Time.now - t).should be_between(0.5, 1)
+        (Time.now - t).should be_between(0.5, 0.7)
       end
     end
 
     context "#soon" do
-      it "is an alias for #in(30)" do
-        t = Time.now
-        expect {
-          link(:id => "toggle").click
-        }.to make {div(:id => "div1").present?}.soon
-        (Time.now - t).should be <= 30
+      it "is an alias for #within(30)" do
+        RSpec::Matchers::Matcher.new(nil) {}.soon.instance_variable_get(:@within_timeout).should == 30
       end
     end
 

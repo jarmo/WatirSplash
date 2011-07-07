@@ -146,13 +146,7 @@ RSpec::Matchers.constants.each do |const|
       alias_method :__matches?, :matches? 
 
       def matches?(actual)
-        if @within_timeout
-          Watir::Wait.until(@within_timeout) {__matches?(actual)} rescue false
-        elsif @during_timeout
-          Watir::Wait.while(@during_timeout) {__matches?(actual)} rescue true
-        else
-          __matches?(actual)
-        end
+        match_with_wait {__matches?(actual)}
       end
     end
 
@@ -160,23 +154,25 @@ RSpec::Matchers.constants.each do |const|
       alias_method :__does_not_match?, :does_not_match?
 
       def does_not_match?(actual)
-        if @within_timeout
-          Watir::Wait.until(@within_timeout) {__does_not_match?(actual)} rescue false
-        elsif @during_timeout
-          Watir::Wait.while(@during_timeout) {__does_not_match?(actual)} rescue true
-        else
-          __does_not_match?(actual)
-        end
+        match_with_wait {__does_not_match?(actual)}
       end
     elsif inst_methods.include? :matches?
       def does_not_match?(actual)
-        if @within_timeout
-          Watir::Wait.until(@within_timeout) {!__matches?(actual)} rescue false
-        elsif @during_timeout
-          Watir::Wait.while(@during_timeout) {!__matches?(actual)} rescue true
-        else
-          !__matches?(actual)
-        end
+        match_with_wait {!__matches?(actual)}
+      end
+    end
+
+    private
+
+    def match_with_wait
+      if @within_timeout
+        timeout = @within_timeout; @within_timeout = nil
+        Watir::Wait.until(timeout) {yield} rescue false
+      elsif @during_timeout
+        timeout = @during_timeout; @during_timeout = nil
+        Watir::Wait.while(timeout) {yield} rescue true        
+      else
+        yield
       end
     end
   end
