@@ -1,15 +1,6 @@
 require 'rspec/core/formatters/html_formatter'
 require 'rspec/core/formatters/snippet_extractor'
 
-# make sure that UnkownObjectException constant exists
-module Watir
-  module Exception
-    class WatirException < RuntimeError  
-    end
-    class UnknownObjectException < WatirException; end
-  end
-end
-
 # patch for https://github.com/rspec/rspec-core/issues/#issue/214
 module RSpec
   module Core
@@ -156,21 +147,9 @@ RSpec::Matchers.constants.each do |const|
 
       def matches?(actual)
         if @within_timeout
-          Watir::Wait.until(@within_timeout) do
-            begin
-              __matches?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue false
+          Watir::Wait.until(@within_timeout) {__matches?(actual)} rescue false
         elsif @during_timeout
-          Watir::Wait.while(@during_timeout) do
-            begin
-              __matches?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue true
+          Watir::Wait.while(@during_timeout) {__matches?(actual)} rescue true
         else
           __matches?(actual)
         end
@@ -182,21 +161,9 @@ RSpec::Matchers.constants.each do |const|
 
       def does_not_match?(actual)
         if @within_timeout
-          Watir::Wait.until(@within_timeout) do
-            begin
-              __does_not_match?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue false
+          Watir::Wait.until(@within_timeout) {__does_not_match?(actual)} rescue false
         elsif @during_timeout
-          Watir::Wait.while(@during_timeout) do
-            begin
-              __does_not_match?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue true
+          Watir::Wait.while(@during_timeout) {__does_not_match?(actual)} rescue true
         else
           __does_not_match?(actual)
         end
@@ -204,21 +171,9 @@ RSpec::Matchers.constants.each do |const|
     elsif inst_methods.include? :matches?
       def does_not_match?(actual)
         if @within_timeout
-          Watir::Wait.until(@within_timeout) do
-            begin
-              !__matches?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue false
+          Watir::Wait.until(@within_timeout) {!__matches?(actual)} rescue false
         elsif @during_timeout
-          Watir::Wait.while(@during_timeout) do
-            begin
-              !__matches?(actual)
-            rescue Watir::Exception::UnknownObjectException
-              false
-            end
-          end rescue true
+          Watir::Wait.while(@during_timeout) {!__matches?(actual)} rescue true
         else
           !__matches?(actual)
         end
