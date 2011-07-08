@@ -1,2 +1,5 @@
---require
-environment
+--require environment
+--color
+--format documentation
+--require watirsplash/html_formatter
+--format WatirSplash::HtmlFormatter

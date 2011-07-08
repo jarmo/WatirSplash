@@ -17,29 +17,21 @@ module WatirSplash
         File::ALT_SEPARATOR ? file_path.gsub(File::SEPARATOR, File::ALT_SEPARATOR) : file_path
       end
 
-      # configure RSpec to use documentation and WatirSplash::HtmlFormatter formatters
-      def configure_rspec_formatters
-        config = RSpec.configuration
-        config.color_enabled = true
-        results_path = ENV["WATIRSPLASH_RESULTS_PATH"] || "results/index.html"
-        @@html_formatter = WatirSplash::HtmlFormatter.new(results_path)
-        config.formatters.unshift(@@html_formatter)
-        config.add_formatter(:documentation)
-      end
-
       def formatter
-        @@html_formatter
+        @html_formatter ||= begin
+                              formatter = RSpec.configuration.formatters.find {|formatter| formatter.kind_of? WatirSplash::HtmlFormatter}
+                              raise "WatirSplash::HtmlFormatter is not loaded - are you sure that you have specified it in your .rspec file?" unless formatter
+                              formatter
+                            end
       end
-
-      @@framework = nil
 
       def framework= framework
         framework = framework.to_sym
-        @@framework = framework == :default ? default_framework : framework.to_sym
+        @framework = framework == :default ? default_framework : framework
       end
 
       def framework
-        @@framework
+        @framework
       end
 
       def load_framework

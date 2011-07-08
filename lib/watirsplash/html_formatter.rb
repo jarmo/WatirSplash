@@ -10,15 +10,17 @@ module WatirSplash
   # * saves all files generated/downloaded during the test and shows them in the report
   class HtmlFormatter < ::RSpec::Core::Formatters::HtmlFormatter
 
-    def initialize(output) # :nodoc:
-      @output_dir = File.expand_path(File.dirname(output))
-      archive_results
+    attr_reader :output_file
 
-      puts "Results will be saved into the directory #{@output_dir}"
+    def initialize(output) # :nodoc:
+      @output_dir = File.expand_path(ENV["WATIRSPLASH_RESULTS_PATH"] || File.dirname(output) || "results")
+      @output_file = File.join(@output_dir, "index.html")
+
+      puts "Results will be saved to #{@output_file}"
       @files_dir = File.join(@output_dir, "files")
       FileUtils.mkdir_p(@files_dir)
       @files_saved_during_example = []
-      super(File.open(output, "w"))
+      super(File.open(@output_file, "w"))
     end
 
     def example_group_started(example_group) # :nodoc:
@@ -51,7 +53,7 @@ module WatirSplash
 
       description = file[:desc] ? file[:desc] : File.extname(file[:path]).upcase[1..-1]
       path = Pathname.new(file[:path])
-      "<a href='#{path.relative_path_from(Pathname.new(@output_dir))}'>#{description}</a>&nbsp;"
+      "<a href='#{path.relative_path_from(Pathname.new @output_dir)}'>#{description}</a>&nbsp;"
     end
 
     def save_html # :nodoc:
@@ -84,14 +86,6 @@ module WatirSplash
     end
 
     private
-
-    def archive_results
-      if File.exists?(@output_dir)
-        archive_dir = File.join(@output_dir, "../archive")
-        FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
-        FileUtils.mv @output_dir, File.join(archive_dir, "#{File.basename(@output_dir)}_#{File.mtime(@output_dir).strftime("%y%m%d_%H%M%S")}")
-      end
-    end
 
     def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")
