@@ -14,8 +14,7 @@ module WatirSplash
 
     def initialize(output) # :nodoc:
       @output_dir = File.expand_path(ENV["WATIRSPLASH_RESULTS_PATH"] || File.dirname(output) || "results")
-      @output_file = File.join(@output_dir, "index.html")
-
+      @output_file = Pathname.new(File.join(@output_dir, "index.html")).relative_path_from(Pathname.new(Dir.pwd))
       puts "Results will be saved to #{@output_file}"
       @files_dir = File.join(@output_dir, "files")
       FileUtils.mkdir_p(@files_dir)
