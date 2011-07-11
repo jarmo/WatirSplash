@@ -1,3 +1,7 @@
+=== Version 2.1.0 / 2011-07-11
+
+ * integrated with Spork for faster environment loading
+
 === Version 2.0.0 / 2011-07-06
 
  * added Page Objects support - generate them with `watirsplash page` generator 

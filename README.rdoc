@@ -6,12 +6,12 @@
 == DESCRIPTION
 
 WatirSplash makes browser-based web page testing in Ruby splashin' easy.
-It combines Watir, FireWatir or Watir-WebDriver for controlling the browser and
-RSpec for testing framework. This powerful combination gives you
+It combines Watir, FireWatir or Watir-WebDriver for controlling the browser, 
+RSpec for testing framework and Spork for faster environment loading. This powerful combination gives you
 the ability to write easily well-maintained and easy-to-read specs (specifications in RSpec) so
 you don't need to have any extra documentation for your applications.
 
-WatirSplash makes it easier to use best features of both of these tools together so
+WatirSplash makes it easier to use best features of all of these tools together so
 you won't have to spend time on thinking how to do that yourself - you can start
 testing right away!
 
@@ -96,9 +96,15 @@ testing right away!
       end
     end
 
-8) Execute all specs
+7) Start Spork for faster environment loading:
+   C:\my_project\ui-test>bundle exec spork 
+   ...
+  --> DRb magazine_slave_service: 1 provided...
+  --> DRb magazine_slave_service: 2 provided...   
+
+9) Execute all specs
     C:\my_project\ui-test>bundle exec rspec spec
-    Results will be saved into the directory C:/my_project/ui-test/results
+    Results will be saved into to results/index.html
 
     App::Page::Search @ app/page/search_spec.rb:1 (30.06.2011)
       has something on the search page:2 (09:34:30)
@@ -106,9 +112,9 @@ testing right away!
     Finished in 4.48 seconds
     1 example, 0 failures
 
-9) Check out the html report at results/index.html
+10) Check out the html report at results/index.html
 
-10) Repeat & profit! 
+11) Repeat & profit! 
 
 == SUPPORTED PLATFORMS & BROWSERS
 
