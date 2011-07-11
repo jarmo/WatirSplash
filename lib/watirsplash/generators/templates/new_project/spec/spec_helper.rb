@@ -4,10 +4,9 @@ Bundler.setup
 require 'spork'
 
 Spork.prefork do
-    # Loading more in this block will cause your tests to run faster. However,
+  # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-  ENV["WATIRSPLASH_RESULTS_PATH"] = "results/#{Time.now.strftime("%y%m%d_%H%M%S")}/index.html"
   require "watirsplash"
 
   # What framework to use? Possible values are:
@@ -29,6 +28,12 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # Save WatirSplash html spec results to the specified directory. If
+  # output_stream exists then Spork is not running.
+  ENV["WATIRSPLASH_RESULTS_PATH"] ||= RSpec.configuration.settings[:output_stream] ?
+    "results/local/index.html" :
+    "results/#{Time.now.strftime("%y%m%d_%H%M%S")}/index.html"
+
   # This code will be run each time you run your specs.
   require_all Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*.rb"))
 end
