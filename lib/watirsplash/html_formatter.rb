@@ -52,7 +52,7 @@ module WatirSplash
 
       description = file[:desc] ? file[:desc] : File.extname(file[:path]).upcase[1..-1]
       path = Pathname.new(file[:path])
-      "<a href='#{path.relative_path_from(Pathname.new @output_dir)}'>#{description}</a>&nbsp;"
+      "<a href='#{path.relative_path_from(Pathname.new @output_path)}'>#{description}</a>&nbsp;"
     end
 
     def save_html # :nodoc:
