@@ -14,6 +14,8 @@ module WatirSplash
 
     def initialize(output) # :nodoc:
       @output_path = File.expand_path(ENV["WATIRSPLASH_RESULTS_PATH"] || (output.respond_to?(:path) ? output.path : "results/index.html"))
+      archive_results if File.exists?(@output_path)
+
       @output_relative_path = Pathname.new(@output_path).relative_path_from(Pathname.new(Dir.pwd))
       puts "Results will be saved to #{@output_relative_path}"
       @files_dir = File.join(File.dirname(@output_path), "files")
@@ -85,6 +87,13 @@ module WatirSplash
     end
 
     private
+
+    def archive_results
+      output_dir = File.dirname(@output_path)
+      archive_dir = File.join(output_dir, "../archive")
+      FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
+      FileUtils.mv output_dir, File.join(archive_dir, "#{File.basename(output_dir)}_#{File.mtime(output_dir).strftime("%y%m%d_%H%M%S")}")
+    end
 
     def append_extra_information_to_description(example_group)
       date = Time.now.strftime("%d.%m.%Y")

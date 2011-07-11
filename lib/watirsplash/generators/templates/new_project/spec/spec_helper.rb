@@ -28,12 +28,6 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  # Save WatirSplash html spec results to the specified directory. If
-  # output_stream exists then Spork is not running.
-  ENV["WATIRSPLASH_RESULTS_PATH"] ||= RSpec.configuration.settings[:output_stream] ?
-    "results/local/index.html" :
-    "results/#{Time.now.strftime("%y%m%d_%H%M%S")}/index.html"
-
   # This code will be run each time you run your specs.
   require_all Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*.rb"))
 end
