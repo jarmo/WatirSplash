@@ -1,19 +1,12 @@
 module WatirSplash
   class Browser
     class << self
+
+      attr_accessor :current
+
       def new
         prepare Watir::Browser.new
       end    
-
-      @@current = nil
-
-      def current
-        @@current
-      end
-
-      def current= browser
-        @@current = browser
-      end
 
       private
 

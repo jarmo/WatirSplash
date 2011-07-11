@@ -1,4 +1,5 @@
---require environment
+--drb
+--require spec/spec_helper
 --color
 --format documentation
 --require watirsplash/html_formatter

@@ -10,16 +10,16 @@ module WatirSplash
   # * saves all files generated/downloaded during the test and shows them in the report
   class HtmlFormatter < ::RSpec::Core::Formatters::HtmlFormatter
 
-    attr_reader :output_file
+    attr_reader :output_relative_path
 
     def initialize(output) # :nodoc:
-      @output_dir = File.expand_path(ENV["WATIRSPLASH_RESULTS_PATH"] || File.dirname(output) || "results")
-      @output_file = Pathname.new(File.join(@output_dir, "index.html")).relative_path_from(Pathname.new(Dir.pwd))
-      puts "Results will be saved to #{@output_file}"
-      @files_dir = File.join(@output_dir, "files")
+      @output_path = File.expand_path(ENV["WATIRSPLASH_RESULTS_PATH"] || (output.respond_to?(:path) ? output.path : "results/index.html"))
+      @output_relative_path = Pathname.new(@output_path).relative_path_from(Pathname.new(Dir.pwd))
+      puts "Results will be saved to #{@output_relative_path}"
+      @files_dir = File.join(File.dirname(@output_path), "files")
       FileUtils.mkdir_p(@files_dir)
       @files_saved_during_example = []
-      super(File.open(@output_file, "w"))
+      super(File.open(@output_path, "w"))
     end
 
     def example_group_started(example_group) # :nodoc:
