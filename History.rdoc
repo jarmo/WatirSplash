@@ -1,6 +1,7 @@
 === Version 2.1.0 / 2011-07-11
 
  * integrated with Spork for faster environment loading
+ * all options to RSpec should be provided now via .rspec file
 
 === Version 2.0.0 / 2011-07-06
 
