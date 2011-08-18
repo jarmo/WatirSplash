@@ -1,3 +1,8 @@
+=== Version 2.1.1 / 2011-08-18
+
+ * bumped Watir dependency to 2.0.1
+ * bumped Watir-WebDriver dependency to 0.3.1
+
 === Version 2.1.0 / 2011-07-11
 
  * integrated with Spork for faster environment loading
