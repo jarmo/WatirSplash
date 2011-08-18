@@ -9,7 +9,7 @@ platforms :mingw, :mswin do
 end
 
 gem "watir-webdriver", WatirSplash::Version::WATIR_WEBDRIVER
-gem "firewatir", WatirSplash::Version::WATIR
+gem "firewatir", ">= 1.9.3"
 gem "rspec", "~>2.6.0"
 gem "spork", "~>0.9.0.rc9"
 
