@@ -127,7 +127,7 @@ Each framework drives a specific browser:
 * Watir - IE
 * Watir-WebDriver - Chrome, IE and Firefox
 
-It is possible to specify what framework to use in config.rb file:
+It is possible to specify what framework to use in spec_helper.rb file:
     WatirSplash::Util.framework = "watir-webdriver/firefox"
 
 It is also possible to specify used framework by using environment variable WATIRSPLASH_FRAMEWORK.
