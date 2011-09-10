@@ -62,7 +62,7 @@ testing right away!
           def search_button
             modify button(:name => "go"),
               # clicking the search button results a page transition to "results" page
-              :click => lambda {Results.new @browser}
+              :click => lambda {redirect_to Results}
           end
         end
       end
@@ -119,13 +119,13 @@ testing right away!
 == SUPPORTED PLATFORMS & BROWSERS
 
 WatirSplash supports different frameworks/browsers on different operating systems:
-* Linux & OS X - firewatir, watir-webdriver/chrome and watir-webdriver/firefox
-* Windows - firewatir, watir, watir-webdriver/chrome, watir-webdriver/ie, watir-webdriver/firefox
+* Linux & OS X - watir-webdriver/firefox, watir-webdriver/chrome and firewatir
+* Windows - watir, watir-webdriver/firefox, watir-webdriver/chrome, watir-webdriver/ie and firewatir
 
 Each framework drives a specific browser:
-* FireWatir - Firefox
 * Watir - IE
 * Watir-WebDriver - Chrome, IE and Firefox
+* FireWatir - Firefox
 
 It is possible to specify what framework to use in spec_helper.rb file:
     WatirSplash::Util.framework = "watir-webdriver/firefox"
