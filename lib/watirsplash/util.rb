@@ -44,9 +44,9 @@ module WatirSplash
       def default_framework
         case RUBY_PLATFORM
         when /mswin|msys|mingw32/
-          :watir
+          "watir"
         when /darwin|linux/
-          :firewatir
+          "watir-webdriver/firefox"
         else
           raise "Unsupported platform: #{RUBY_PLATFORM}"
         end
