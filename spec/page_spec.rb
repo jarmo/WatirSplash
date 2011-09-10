@@ -4,8 +4,13 @@ class DummyPage < WatirSplash::Page::Base
   def something
     modify Hash.new,
       :store => lambda {|a,b| a + b},
-      :new_method => lambda {[]}
+      :new_method => lambda {[]},
+      :another_page => lambda {redirect_to AnotherDummyPage},
+      :another_page_with_new_browser => lambda {|browser| redirect_to AnotherDummyPage, browser}
   end
+end
+
+class AnotherDummyPage < WatirSplash::Page::Base
 end
 
 describe WatirSplash::Page::Base do
@@ -19,7 +24,7 @@ describe WatirSplash::Page::Base do
       page = DummyPage.new
       browser = page.instance_variable_get(:@browser)
       browser.should respond_to(:title)
-      browser.url.should =~ /bing\.com/
+      browser.url.should =~ %r{bing.com}
     end
 
     it "allows to reuse existing browser" do
@@ -29,7 +34,7 @@ describe WatirSplash::Page::Base do
       page = DummyPage.new(browser)
       page_browser = page.instance_variable_get(:@browser)
       page_browser.should == browser
-      page_browser.url.should =~ /google\.com/
+      page_browser.url.should =~ %r{google.com}
     end
   end
 
@@ -63,6 +68,31 @@ describe WatirSplash::Page::Base do
     end
   end
 
+  context "#redirect_to" do
+    it "redirects to the new page reusing the current browser" do
+      page = DummyPage.new
+      another_page = page.something.another_page
+      another_page.should be_kind_of(AnotherDummyPage)
+      another_page.url.should =~ %r{bing.com}
+    end
+
+    it "redirects to the new page using the provided browser" do
+      page = DummyPage.new
+      old_browser = WatirSplash::Browser.current
+
+      browser = WatirSplash::Browser.new
+      browser.goto "http://google.com/ncr"
+      new_page = page.something.another_page_with_new_browser browser
+      new_page_browser = new_page.instance_variable_get(:@browser)
+      new_page_browser.should == browser
+      new_page_browser.url.should =~ %r{google.com}
+
+      page_browser = page.instance_variable_get(:@browser)
+      page_browser.should == old_browser
+      page_browser.url.should =~ %r{bing.com}
+    end
+  end
+
   context "#method_missing" do
     it "gets SpecHelper module included into class" do
       DummyPage.included_modules.should include(WatirSplash::SpecHelper)
@@ -71,7 +101,7 @@ describe WatirSplash::Page::Base do
     it "redirects all missing methods to browser object" do
       page = DummyPage.new
       page.should_not respond_to(:text_field)
-      page.text_field(:id => /somethin/).should be_kind_of(Watir::TextField)
+      page.text_field(:id => /something/).should be_kind_of(Watir::TextField)
     end
   end
 

@@ -9,16 +9,23 @@ module WatirSplash
         def url url
           @@url = url
         end
+
       end
 
       def initialize(browser=nil)
         if browser
           @browser = WatirSplash::Browser.current = browser 
         else
-          @browser = WatirSplash::Browser.new
+          @browser = (WatirSplash::Browser.current &&
+                      WatirSplash::Browser.current.exists?) ||
+                      WatirSplash::Browser.new
           @browser.goto @@url
         end
       end
+
+      def redirect_to page, browser=nil
+        page.new browser || WatirSplash::Browser.current
+      end      
 
       def modify element, methodz
         methodz.each_pair do |meth, return_value|
