@@ -1,3 +1,10 @@
+=== Version 2.2.0 / 2011-09-10
+
+ * watir-webdriver/firefox is now the default framework under Linux and OS X
+ * Page objects will reuse WatirSplash::Browser.current if it exists
+ * added Page#redirect_to for redirecting to another Page object
+ * require spec_helper relatively from working directory
+
 === Version 2.1.1 / 2011-08-18
 
  * bumped Watir dependency to 2.0.1
