@@ -2,13 +2,6 @@ WatirSplash::Frameworks::Helper.load_gems "watir", "win32/screenshot"
 require "watirsplash/mini_magick_patch"
 require "watir/ie"
 
-module Watir
-  module PageCheckers
-    # raises an error if javascript error was found
-    JAVASCRIPT_ERRORS_CHECKER = lambda {|ie| raise "Expected no JavaScript errors to appear on page, but having some!" if ie.status =~ /Error on page/}
-  end
-end
-
 # patches for Watir
 module Watir
   class IE #:nodoc:all
@@ -17,8 +10,6 @@ module Watir
     def initialize suppress_new_window=nil
       _initialize suppress_new_window
       self.speed = :fast
-      @error_checkers ||= []
-      add_checker Watir::PageCheckers::JAVASCRIPT_ERRORS_CHECKER
     end
 
     def save_screenshot(params)
