@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    watirsplash (2.2.0)
+    watirsplash (2.3.1)
       bundler (~> 1.0)
       rake (= 0.8.7)
       require_all
@@ -14,13 +14,13 @@ GEM
     builder (3.0.0)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
-    commonwatir (2.0.1)
+    commonwatir (2.0.2)
       user-choices
     diff-lcs (1.1.2)
     ffi (1.0.9-x86-mingw32)
     firewatir (1.9.4)
       commonwatir (>= 1.9.2)
-    hoe (2.12.0)
+    hoe (2.12.3)
       rake (~> 0.8)
     json_pure (1.5.4)
       spruz (~> 0.2.8)
@@ -56,8 +56,8 @@ GEM
       builder (>= 2.1.2)
       s4t-utils (>= 1.0.3)
       xml-simple (>= 1.0.11)
-    watir (2.0.1)
-      commonwatir (= 2.0.1)
+    watir (2.0.2)
+      commonwatir (= 2.0.2)
       ffi (~> 1.0)
       nokogiri
       rautomation (~> 0.6.3)
@@ -86,7 +86,7 @@ DEPENDENCIES
   firewatir (>= 1.9.4)
   rspec (~> 2.6.0)
   spork (~> 0.9.0.rc9)
-  watir (= 2.0.1)
+  watir (= 2.0.2)
   watir-webdriver (~> 0.3.3)
   watirsplash!
   win32screenshot (~> 1.0.5)
