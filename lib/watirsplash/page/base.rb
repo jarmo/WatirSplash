@@ -14,11 +14,10 @@ module WatirSplash
 
       def initialize(browser=nil)
         if browser
-          @browser = WatirSplash::Browser.current = browser 
+          @browser = browser 
         else
-          @browser = (WatirSplash::Browser.current &&
-                      WatirSplash::Browser.current.exists?) ||
-                      WatirSplash::Browser.new
+          reuse_current = WatirSplash::Browser.current && WatirSplash::Browser.current.exists?
+          @browser = reuse_current ? WatirSplash::Browser.current : (WatirSplash::Browser.current = WatirSplash::Browser.new)
           @browser.goto @@url
         end
       end

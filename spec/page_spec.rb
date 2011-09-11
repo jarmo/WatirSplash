@@ -36,6 +36,28 @@ describe WatirSplash::Page::Base do
       page_browser.should == browser
       page_browser.url.should =~ %r{google.com}
     end
+
+    it "reuses the current browser" do
+      browser = WatirSplash::Browser.new
+      
+      page = DummyPage.new
+      page.instance_variable_get(:@browser).should == browser
+
+      WatirSplash::Browser.current.should == browser      
+    end
+
+    it "opens up a new browser if current browser has been closed" do
+      browser = WatirSplash::Browser.new
+      browser.close
+      browser.should_not exist
+
+      page = DummyPage.new
+      page_browser = page.instance_variable_get(:@browser)
+      page_browser.should exist
+      page_browser.should_not == browser
+
+      WatirSplash::Browser.current.should == page_browser
+    end
   end
 
   context "#modify" do
