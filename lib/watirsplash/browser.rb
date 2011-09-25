@@ -10,7 +10,7 @@ module WatirSplash
         browser.execute_script "window.__browserErrorMessage = undefined"
         raise JavaScriptError, "JavaScript error: #{error_message}"
       end
-      
+
       browser.execute_script %q[
         if (!window.onErrorFn) {
           window.onErrorFn = function(errorMsg, url, lineNumber) {
@@ -26,7 +26,7 @@ module WatirSplash
           window.onerror = window.onErrorFn;
         }]
     end
-          
+
     class << self
 
       attr_accessor :current
@@ -35,12 +35,31 @@ module WatirSplash
         prepare Watir::Browser.new
       end    
 
+      def exist?
+        current && current.exists?
+      end
+
+      alias_method :exists?, :exist?
+
       private
 
       def prepare browser
         self.current = browser
         browser.add_checker JAVASCRIPT_ERRORS_CHECKER
         browser
+      end
+
+      def method_missing name, *args
+        if current.respond_to?(name)
+          instance_eval %Q[
+          def #{name}(*args)
+            current.send(:#{name}, *args) {yield}
+          end
+          ]
+          send(name, *args) {yield}
+        else
+          super
+        end
       end
 
     end

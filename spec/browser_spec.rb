@@ -31,6 +31,28 @@ describe WatirSplash::Browser do
     }.not_to raise_error
   end
 
+  it ".exist? && .exists?" do
+    WatirSplash::Browser.current = nil
+    WatirSplash::Browser.should_not exist
+
+    WatirSplash::Browser.new
+    WatirSplash::Browser.should exist
+
+    WatirSplash::Browser.close
+    WatirSplash::Browser.should_not exist
+
+    WatirSplash::Browser.should respond_to(:exists?)
+  end
+
+  it "redirects missing method calls to browser object" do
+    b = WatirSplash::Browser.new
+    WatirSplash::Browser.should_not respond_to(:goto)
+    expect {
+      WatirSplash::Browser.goto "google.com"
+    }.to_not raise_exception
+    b.title.should =~ /google/i
+  end
+
   after :each do
     WatirSplash::Browser.current.close
   end

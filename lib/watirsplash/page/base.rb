@@ -16,8 +16,7 @@ module WatirSplash
         if browser
           @browser = browser 
         else
-          reuse_current = WatirSplash::Browser.current && WatirSplash::Browser.current.exists?
-          @browser = reuse_current ? WatirSplash::Browser.current : (WatirSplash::Browser.current = WatirSplash::Browser.new)
+          @browser = WatirSplash::Browser.exists? ? WatirSplash::Browser.current : (WatirSplash::Browser.current = WatirSplash::Browser.new)
           @browser.goto @@url
         end
       end

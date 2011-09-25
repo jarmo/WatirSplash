@@ -32,12 +32,12 @@ module WatirSplash
 
     def example_started(example) # :nodoc:
       @files_saved_during_example.clear
-      example.metadata[:description] += "#{example.metadata[:location].scan(/:\d+$/)} (#{Time.now.strftime("%H:%M:%S")})"
+      example.metadata[:description] += "#{example.metadata[:location].scan(/:\d+$/).flatten.first} (#{Time.now.strftime("%H:%M:%S")})"
       super
     end
 
     def extra_failure_content(exception) # :nodoc:
-      if WatirSplash::Browser.current && WatirSplash::Browser.current.exists?
+      if WatirSplash::Browser.exists?
         save_screenshot
         save_html
       end
