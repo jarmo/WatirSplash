@@ -1,6 +1,6 @@
 module WatirSplash
   module Version
-    WATIRSPLASH = "2.3.2"
+    WATIRSPLASH = "2.4.0"
 
     # possible runtime dependencies
     WATIR = "2.0.2"
