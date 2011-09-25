@@ -12,6 +12,7 @@ gem "watir-webdriver", WatirSplash::Version::WATIR_WEBDRIVER
 gem "firewatir", ">= 1.9.4"
 gem "rspec", "~>2.6.0"
 gem "spork", "~>0.9.0.rc9"
+gem "spork-local_process"
 
 # add your project specific dependencies here:
 # gem "ruby-debug", "0.10.3"

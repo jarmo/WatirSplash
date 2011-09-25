@@ -48,6 +48,8 @@ GEM
       rubyzip
     spork (0.9.0.rc9-x86-mingw32)
       win32-process
+    spork-local_process (0.0.1)
+      spork (~> 0.9.0.rc9)
     spruz (0.2.13)
     subexec (0.0.4)
     syntax (1.0.0)
@@ -86,6 +88,7 @@ DEPENDENCIES
   firewatir (>= 1.9.4)
   rspec (~> 2.6.0)
   spork (~> 0.9.0.rc9)
+  spork-local_process
   watir (= 2.0.2)
   watir-webdriver (~> 0.3.3)
   watirsplash!

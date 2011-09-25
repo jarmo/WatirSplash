@@ -2,6 +2,7 @@ require 'rubygems'
 require "bundler"
 Bundler.setup
 require 'spork'
+require 'spork/local_process'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -29,7 +30,10 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-  require_all Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*.rb"))
+  Spork::RunStrategy::LocalProcess.unload "#{<%= formatted_name %>}"
+  load_all Dir.glob(File.join(File.dirname(__FILE__), "**/*.rb")).
+    delete_if {|f| File.basename(f) =~ %r{(_)?spec(_helper)?.rb$}}
+  load_all Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*.rb"))
 end
 
 # --- Instructions ---
