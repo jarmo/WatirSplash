@@ -30,7 +30,6 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-  Spork::RunStrategy::LocalProcess.unload "#{<%= formatted_name %>}"
   load_all Dir.glob(File.join(File.dirname(__FILE__), "**/*.rb")).
     delete_if {|f| File.basename(f) =~ %r{(_)?spec(_helper)?.rb$}}
   load_all Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*.rb"))
