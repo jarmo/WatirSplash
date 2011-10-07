@@ -28,15 +28,13 @@ module WatirSplash
       def modify element, methodz
         methodz.each_pair do |meth, return_value|
           element.instance_eval do 
-            instance_variable_set("@_#{meth}_return_value_proc", return_value)
-            instance_eval %Q[
-              self.class.send(:alias_method, :__#{meth}, :#{meth}) if respond_to? :#{meth}
+            singleton = class << self; self end
 
-              def #{meth}(*args)
-                self.send(:__#{meth}, *args) if respond_to? :__#{meth}
-                instance_variable_get("@_#{meth}_return_value_proc").call(*args)
-              end
-            ]
+            singleton.send :alias_method, "__#{meth}", meth if respond_to? meth
+            singleton.send :define_method, meth do |*args|
+              self.send("__#{meth}", *args) if respond_to? "__#{meth}"
+              return_value.call(*args)
+            end
           end
         end
         element
