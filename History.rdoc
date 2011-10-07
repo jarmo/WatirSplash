@@ -1,8 +1,12 @@
+=== Version 2.4.1 / 2011-10-07
+
+  * JavaScript error checker doesn't raise an error for "undefined"
+  * Page::Base#modify method uses now define_method instead of instance_eval
+
 === Version 2.4.0 / 2011-09-25
 
  * add WatirSplash::Browser.exist? method
  * redirect all method invocations on WatirSplash::Browser.current when method doesn't exist in WatirSplash::Browser class itself
-
 
 === Version 2.3.2 / 2011-09-25
 
