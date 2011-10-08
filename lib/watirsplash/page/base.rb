@@ -4,10 +4,14 @@ module WatirSplash
       include SpecHelper
 
       class << self
-        @@url = "about:blank"
+        @url = "about:blank"
 
         def url url
-          @@url = url
+          @url = url
+        end
+
+        def _url
+          @url
         end
 
       end
@@ -17,7 +21,7 @@ module WatirSplash
           @browser = browser 
         else
           @browser = WatirSplash::Browser.exists? ? WatirSplash::Browser.current : (WatirSplash::Browser.current = WatirSplash::Browser.new)
-          @browser.goto @@url
+          @browser.goto self.class._url
         end
       end
 
