@@ -1,3 +1,7 @@
+=== 2.4.2 / 2011-10-17
+
+  * Fix Page::Base.url to use instance variable instead of class variable
+
 === Version 2.4.1 / 2011-10-07
 
   * JavaScript error checker doesn't raise an error for "undefined"
