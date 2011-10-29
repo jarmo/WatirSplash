@@ -3,8 +3,6 @@
 * Web: http://github.com/jarmo/WatirSplash
 * Author: Jarmo Pertman (mailto:jarmo.p[at]gmail.com)
 
-{<img alt='Click here to lend your support to: WatirSplash and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/16193.png?skin_name=chrome' border='0' />}[http://www.pledgie.com/campaigns/16193]
-
 WatirSplash makes browser-based web page testing in Ruby splashin' easy.
 It combines Watir, FireWatir or Watir-WebDriver for controlling the browser, 
 RSpec for testing framework and Spork for faster environment loading. This powerful combination gives you
