@@ -2,7 +2,7 @@ module WatirSplash
   module Generators
     module Helper
       def supported_frameworks
-        %w[default watir firewatir watir-webdriver/ie watir-webdriver/firefox watir-webdriver/chrome]
+        %w[default watir watir-webdriver/ie watir-webdriver/firefox watir-webdriver/chrome]
       end
 
       def frameworks_banner
