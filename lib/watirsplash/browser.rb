@@ -4,12 +4,13 @@ module WatirSplash
   class Browser
     # raises an error if any JavaScript errors were found
     JAVASCRIPT_ERRORS_CHECKER = lambda do |browser| 
-      error_message = browser.execute_script "#{browser.respond_to?(:driver) ? "return ": nil}window.__browserErrorMessage"
+      error_message = browser.execute_script %q[
+        var msg = window.__browserErrorMessage;
+        window.__browserErrorMessage = undefined;
+        return msg;
+      ]
 
-      if error_message && !error_message.empty? && error_message != "undefined"
-        browser.execute_script "window.__browserErrorMessage = undefined"
-        raise JavaScriptError, "JavaScript error: #{error_message}"
-      end
+      raise JavaScriptError, "JavaScript error: #{error_message}" if error_message
 
       browser.execute_script %q[
         if (!window.onErrorFn) {
