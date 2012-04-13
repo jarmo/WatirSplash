@@ -155,7 +155,7 @@ describe "RSpec patches" do
 
     context "#soon" do
       it "is an alias for #within(30)" do
-        RSpec::Matchers::Matcher.new(nil) {}.soon.instance_variable_get(:@within_timeout).should == 30
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.soon.instance_variable_get(:@within_timeout).should == 30
       end
     end
 
@@ -169,25 +169,25 @@ describe "RSpec patches" do
 
     context "#seconds" do
       it "is for syntactic sugar" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(2).seconds.instance_variable_get(:@within_timeout).should == 2
-        RSpec::Matchers::Matcher.new(nil) {}.during(3).seconds.instance_variable_get(:@during_timeout).should == 3
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.within(2).seconds.instance_variable_get(:@within_timeout).should == 2
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.during(3).seconds.instance_variable_get(:@during_timeout).should == 3
       end
 
       it "has #second as an alias" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(1).second.instance_variable_get(:@within_timeout).should == 1
-        RSpec::Matchers::Matcher.new(nil) {}.during(2).second.instance_variable_get(:@during_timeout).should == 2
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.within(1).second.instance_variable_get(:@within_timeout).should == 1
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.during(2).second.instance_variable_get(:@during_timeout).should == 2
       end
     end
 
     context "#minutes" do
       it "converts timeout into minutes" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(2).minutes.instance_variable_get(:@within_timeout).should == 2*60
-        RSpec::Matchers::Matcher.new(nil) {}.during(3).minutes.instance_variable_get(:@during_timeout).should == 3*60
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.within(2).minutes.instance_variable_get(:@within_timeout).should == 2*60
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.during(3).minutes.instance_variable_get(:@during_timeout).should == 3*60
       end
 
       it "has #minute as an alias" do
-        RSpec::Matchers::Matcher.new(nil) {}.within(1).minute.instance_variable_get(:@within_timeout).should == 1*60
-        RSpec::Matchers::Matcher.new(nil) {}.during(2).minute.instance_variable_get(:@during_timeout).should == 2*60
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.within(1).minute.instance_variable_get(:@within_timeout).should == 1*60
+        RSpec::Matchers::DSL::Matcher.new(nil) {}.during(2).minute.instance_variable_get(:@during_timeout).should == 2*60
       end
     end
 
