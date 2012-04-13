@@ -143,4 +143,4 @@ You can read more information about the usage and features from the wiki at http
 
 == COPYRIGHT
 
-Copyright © 2010-2011 Jarmo Pertman. See LICENSE for details.
+Copyright © 2010-2012 Jarmo Pertman. See LICENSE for details.
