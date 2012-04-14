@@ -24,7 +24,7 @@ module Watir
     # saves a file with the browser
     #
     # clicking the button opens a browser's save as dialog and saves the file document.pdf
-    #  button(:id => "something").download("c:/document.pdf") # => c:/document.pdf
+    #  button(:id => "something").save_as("c:/document.pdf") # => c:/document.pdf
     #
     # * raises an exception if saving the file is unsuccessful
     # * returns saved file path
