@@ -1,3 +1,12 @@
+=== 2.4.3 / 2012-04-23
+
+  * Add support for Watir 3
+  * Add support for file downloads in IE9 with Watir 3
+  * Add support for RSpec 2.9
+  * Remove rake and bundler as gem dependencies
+  * Remove Firewatir support
+  * Remove RSpec #match_array matcher
+
 === 2.4.2 / 2011-10-17
 
   * Fix Page::Base.url to use instance variable instead of class variable
