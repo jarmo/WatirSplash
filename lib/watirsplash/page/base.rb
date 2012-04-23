@@ -4,16 +4,13 @@ module WatirSplash
       include SpecHelper
 
       class << self
-        @url = "about:blank"
-
         def url url
           @url = url
         end
 
         def _url
-          @url
+          @url || "about:blank"
         end
-
       end
 
       def initialize(browser=nil)
