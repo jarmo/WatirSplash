@@ -17,7 +17,7 @@ testing right away!
 
 == GETTING STARTED
 
-1) Install Ruby (version 1.8.7 is recommended)
+1) Install Ruby (version 1.9.3 is recommended)
 
 2) Install WatirSplash
     C:\my_project>gem install watirsplash
@@ -119,13 +119,12 @@ testing right away!
 == SUPPORTED PLATFORMS & BROWSERS
 
 WatirSplash supports different frameworks/browsers on different operating systems:
-* Linux & OS X - watir-webdriver/firefox, watir-webdriver/chrome and firewatir
-* Windows - watir, watir-webdriver/firefox, watir-webdriver/chrome, watir-webdriver/ie and firewatir
+* Linux & OS X - watir-webdriver/firefox and watir-webdriver/chrome
+* Windows - watir, watir-webdriver/firefox, watir-webdriver/chrome and watir-webdriver/ie
 
 Each framework drives a specific browser:
 * Watir - IE
 * Watir-WebDriver - Chrome, IE and Firefox
-* FireWatir - Firefox
 
 It is possible to specify what framework to use in spec_helper.rb file:
     WatirSplash::Util.framework = "watir-webdriver/firefox"
@@ -143,4 +142,4 @@ You can read more information about the usage and features from the wiki at http
 
 == COPYRIGHT
 
-Copyright © 2010-2012 Jarmo Pertman. See LICENSE for details.
+Copyright © Jarmo Pertman. See LICENSE for details.
