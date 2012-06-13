@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    watirsplash (2.4.3)
+    watirsplash (2.4.4)
       require_all
       syntax
       thor (~> 0)
