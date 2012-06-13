@@ -120,7 +120,7 @@ module WatirSplash
       alias_method :make, :change
     end
 
-    matchers = ::RSpec::Matchers::BuiltIn.constants
+    matchers = ::RSpec::Matchers::BuiltIn.constants.map(&:to_sym)
     matchers.delete :BaseMatcher
     matchers.each do |const|
       bootstrap ::RSpec::Matchers::BuiltIn.const_get const
