@@ -1,4 +1,4 @@
-WatirSplash::Frameworks::Helper.load_gems "watir-classic", "win32/screenshot"
+WatirSplash::Frameworks::Helper.load_gems "watir-classic"
 require "watirsplash/mini_magick_patch"
 require "watir-classic/ie"
 
@@ -10,13 +10,6 @@ module Watir
     def initialize suppress_new_window=nil
       _initialize suppress_new_window
       self.speed = :fast
-    end
-
-    def save_screenshot(params)
-      params[:hwnd] ||= hwnd
-      ::Win32::Screenshot::Take.of(:window, :hwnd => params[:hwnd]).write(params[:file_name])
-    rescue => e
-      $stderr.puts "saving of screenshot failed: #{e.message}"
     end
   end
 

@@ -68,9 +68,9 @@ module WatirSplash
       file_name
     end
 
-    def save_screenshot(description="Screenshot", hwnd=nil) # :nodoc:
+    def save_screenshot(description="Screenshot") # :nodoc:
       file_name = file_path("screenshot.png", description)
-      WatirSplash::Browser.current.save_screenshot(:file_name => file_name, :hwnd => hwnd)
+      WatirSplash::Browser.current.screenshot.save(file_name)
       file_name
     end
 

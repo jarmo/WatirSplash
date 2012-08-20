@@ -4,7 +4,6 @@ gemspec
 
 platforms :mingw, :mswin do
   gem "watir", WatirSplash::Version::WATIR
-  gem "win32screenshot", WatirSplash::Version::WIN32SCREENSHOT
 end
 
 gem "watir-webdriver", WatirSplash::Version::WATIR_WEBDRIVER
