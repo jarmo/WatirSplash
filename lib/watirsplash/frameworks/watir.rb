@@ -1,5 +1,4 @@
 WatirSplash::Frameworks::Helper.load_gems "watir-classic"
-require "watirsplash/mini_magick_patch"
 require "watir-classic/ie"
 
 # patches for Watir
