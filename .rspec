@@ -1,5 +1,0 @@
---require ./spec/spec_helper.rb
---color
---format documentation
---require ./lib/watirsplash/html_formatter
---format WatirSplash::HtmlFormatter

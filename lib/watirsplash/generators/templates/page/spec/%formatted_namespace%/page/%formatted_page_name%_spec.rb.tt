@@ -1,5 +1,0 @@
-describe <%= page_path %> do
-  it "has something on the <%= formatted_page_name %> page" do
-    <%= spec_body %>
-  end
-end

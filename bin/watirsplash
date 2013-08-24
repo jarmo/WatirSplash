@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-require "watirsplash/cli"
-WatirSplash::CLI.start
